@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="뽀모도로 기법으로 생산성을 향상시키세요. 25분 집중 + 5분 휴식 자동 순환으로 효율적인 시간 관리">
+    <meta name="keywords" content="뽀모도로, 뽀모도로 타이머, 뽀모도로 기법, 생산성, 집중, 시간관리, 25분 타이머, 업무 효율">
+    <title>뽀모도로 타이머 - 25분 집중으로 생산성 향상 | TimerTools Pro</title>
+    
+    <!-- Language and SEO -->
+    <link rel="canonical" href="https://timertools.pro/timer/pomodoro.html">
+    <link rel="alternate" hreflang="ko" href="https://timertools.pro/timer/pomodoro.html">
+    <link rel="alternate" hreflang="en" href="https://timertools.pro/en/timer/pomodoro.html">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="뽀모도로 타이머 - 25분 집중으로 생산성 향상">
+    <meta property="og:description" content="뽀모도로 기법으로 25분 집중 + 5분 휴식 자동 순환. 효율적인 시간 관리와 생산성 향상">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://timertools.pro/timer/pomodoro.html">
+    <meta property="og:image" content="https://timertools.pro/assets/images/pomodoro-timer-og.jpg">
+    <meta property="og:locale" content="ko_KR">
+    
+    <!-- Additional SEO -->
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="TimerTools Pro">
+    
+    <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/timer.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">메인 콘텐츠로 건너뛰기</a>
+    
+    <header class="header" role="banner">
+        <nav class="nav-container" role="navigation">
+            <div class="nav-brand">
+                <div class="logo"><a href="../index.html">TimerTools Pro</a></div>
+            </div>
+            
+            <div class="breadcrumb">
+                <a href="../index.html">홈</a> &gt; <span aria-current="page">뽀모도로 타이머</span>
+                <button class="favorite-btn" aria-label="즐겨찾기에 추가" title="즐겨찾기">⭐</button>
+            </div>
+        </nav>
+        
+        <div class="ad-space ad-mobile-banner" aria-hidden="true">
+            <div class="ad-placeholder">320x50 모바일 배너</div>
+        </div>
+    </header>
+
+    <main id="main-content" class="timer-main" role="main">
+        <div class="container">
+            <div class="timer-layout">
+                <!-- Timer Section -->
+                <section class="timer-section pomodoro-section" aria-labelledby="timer-title">
+                    <h1 id="timer-title" class="timer-title">뽀모도로 타이머</h1>
+                    
+                    <!-- Session Status -->
+                    <div class="session-status">
+                        <div class="session-type" id="session-type">작업 시간</div>
+                        <div class="session-counter">
+                            세션 <span id="session-count">1</span> / <span id="total-sessions">4</span>
+                        </div>
+                    </div>
+                    
+                    <div class="timer-display" role="timer" aria-live="polite" aria-atomic="true">
+                        <div class="timer-circle">
+                            <svg class="timer-svg" viewBox="0 0 200 200" aria-hidden="true">
+                                <circle class="timer-bg" cx="100" cy="100" r="90" />
+                                <circle class="timer-progress" cx="100" cy="100" r="90" />
+                            </svg>
+                            <div class="timer-time" id="timer-display">25:00</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timer-controls">
+                        <div class="control-buttons">
+                            <button id="start-btn" class="btn btn-primary timer-btn">
+                                <span class="btn-icon">▶️</span>
+                                <span class="btn-text">시작</span>
+                            </button>
+                            <button id="pause-btn" class="btn btn-secondary timer-btn" style="display: none;">
+                                <span class="btn-icon">⏸️</span>
+                                <span class="btn-text">일시정지</span>
+                            </button>
+                            <button id="skip-btn" class="btn btn-outline timer-btn">
+                                <span class="btn-icon">⏭️</span>
+                                <span class="btn-text">건너뛰기</span>
+                            </button>
+                            <button id="reset-btn" class="btn btn-outline timer-btn">
+                                <span class="btn-icon">🔄</span>
+                                <span class="btn-text">리셋</span>
+                            </button>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Sidebar -->
+                <aside class="timer-sidebar">
+                    <!-- Ad Space -->
+                    <div class="ad-space ad-rectangle" aria-hidden="true">
+                        <div class="ad-placeholder">300x250 광고</div>
+                    </div>
+                    
+                    <!-- Settings -->
+                    <div class="settings-section">
+                        <h3>시간 설정</h3>
+                        <div class="time-settings">
+                            <div class="setting-item">
+                                <label for="work-time">작업 시간 (분)</label>
+                                <input type="number" id="work-time" min="1" max="60" value="25">
+                            </div>
+                            <div class="setting-item">
+                                <label for="break-time">휴식 시간 (분)</label>
+                                <input type="number" id="break-time" min="1" max="30" value="5">
+                            </div>
+                            <div class="setting-item">
+                                <label for="long-break-time">긴 휴식 시간 (분)</label>
+                                <input type="number" id="long-break-time" min="5" max="60" value="15">
+                            </div>
+                            <div class="setting-item">
+                                <label for="sessions-before-long-break">긴 휴식까지 세션</label>
+                                <input type="number" id="sessions-before-long-break" min="2" max="8" value="4">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Audio Settings -->
+                    <div class="settings-section">
+                        <h3>알림 설정</h3>
+                        <div class="audio-settings">
+                            <div class="setting-item">
+                                <label for="volume">볼륨</label>
+                                <input type="range" id="volume" min="0" max="100" value="70">
+                                <span class="volume-display">70%</span>
+                            </div>
+                            <div class="setting-item">
+                                <label>
+                                    <input type="checkbox" id="notifications" checked>
+                                    브라우저 알림 활성화
+                                </label>
+                            </div>
+                            <div class="setting-item">
+                                <button class="btn btn-outline fullscreen-btn">전체화면 모드</button>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+        
+        <!-- Native Ad -->
+        <section class="ad-space ad-native" aria-hidden="true">
+            <div class="container">
+                <div class="ad-placeholder">336x280 네이티브 광고</div>
+            </div>
+        </section>
+        
+        <!-- Guide Section -->
+        <section class="guide-section" aria-labelledby="guide-title">
+            <div class="container">
+                <h2 id="guide-title">🍅 뽀모도로 기법이란?</h2>
+                
+                <div class="pomodoro-guide">
+                    <div class="guide-content">
+                        <p>뽀모도로 기법은 25분 집중 작업과 5분 휴식을 반복하는 시간 관리 방법입니다.</p>
+                        
+                        <ol class="usage-steps">
+                            <li><strong>25분 집중:</strong> 한 가지 작업에만 집중하여 수행</li>
+                            <li><strong>5분 휴식:</strong> 짧은 휴식으로 재충전</li>
+                            <li><strong>4세션 반복:</strong> 4번의 뽀모도로 후 긴 휴식 (15분)</li>
+                            <li><strong>반복:</strong> 하루 목표량까지 계속 반복</li>
+                        </ol>
+                        
+                        <div class="benefits">
+                            <h3>💡 뽀모도로 기법의 장점</h3>
+                            <ul>
+                                <li>집중력과 생산성 향상</li>
+                                <li>피로 누적 방지</li>
+                                <li>작업 진행 상황 가시화</li>
+                                <li>멀티태스킹 방지</li>
+                                <li>번아웃 예방</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Related Tools -->
+        <section class="related-tools" aria-labelledby="related-title">
+            <div class="container">
+                <h2 id="related-title">관련 도구 추천</h2>
+                
+                <div class="related-cards">
+                    <article class="related-card">
+                        <div class="tool-icon">⏰</div>
+                        <h3>기본 타이머</h3>
+                        <p>원하는 시간을 자유롭게 설정하는 기본 타이머</p>
+                        <a href="basic.html" class="btn btn-outline">바로가기</a>
+                    </article>
+                    
+                    <article class="related-card">
+                        <div class="tool-icon">⚡</div>
+                        <h3>멀티 타이머</h3>
+                        <p>여러 작업을 동시에 관리하는 멀티 타이머</p>
+                        <a href="multi.html" class="btn btn-outline">바로가기</a>
+                    </article>
+                    
+                    <article class="related-card">
+                        <div class="tool-icon">💪</div>
+                        <h3>운동 타이머</h3>
+                        <p>HIIT와 인터벌 트레이닝을 위한 운동 타이머</p>
+                        <a href="workout.html" class="btn btn-outline">바로가기</a>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="footer" role="contentinfo">
+        <div class="ad-space ad-footer" aria-hidden="true">
+            <div class="ad-placeholder">728x90 푸터 광고</div>
+        </div>
+        
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-links">
+                    <a href="../privacy.html">개인정보보호</a>
+                    <a href="../terms.html">이용약관</a>
+                    <a href="../contact.html">문의하기</a>
+                </div>
+            </div>
+            <div class="footer-copyright">
+                <p>&copy; 2024 TimerTools Pro. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Audio elements for notifications -->
+    <audio id="alarm-audio">
+        <source src="../assets/audio/classic.mp3" type="audio/mpeg">
+        <source src="../assets/audio/classic.ogg" type="audio/ogg">
+    </audio>
+    
+    <script src="../assets/js/seo-performance.js"></script>
+    <script src="../assets/js/seo-i18n.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/pomodoro.js"></script>
+</body>
+</html>

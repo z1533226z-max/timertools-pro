@@ -33,7 +33,6 @@
                     <option value="ko">한국어</option>
                     <option value="en">English</option>
                 </select>
-                <button class="favorite-btn" aria-label="즐겨찾기에 추가" title="즐겨찾기">⭐</button>
             </div>
         </nav>
         
@@ -202,138 +201,42 @@
             </div>
         </div>
         
-        <!-- Task Management Section -->
-        <section class="task-section" aria-labelledby="task-title">
-            <div class="container">
-                <h2 id="task-title">작업 관리</h2>
-                
-                <div class="task-input-section">
-                    <div class="current-task">
-                        <label for="current-task-input">현재 작업</label>
-                        <div class="task-input-group">
-                            <input type="text" id="current-task-input" placeholder="무엇에 집중하고 계신가요?" maxlength="100" aria-describedby="task-help">
-                            <button class="btn btn-primary" id="save-task-btn">저장</button>
-                        </div>
-                        <small id="task-help">현재 진행 중인 작업을 입력하세요. 뽀모도로와 함께 기록됩니다.</small>
-                    </div>
-                    
-                    <div class="task-tags">
-                        <label>태그</label>
-                        <div class="tag-container">
-                            <div class="tag-list" id="tag-list">
-                                <button class="tag-btn active" data-tag="업무">#업무</button>
-                                <button class="tag-btn" data-tag="공부">#공부</button>
-                                <button class="tag-btn" data-tag="개인">#개인</button>
-                                <button class="tag-btn" data-tag="프로젝트">#프로젝트</button>
-                                <button class="tag-btn" data-tag="독서">#독서</button>
-                                <button class="tag-btn" data-tag="운동">#운동</button>
-                            </div>
-                            <div class="custom-tag-input">
-                                <input type="text" id="custom-tag-input" placeholder="새 태그 추가" maxlength="20">
-                                <button class="btn btn-sm" id="add-tag-btn">추가</button>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="task-notes">
-                        <label for="task-notes-input">메모</label>
-                        <textarea id="task-notes-input" placeholder="이 세션에 대한 메모나 아이디어를 기록하세요..." maxlength="500" rows="3"></textarea>
-                        <div class="notes-counter">
-                            <span id="notes-count">0</span>/500
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
         <!-- Settings Panel -->
         <section class="pomodoro-settings-panel" aria-labelledby="pomodoro-settings-title">
             <div class="container">
                 <button class="settings-toggle" aria-expanded="false" aria-controls="pomodoro-settings-content">
                     <span class="settings-icon">⚙️</span>
-                    <span id="pomodoro-settings-title">고급 설정</span>
+                    <span id="pomodoro-settings-title">설정</span>
                     <span class="toggle-icon" aria-hidden="true">▼</span>
                 </button>
                 
                 <div id="pomodoro-settings-content" class="settings-content" hidden>
+                    <div class="settings-header">
+                        <button class="settings-close" aria-label="설정 닫기" title="설정 닫기">
+                            <span class="close-icon">✕</span>
+                            <span class="close-text">닫기</span>
+                        </button>
+                    </div>
                     <div class="settings-grid">
                         <div class="setting-group">
                             <h4>알림 설정</h4>
                             <div class="setting-item">
-                                <label for="work-end-sound">작업 완료 알림</label>
-                                <select id="work-end-sound">
-                                    <option value="bell">벨</option>
-                                    <option value="chime">차임</option>
-                                    <option value="ding">딩</option>
-                                    <option value="notification">알림</option>
-                                </select>
-                            </div>
-                            <div class="setting-item">
-                                <label for="break-end-sound">휴식 완료 알림</label>
-                                <select id="break-end-sound">
-                                    <option value="gentle">부드러운 벨</option>
-                                    <option value="chirp">새소리</option>
-                                    <option value="soft-chime">소프트 차임</option>
-                                </select>
-                            </div>
-                            <div class="setting-item">
                                 <label>
-                                    <input type="checkbox" id="session-reminders" checked>
-                                    세션 중간 알림 (5분 전)
+                                    <input type="checkbox" id="sound-enabled" checked>
+                                    알림음 사용
                                 </label>
                             </div>
                             <div class="setting-item">
-                                <label>
-                                    <input type="checkbox" id="encourage-notifications" checked>
-                                    격려 메시지 표시
-                                </label>
+                                <label for="volume">볼륨</label>
+                                <input type="range" id="volume" min="0" max="100" value="70">
+                                <span class="volume-value">70%</span>
                             </div>
                         </div>
                         
                         <div class="setting-group">
                             <h4>화면 설정</h4>
                             <div class="setting-item">
-                                <label for="pomodoro-theme">테마</label>
-                                <select id="pomodoro-theme">
-                                    <option value="classic">클래식 (빨강)</option>
-                                    <option value="forest">포레스트 (초록)</option>
-                                    <option value="ocean">오션 (파랑)</option>
-                                    <option value="sunset">선셋 (주황)</option>
-                                </select>
-                            </div>
-                            <div class="setting-item">
-                                <label>
-                                    <input type="checkbox" id="minimal-mode">
-                                    미니멀 모드
-                                </label>
-                            </div>
-                            <div class="setting-item">
-                                <label>
-                                    <input type="checkbox" id="progress-animations" checked>
-                                    진행률 애니메이션
-                                </label>
-                            </div>
-                            <div class="setting-item">
-                                <button class="btn btn-outline" id="pomodoro-fullscreen">풀스크린 집중 모드</button>
-                            </div>
-                        </div>
-                        
-                        <div class="setting-group">
-                            <h4>통계 및 데이터</h4>
-                            <div class="setting-item">
-                                <label>
-                                    <input type="checkbox" id="track-productivity" checked>
-                                    생산성 추적
-                                </label>
-                            </div>
-                            <div class="setting-item">
-                                <label>
-                                    <input type="checkbox" id="export-data">
-                                    데이터 내보내기 허용
-                                </label>
-                            </div>
-                            <div class="setting-item">
-                                <button class="btn btn-sm btn-outline" id="reset-stats">통계 초기화</button>
+                                <button class="btn btn-outline" id="pomodoro-fullscreen">전체화면 모드</button>
                             </div>
                         </div>
                     </div>
@@ -416,36 +319,6 @@
                             <li><strong>유연성 유지:</strong> 상황에 따라 시간 조정 가능 (15분, 45분 등)</li>
                         </ul>
                     </div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Related Tools -->
-        <section class="related-tools" aria-labelledby="related-title">
-            <div class="container">
-                <h2 id="related-title">관련 도구 추천</h2>
-                
-                <div class="related-cards">
-                    <article class="related-card">
-                        <div class="tool-icon">⏰</div>
-                        <h3>기본 타이머</h3>
-                        <p>간단한 카운트다운 타이머</p>
-                        <a href="basic.html" class="btn btn-outline">바로가기</a>
-                    </article>
-                    
-                    <article class="related-card">
-                        <div class="tool-icon">⚡</div>
-                        <h3>멀티 타이머</h3>
-                        <p>여러 타이머를 동시에 관리</p>
-                        <a href="multi.html" class="btn btn-outline">바로가기</a>
-                    </article>
-                    
-                    <article class="related-card">
-                        <div class="tool-icon">📊</div>
-                        <h3>통계 대시보드</h3>
-                        <p>생산성 통계 및 분석</p>
-                        <a href="../dashboard/" class="btn btn-outline">바로가기</a>
-                    </article>
                 </div>
             </div>
         </section>

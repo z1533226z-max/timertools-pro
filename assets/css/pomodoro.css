@@ -201,7 +201,7 @@
 }
 
 .pomodoro-btn .btn-icon {
-  font-size: var(--text-lg);
+  font-size: var(--text-xl);
   margin-right: var(--space-2);
 }
 
@@ -468,6 +468,43 @@
   margin-top: var(--space-8);
 }
 
+.settings-header {
+  display: flex;
+  justify-content: flex-end;
+  padding: var(--space-4) 0 var(--space-2);
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: var(--space-4);
+}
+
+.settings-close {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+  cursor: pointer;
+  padding: var(--space-2);
+  border-radius: var(--radius-md);
+  transition: all 0.2s ease;
+}
+
+.settings-close:hover,
+.settings-close:focus {
+  background: var(--bg-hover);
+  color: var(--text-primary);
+}
+
+.close-icon {
+  font-size: var(--text-lg);
+  font-weight: bold;
+}
+
+.close-text {
+  font-weight: 500;
+}
+
 /* Guide Section */
 .guide-section {
   padding: var(--space-16) 0;
@@ -619,6 +656,16 @@
 
 .pomodoro-section.finished {
   animation: celebration 2s ease-in-out;
+}
+
+.pomodoro-section.finished .pomodoro-progress {
+  stroke: #10b981; /* 초록색으로 변경 */
+  stroke-width: 8;
+}
+
+.pomodoro-section.finished .pomodoro-time {
+  color: #10b981;
+  font-weight: 600;
 }
 
 /* Animations */
