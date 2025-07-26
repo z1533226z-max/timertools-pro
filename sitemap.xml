@@ -1,175 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" 
-        xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  
-  <!-- Korean Main Pages -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://timertools.pro/</loc>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://timertools.pro/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://timertools.pro/en/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://timertools.pro/" />
-    <lastmod>2024-12-20</lastmod>
+    <loc>http://gon.ai.kr/</loc>
+    <lastmod>2025-01-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
-  
   <url>
-    <loc>https://timertools.pro/timer/basic.html</loc>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://timertools.pro/timer/basic.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://timertools.pro/en/timer/basic.html" />
-    <lastmod>2024-12-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  
-  <url>
-    <loc>https://timertools.pro/timer/pomodoro.html</loc>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://timertools.pro/timer/pomodoro.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://timertools.pro/en/timer/pomodoro.html" />
-    <lastmod>2024-12-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  
-  <url>
-    <loc>https://timertools.pro/timer/multi.html</loc>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://timertools.pro/timer/multi.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://timertools.pro/en/timer/multi.html" />
-    <lastmod>2024-12-20</lastmod>
+    <loc>http://gon.ai.kr/timer/basic.html</loc>
+    <lastmod>2025-01-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-  
   <url>
-    <loc>https://timertools.pro/timer/cooking.html</loc>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://timertools.pro/timer/cooking.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://timertools.pro/en/timer/cooking.html" />
-    <lastmod>2024-12-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://timertools.pro/timer/workout.html</loc>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://timertools.pro/timer/workout.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://timertools.pro/en/timer/workout.html" />
-    <lastmod>2024-12-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://timertools.pro/guide/</loc>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://timertools.pro/guide/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://timertools.pro/en/guide/" />
-    <lastmod>2024-12-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://timertools.pro/blog/</loc>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://timertools.pro/blog/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://timertools.pro/en/blog/" />
-    <lastmod>2024-12-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <!-- English Main Pages -->
-  <url>
-    <loc>https://timertools.pro/en/</loc>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://timertools.pro/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://timertools.pro/en/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://timertools.pro/" />
-    <lastmod>2024-12-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  
-  <url>
-    <loc>https://timertools.pro/en/timer/basic.html</loc>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://timertools.pro/timer/basic.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://timertools.pro/en/timer/basic.html" />
-    <lastmod>2024-12-20</lastmod>
+    <loc>http://gon.ai.kr/timer/pomodoro.html</loc>
+    <lastmod>2025-01-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-  
   <url>
-    <loc>https://timertools.pro/en/timer/pomodoro.html</loc>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://timertools.pro/timer/pomodoro.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://timertools.pro/en/timer/pomodoro.html" />
-    <lastmod>2024-12-20</lastmod>
+    <loc>http://gon.ai.kr/timer/multi.html</loc>
+    <lastmod>2025-01-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-  
   <url>
-    <loc>https://timertools.pro/en/timer/multi.html</loc>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://timertools.pro/timer/multi.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://timertools.pro/en/timer/multi.html" />
-    <lastmod>2024-12-20</lastmod>
+    <loc>http://gon.ai.kr/timer/cooking.html</loc>
+    <lastmod>2025-01-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-  
   <url>
-    <loc>https://timertools.pro/en/timer/cooking.html</loc>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://timertools.pro/timer/cooking.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://timertools.pro/en/timer/cooking.html" />
-    <lastmod>2024-12-20</lastmod>
+    <loc>http://gon.ai.kr/timer/workout.html</loc>
+    <lastmod>2025-01-26</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
-  
-  <url>
-    <loc>https://timertools.pro/en/timer/workout.html</loc>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://timertools.pro/timer/workout.html" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://timertools.pro/en/timer/workout.html" />
-    <lastmod>2024-12-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://timertools.pro/en/guide/</loc>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://timertools.pro/guide/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://timertools.pro/en/guide/" />
-    <lastmod>2024-12-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://timertools.pro/en/blog/</loc>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://timertools.pro/blog/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://timertools.pro/en/blog/" />
-    <lastmod>2024-12-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <!-- Static Pages -->
-  <url>
-    <loc>https://timertools.pro/privacy.html</loc>
-    <lastmod>2024-12-20</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-  
-  <url>
-    <loc>https://timertools.pro/terms.html</loc>
-    <lastmod>2024-12-20</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-  
-  <url>
-    <loc>https://timertools.pro/contact.html</loc>
-    <lastmod>2024-12-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.4</priority>
-  </url>
-  
 </urlset>
