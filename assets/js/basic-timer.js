@@ -136,6 +136,8 @@ class BasicTimer {
       // Settings
       settingsToggle: $('.settings-toggle'),
       settingsPanel: $('#settings-panel'),
+      settingsClose: $('.settings-close'),
+      toggleArrow: $('.toggle-arrow'),
       soundEnabledCheckbox: $('#sound-enabled'),
       volumeSlider: $('#volume'),
       volumeValue: $('.volume-value'),
@@ -168,6 +170,7 @@ class BasicTimer {
     
     // Settings
     this.elements.settingsToggle.addEventListener('click', () => this.toggleSettings());
+    this.elements.settingsClose?.addEventListener('click', () => this.closeSettings());
     this.elements.soundEnabledCheckbox.addEventListener('change', () => this.updateSettings());
     this.elements.volumeSlider.addEventListener('input', () => this.updateVolume());
     this.elements.fullscreenBtn.addEventListener('click', () => this.toggleFullscreen());
@@ -421,6 +424,21 @@ class BasicTimer {
     
     this.elements.settingsToggle.setAttribute('aria-expanded', newState);
     this.elements.settingsPanel.hidden = !newState;
+    
+    // Update arrow direction
+    if (this.elements.toggleArrow) {
+      this.elements.toggleArrow.textContent = newState ? '▲' : '▼';
+    }
+  }
+  
+  closeSettings() {
+    this.elements.settingsToggle.setAttribute('aria-expanded', 'false');
+    this.elements.settingsPanel.hidden = true;
+    
+    // Update arrow direction
+    if (this.elements.toggleArrow) {
+      this.elements.toggleArrow.textContent = '▼';
+    }
   }
   
   updateSettings() {
