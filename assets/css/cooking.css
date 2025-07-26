@@ -1,0 +1,1242 @@
+/* ====================================
+   Cooking Timer Styles - TimerTools Pro
+   ==================================== */
+
+/* Base Variables for Cooking Timer */
+:root {
+    --cooking-primary: #ff6b35;
+    --cooking-secondary: #f7931e;
+    --cooking-accent: #ffb347;
+    --cooking-danger: #e74c3c;
+    --cooking-success: #27ae60;
+    --cooking-warning: #f39c12;
+    --cooking-info: #3498db;
+    
+    /* Temperature Colors */
+    --temp-cold: #3b82f6;
+    --temp-cold-bg: #eff6ff;
+    --temp-warm: #f59e0b;
+    --temp-warm-bg: #fffbeb;
+    --temp-hot: #ef4444;
+    --temp-hot-bg: #fef2f2;
+    --temp-critical: #991b1b;
+    --temp-critical-bg: #fee2e2;
+    
+    /* Cooking Categories */
+    --pasta-color: #e74c3c;
+    --meat-color: #8b4513;
+    --stew-color: #d35400;
+    --baking-color: #9b59b6;
+    --salad-color: #27ae60;
+}
+
+/* ====================================
+   Layout Structure
+   ==================================== */
+
+.cooking-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
+    background: var(--bg-primary);
+}
+
+.breadcrumb {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding: 0.75rem 1rem;
+    background: var(--surface-color);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.breadcrumb ol {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 0.5rem;
+}
+
+.breadcrumb ol li:not(:last-child)::after {
+    content: " > ";
+    color: var(--text-secondary);
+    margin-left: 0.5rem;
+}
+
+.breadcrumb a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.favorites-btn {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 0.25rem;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.favorites-btn:hover {
+    background: var(--hover-color);
+}
+
+/* ====================================
+   Recipe Selection Screen
+   ==================================== */
+
+.recipe-selection {
+    background: var(--surface-color);
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.section-title {
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    color: var(--text-primary);
+}
+
+.recipe-categories h3 {
+    font-size: 1.25rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.recipe-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.recipe-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1.5rem 1rem;
+    background: var(--bg-primary);
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    color: var(--text-primary);
+}
+
+.recipe-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    border-color: var(--cooking-primary);
+}
+
+.recipe-card.active {
+    border-color: var(--cooking-primary);
+    background: var(--cooking-accent);
+}
+
+.recipe-icon {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.recipe-name {
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+}
+
+.recipe-time {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+/* Custom Recipe Form */
+.custom-recipe {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.custom-form {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-group label {
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.form-group input, .form-group select {
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-size: 1rem;
+}
+
+.form-group input:focus, .form-group select:focus {
+    outline: none;
+    border-color: var(--cooking-primary);
+    box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
+}
+
+/* ====================================
+   Step Configuration Screen
+   ==================================== */
+
+.step-configuration {
+    background: var(--surface-color);
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.steps-config-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.steps-config-container .step-config-item {
+    animation: slideInUp 0.3s ease-out forwards;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.steps-config-container .step-config-item:nth-child(1) { animation-delay: 0.1s; }
+.steps-config-container .step-config-item:nth-child(2) { animation-delay: 0.2s; }
+.steps-config-container .step-config-item:nth-child(3) { animation-delay: 0.3s; }
+.steps-config-container .step-config-item:nth-child(4) { animation-delay: 0.4s; }
+.steps-config-container .step-config-item:nth-child(5) { animation-delay: 0.5s; }
+
+@keyframes slideInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.step-config-item {
+    display: grid;
+    grid-template-columns: auto 1fr auto auto;
+    gap: 1rem;
+    align-items: start;
+    padding: 1.5rem;
+    background: var(--bg-primary);
+    border-radius: 12px;
+    border: 2px solid var(--border-color);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+.step-config-item:hover {
+    border-color: var(--cooking-primary);
+    box-shadow: 0 4px 12px rgba(255, 107, 53, 0.15);
+    transform: translateY(-2px);
+}
+
+.step-number {
+    font-weight: 700;
+    color: var(--cooking-primary);
+    font-size: 1.1rem;
+    min-width: 70px;
+    text-align: center;
+    background: var(--cooking-accent);
+    padding: 0.5rem;
+    border-radius: 8px;
+    align-self: stretch;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.step-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.input-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--cooking-primary);
+    margin-bottom: 0.25rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.unit-label {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+    margin-top: 0.25rem;
+}
+
+.step-details input,
+.step-details textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    background: var(--surface-color);
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+}
+
+.step-details input:focus,
+.step-details textarea:focus {
+    outline: none;
+    border-color: var(--cooking-primary);
+    box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
+}
+
+.step-details textarea {
+    min-height: 60px;
+    resize: vertical;
+    font-family: inherit;
+}
+
+.step-time {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.step-time-input {
+    width: 80px;
+    text-align: center;
+    padding: 0.75rem 0.5rem;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    background: var(--surface-color);
+    color: var(--text-primary);
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.step-time-input:focus {
+    outline: none;
+    border-color: var(--cooking-primary);
+    box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
+}
+
+.step-temp {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.step-temp-select {
+    width: 120px;
+    padding: 0.75rem;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    background: var(--surface-color);
+    color: var(--text-primary);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.step-temp-select:focus {
+    outline: none;
+    border-color: var(--cooking-primary);
+    box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
+}
+
+.config-summary {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, var(--cooking-accent), rgba(255, 179, 71, 0.1));
+    border-radius: 12px;
+    border: 2px solid var(--cooking-primary);
+    box-shadow: 0 4px 12px rgba(255, 107, 53, 0.1);
+}
+
+.config-summary p {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.config-summary #config-total-time {
+    color: var(--cooking-primary);
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+.config-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+}
+
+/* ====================================
+   Main Cooking Timer Screen
+   ==================================== */
+
+.cooking-timer-main {
+    display: grid;
+    gap: 2rem;
+}
+
+.desktop-layout {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+/* Main Timer Section */
+.main-timer-section {
+    background: var(--surface-color);
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.timer-card h2 {
+    text-align: center;
+    margin-bottom: 1rem;
+    color: var(--cooking-primary);
+}
+
+.current-step-info {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.step-indicator {
+    background: var(--cooking-accent);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.timer-display {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+.time-circle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--cooking-primary), var(--cooking-secondary));
+    color: white;
+    box-shadow: 0 8px 16px rgba(255, 107, 53, 0.3);
+}
+
+.time-remaining {
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.step-status {
+    font-size: 1rem;
+    margin-top: 0.5rem;
+    opacity: 0.9;
+}
+
+.progress-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.progress-bar {
+    flex: 1;
+    height: 12px;
+    background: var(--bg-secondary);
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--cooking-primary), var(--cooking-secondary));
+    transition: width 0.3s ease;
+}
+
+.progress-text {
+    font-weight: 500;
+    color: var(--cooking-primary);
+    min-width: 60px;
+}
+
+.timer-controls {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+/* Side Panel */
+.side-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.ad-space {
+    background: var(--bg-secondary);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px dashed var(--border-color);
+}
+
+.ad-rectangle {
+    height: 250px;
+}
+
+.ad-placeholder {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+}
+
+.recipe-presets {
+    background: var(--surface-color);
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.recipe-presets h3 {
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+    font-size: 1.1rem;
+}
+
+.preset-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.preset-btn {
+    padding: 0.75rem;
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: left;
+    color: var(--text-primary);
+}
+
+.preset-btn:hover {
+    background: var(--hover-color);
+    border-color: var(--cooking-primary);
+}
+
+.preset-custom {
+    border-style: dashed;
+    color: var(--cooking-primary);
+}
+
+/* ====================================
+   Steps Progress Section
+   ==================================== */
+
+.steps-progress {
+    background: var(--surface-color);
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.steps-progress h3 {
+    margin-bottom: 1.5rem;
+    text-align: center;
+    color: var(--text-primary);
+}
+
+.steps-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.step-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: var(--bg-primary);
+    border-radius: 8px;
+    border-left: 4px solid var(--border-color);
+}
+
+.step-item.completed {
+    border-left-color: var(--cooking-success);
+    background: rgba(39, 174, 96, 0.1);
+}
+
+.step-item.active {
+    border-left-color: var(--cooking-primary);
+    background: rgba(255, 107, 53, 0.1);
+}
+
+.step-item.pending {
+    border-left-color: var(--text-secondary);
+    opacity: 0.7;
+}
+
+.step-status-icon {
+    font-size: 1.25rem;
+    min-width: 24px;
+}
+
+.step-info {
+    flex: 1;
+}
+
+.step-name {
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+}
+
+.step-time {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+.time-summary {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    background: var(--bg-secondary);
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+/* ====================================
+   Multi-cooking Management
+   ==================================== */
+
+.multi-cooking {
+    background: var(--surface-color);
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.multi-cooking h3 {
+    margin-bottom: 1.5rem;
+    text-align: center;
+    color: var(--text-primary);
+}
+
+.cooking-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.cooking-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: var(--bg-primary);
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+
+.cooking-icon {
+    font-size: 1.5rem;
+    min-width: 32px;
+}
+
+.cooking-info {
+    flex: 1;
+}
+
+.cooking-name {
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+}
+
+.cooking-timer {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+.cooking-progress {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex: 1;
+    max-width: 200px;
+}
+
+.cooking-dots {
+    display: flex;
+    gap: 2px;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--border-color);
+}
+
+.dot.active {
+    background: var(--cooking-primary);
+}
+
+.dot.completed {
+    background: var(--cooking-success);
+}
+
+.cooking-status {
+    font-size: 0.875rem;
+    font-weight: 500;
+    min-width: 60px;
+}
+
+.cooking-status.진행중 { color: var(--cooking-primary); }
+.cooking-status.완료 { color: var(--cooking-success); }
+.cooking-status.대기중 { color: var(--text-secondary); }
+
+.multi-cooking-controls {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+/* ====================================
+   Cooking Tips Section
+   ==================================== */
+
+.cooking-tips {
+    background: var(--surface-color);
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.cooking-tips h3 {
+    margin-bottom: 1.5rem;
+    text-align: center;
+    color: var(--text-primary);
+}
+
+.current-tip {
+    margin-bottom: 1.5rem;
+    padding: 1.5rem;
+    background: var(--bg-primary);
+    border-radius: 8px;
+    border-left: 4px solid var(--cooking-primary);
+}
+
+.current-tip h4 {
+    margin-bottom: 0.5rem;
+    color: var(--cooking-primary);
+}
+
+.cooking-guide {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.guide-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    background: var(--bg-secondary);
+    border-radius: 6px;
+    font-weight: 500;
+}
+
+/* Temperature Color Classes */
+.temp-cold {
+    color: var(--temp-cold);
+    background: var(--temp-cold-bg);
+}
+
+.temp-warm {
+    color: var(--temp-warm);
+    background: var(--temp-warm-bg);
+}
+
+.temp-hot {
+    color: var(--temp-hot);
+    background: var(--temp-hot-bg);
+}
+
+.temp-critical {
+    color: var(--temp-critical);
+    background: var(--temp-critical-bg);
+    animation: pulse 1s infinite;
+}
+
+/* ====================================
+   Modal Styles
+   ==================================== */
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: var(--surface-color);
+    padding: 2rem;
+    border-radius: 12px;
+    max-width: 400px;
+    width: 90%;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+.modal-content h3 {
+    margin-bottom: 1.5rem;
+    text-align: center;
+    color: var(--text-primary);
+}
+
+.notification-options {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.notification-options label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+/* ====================================
+   Buttons
+   ==================================== */
+
+.btn {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.btn-primary {
+    background: var(--cooking-primary);
+    color: white;
+}
+
+.btn-primary:hover {
+    background: var(--cooking-secondary);
+    transform: translateY(-1px);
+}
+
+.btn-success {
+    background: var(--cooking-success);
+    color: white;
+}
+
+.btn-success:hover {
+    background: #229954;
+    transform: translateY(-1px);
+}
+
+.btn-warning {
+    background: var(--cooking-warning);
+    color: white;
+}
+
+.btn-warning:hover {
+    background: #e67e22;
+    transform: translateY(-1px);
+}
+
+.btn-info {
+    background: var(--cooking-info);
+    color: white;
+}
+
+.btn-info:hover {
+    background: #2980b9;
+    transform: translateY(-1px);
+}
+
+.btn-secondary {
+    background: var(--text-secondary);
+    color: white;
+}
+
+.btn-secondary:hover {
+    background: #5a6c7d;
+    transform: translateY(-1px);
+}
+
+.btn-outline {
+    background: transparent;
+    color: var(--cooking-primary);
+    border: 2px solid var(--cooking-primary);
+}
+
+.btn-outline:hover {
+    background: var(--cooking-primary);
+    color: white;
+}
+
+.btn-large {
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+}
+
+/* ====================================
+   Native Ad Styles
+   ==================================== */
+
+.ad-native {
+    height: 280px;
+    margin: 2rem 0;
+}
+
+/* ====================================
+   Responsive Design
+   ==================================== */
+
+/* Tablet Layout (768px - 1023px) */
+@media (max-width: 1023px) {
+    .desktop-layout {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .side-panel {
+        flex-direction: row;
+        gap: 1rem;
+    }
+    
+    .ad-rectangle {
+        min-width: 300px;
+    }
+    
+    .recipe-presets {
+        flex: 1;
+    }
+    
+    .cooking-guide {
+        gap: 1rem;
+    }
+    
+    .time-circle {
+        width: 180px;
+        height: 180px;
+    }
+    
+    .time-remaining {
+        font-size: 2.5rem;
+    }
+}
+
+/* Mobile Layout (320px - 767px) */
+@media (max-width: 767px) {
+    .cooking-container {
+        padding: 0.5rem;
+    }
+    
+    .breadcrumb {
+        margin-bottom: 1rem;
+        padding: 0.5rem;
+    }
+    
+    .recipe-selection, 
+    .step-configuration,
+    .cooking-timer-main > * {
+        padding: 1rem;
+        margin-bottom: 1rem;
+    }
+    
+    .recipe-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.75rem;
+    }
+    
+    .recipe-card {
+        padding: 1rem 0.5rem;
+    }
+    
+    .recipe-icon {
+        font-size: 2rem;
+    }
+    
+    .custom-form {
+        grid-template-columns: 1fr;
+    }
+    
+    .side-panel {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .timer-controls {
+        gap: 0.5rem;
+    }
+    
+    .timer-controls .btn {
+        flex: 1;
+        min-width: 0;
+        font-size: 0.8rem;
+        padding: 0.6rem 0.5rem;
+    }
+    
+    .time-circle {
+        width: 160px;
+        height: 160px;
+    }
+    
+    .time-remaining {
+        font-size: 2rem;
+    }
+    
+    .step-status {
+        font-size: 0.9rem;
+    }
+    
+    .steps-list {
+        gap: 0.75rem;
+    }
+    
+    .step-item {
+        padding: 0.75rem;
+        gap: 0.75rem;
+    }
+    
+    .cooking-item {
+        padding: 0.75rem;
+        gap: 0.75rem;
+    }
+    
+    .cooking-progress {
+        max-width: 120px;
+    }
+    
+    .multi-cooking-controls,
+    .config-actions {
+        gap: 0.5rem;
+    }
+    
+    .multi-cooking-controls .btn,
+    .config-actions .btn {
+        flex: 1;
+        min-width: 0;
+        font-size: 0.8rem;
+        padding: 0.6rem 0.5rem;
+    }
+    
+    .cooking-guide {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .guide-item {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.9rem;
+    }
+    
+    .time-summary {
+        flex-direction: column;
+        gap: 0.5rem;
+        text-align: center;
+    }
+    
+    .modal-content {
+        padding: 1.5rem;
+        margin: 1rem;
+    }
+    
+    .step-config-item {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        text-align: center;
+        padding: 1rem;
+    }
+    
+    .step-number {
+        align-self: center;
+        min-width: auto;
+        width: fit-content;
+        margin: 0 auto;
+    }
+    
+    .step-details {
+        gap: 0.5rem;
+    }
+    
+    .step-time,
+    .step-temp {
+        margin: 0 auto;
+    }
+    
+    .step-time-input,
+    .step-temp-select {
+        width: 100%;
+        max-width: 200px;
+    }
+    
+    .config-actions {
+        gap: 0.75rem;
+    }
+    
+    .config-actions .btn {
+        flex: 1;
+        min-width: 0;
+        font-size: 0.9rem;
+    }
+}
+
+/* Very Small Mobile (320px - 479px) */
+@media (max-width: 479px) {
+    .recipe-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .time-circle {
+        width: 140px;
+        height: 140px;
+    }
+    
+    .time-remaining {
+        font-size: 1.75rem;
+    }
+    
+    .timer-controls .btn {
+        font-size: 0.75rem;
+        padding: 0.5rem 0.25rem;
+    }
+    
+    .cooking-progress {
+        max-width: 100px;
+    }
+    
+    .cooking-dots .dot {
+        width: 6px;
+        height: 6px;
+    }
+}
+
+/* ====================================
+   Animation Classes
+   ==================================== */
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes scaleIn {
+    from { transform: scale(0.9); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.scale-in {
+    animation: scaleIn 0.2s ease-out;
+}
+
+/* ====================================
+   Print Styles
+   ==================================== */
+
+@media print {
+    .nav-container,
+    .ad-space,
+    .timer-controls,
+    .multi-cooking-controls,
+    .config-actions {
+        display: none;
+    }
+    
+    .cooking-container {
+        max-width: none;
+        padding: 0;
+    }
+    
+    .steps-progress,
+    .cooking-tips {
+        break-inside: avoid;
+    }
+}

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Icon Generator</title>
+    <style>
+        .icon-canvas {
+            display: none;
+        }
+        .preview {
+            display: inline-block;
+            margin: 10px;
+            text-align: center;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>TimerTools Icon Generator</h1>
+    <div id="previews"></div>
+    
+    <script>
+        const sizes = [72, 96, 128, 144, 152, 192, 384, 512];
+        const previewContainer = document.getElementById('previews');
+        
+        sizes.forEach(size => {
+            // Create canvas
+            const canvas = document.createElement('canvas');
+            canvas.width = size;
+            canvas.height = size;
+            canvas.className = 'icon-canvas';
+            
+            const ctx = canvas.getContext('2d');
+            
+            // Draw background circle
+            ctx.fillStyle = '#2563eb';
+            ctx.beginPath();
+            ctx.arc(size/2, size/2, size/2 - 2, 0, 2 * Math.PI);
+            ctx.fill();
+            
+            // Draw clock face
+            ctx.strokeStyle = 'white';
+            ctx.lineWidth = Math.max(1, size/50);
+            ctx.beginPath();
+            ctx.arc(size/2, size/2, size/2 - size/8, 0, 2 * Math.PI);
+            ctx.stroke();
+            
+            // Draw clock hands
+            ctx.strokeStyle = 'white';
+            ctx.lineWidth = Math.max(2, size/40);
+            ctx.lineCap = 'round';
+            
+            // Hour hand (pointing up)
+            ctx.beginPath();
+            ctx.moveTo(size/2, size/2);
+            ctx.lineTo(size/2, size/2 - size/4);
+            ctx.stroke();
+            
+            // Minute hand (pointing right)
+            ctx.lineWidth = Math.max(1, size/50);
+            ctx.beginPath();
+            ctx.moveTo(size/2, size/2);
+            ctx.lineTo(size/2 + size/6, size/2);
+            ctx.stroke();
+            
+            // Center dot
+            ctx.fillStyle = 'white';
+            ctx.beginPath();
+            ctx.arc(size/2, size/2, Math.max(2, size/25), 0, 2 * Math.PI);
+            ctx.fill();
+            
+            // Create preview
+            const preview = document.createElement('div');
+            preview.className = 'preview';
+            
+            const img = new Image();
+            img.src = canvas.toDataURL('image/png');
+            img.style.width = '64px';
+            img.style.height = '64px';
+            
+            const label = document.createElement('div');
+            label.textContent = `${size}x${size}`;
+            
+            const downloadLink = document.createElement('a');
+            downloadLink.href = canvas.toDataURL('image/png');
+            downloadLink.download = `icon-${size}x${size}.png`;
+            downloadLink.textContent = 'Download';
+            downloadLink.style.display = 'block';
+            downloadLink.style.marginTop = '5px';
+            
+            preview.appendChild(img);
+            preview.appendChild(label);
+            preview.appendChild(downloadLink);
+            previewContainer.appendChild(preview);
+            
+            document.body.appendChild(canvas);
+        });
+    </script>
+</body>
+</html>

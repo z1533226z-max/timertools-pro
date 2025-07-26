@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>멀티 타이머 - TimerTools Pro</title>
+    
+    <!-- Meta Tags -->
+    <meta name="description" content="여러 타이머를 동시에 관리할 수 있는 멀티 타이머 도구 - 요리, 운동, 업무에 최적화">
+    <meta name="keywords" content="멀티타이머, 다중타이머, 동시타이머, 여러타이머, 시간관리, 요리타이머, 운동타이머">
+    <meta name="author" content="TimerTools Pro">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://timertools.pro/timer/multi.html">
+    <meta property="og:title" content="멀티 타이머 - TimerTools Pro">
+    <meta property="og:description" content="여러 타이머를 동시에 관리할 수 있는 멀티 타이머 도구">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="../manifest.json">
+    <meta name="theme-color" content="#667eea">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Timer Tools">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/timer.css">
+    <link rel="stylesheet" href="../assets/css/multi.css">
+    
+    <!-- Favicon and Icons -->
+    <link rel="icon" type="image/x-icon" href="../assets/images/favicon.ico">
+    <link rel="apple-touch-icon" href="../assets/icons/icon-192.png">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="../assets/css/styles.css" as="style">
+    <link rel="preload" href="../assets/js/main.js" as="script">
+</head>
+<body>
+    <!-- Skip to main content -->
+    <a href="#main-content" class="skip-link">메인 콘텐츠로 건너뛰기</a>
+    
+    <!-- Navigation -->
+    <nav class="main-nav" role="navigation" aria-label="메인 네비게이션">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <a href="../index.html" class="brand-link" aria-label="TimerTools Pro 홈페이지">
+                    <h1 class="brand-text">TimerTools Pro</h1>
+                </a>
+                <button class="theme-toggle" aria-label="다크/라이트 모드 전환">
+                    <span class="theme-icon">🌙</span>
+                </button>
+            </div>
+            
+            <button class="nav-toggle" id="nav-toggle" aria-label="메뉴 열기" aria-expanded="false">
+                <span class="hamburger"></span>
+            </button>
+            
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="../index.html" class="nav-link" data-i18n="nav.home">홈</a></li>
+                <li class="nav-dropdown">
+                    <button class="nav-dropdown-btn" aria-expanded="false" data-i18n="nav.timer_tools">타이머 도구</button>
+                    <ul class="nav-dropdown-menu">
+                        <li><a href="basic.html" class="nav-link" data-i18n="nav.basic_timer">기본 타이머</a></li>
+                        <li><a href="pomodoro.html" class="nav-link" data-i18n="nav.pomodoro_timer">뽀모도로 타이머</a></li>
+                        <li><a href="multi.html" class="nav-link active" aria-current="page" data-i18n="nav.multi_timer">멀티 타이머</a></li>
+                    </ul>
+                </li>
+                <li><a href="#" class="nav-link" data-i18n="nav.contact">문의</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main id="main-content" class="main-content">
+        <!-- Multi Timer Container - 체크리스트 요구사항대로 구현 -->
+        <div class="multi-timer-container">
+            
+            <!-- Breadcrumb - 체크리스트 요구사항 -->
+            <nav class="breadcrumb" aria-label="페이지 위치">
+                <div class="breadcrumb-content">
+                    <div class="breadcrumb-path">
+                        <a href="../index.html" data-i18n="breadcrumb.home">홈</a> > <span data-i18n="breadcrumb.multi_timer">멀티 타이머</span>
+                    </div>
+                    <div class="breadcrumb-actions">
+                        <select class="language-select" id="language-select" aria-label="언어 선택">
+                            <option value="ko">한국어</option>
+                            <option value="en">English</option>
+                            <option value="ja">日本語</option>
+                            <option value="zh">中文</option>
+                        </select>
+                        <button class="favorite-btn" aria-label="즐겨찾기 추가" data-i18n-aria-label="aria.add_to_favorites">⭐ <span data-i18n="ui.favorites">즐겨찾기</span></button>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- Controls Bar - 체크리스트 필수 구성요소 -->
+            <div class="controls-bar">
+                <div class="control-buttons">
+                    <button id="add-timer-btn" class="control-btn primary">
+                        <span class="btn-icon">➕</span>
+                        <span class="btn-text">타이머 추가</span>
+                    </button>
+                    <button id="start-all-btn" class="control-btn secondary">
+                        <span class="btn-icon">▶️</span>
+                        <span class="btn-text">전체 시작</span>
+                    </button>
+                    <button id="stop-all-btn" class="control-btn secondary">
+                        <span class="btn-icon">⏸️</span>
+                        <span class="btn-text">전체 정지</span>
+                    </button>
+                    <button id="reset-all-btn" class="control-btn secondary">
+                        <span class="btn-icon">🔄</span>
+                        <span class="btn-text">전체 리셋</span>
+                    </button>
+                </div>
+                
+                <!-- Timer Stats - 체크리스트 필수 -->
+                <div class="timer-stats">
+                    <span class="stat-item">
+                        총: <span id="total-count" class="stat-value">0</span>
+                    </span>
+                    <span class="stat-item">
+                        실행: <span id="running-count" class="stat-value">0</span>
+                    </span>
+                    <span class="stat-item">
+                        완료: <span id="completed-count" class="stat-value">0</span>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Timers Grid - 핵심! 중앙 3-column 그리드 -->
+            <div class="timers-grid" id="timers-grid">
+                <!-- 320px 타이머 카드들이 여기에 동적으로 추가됩니다 -->
+                
+                <!-- Empty State -->
+                <div class="empty-state" id="empty-state">
+                    <div class="empty-icon">⏲️</div>
+                    <h3 class="empty-title">타이머를 추가해보세요</h3>
+                    <p class="empty-description">
+                        여러 작업을 동시에 관리할 수 있는 멀티 타이머입니다.<br>
+                        요리, 운동, 업무 등 다양한 용도로 활용해보세요.
+                    </p>
+                    <button class="btn btn-primary" onclick="addNewTimer()">
+                        <span class="btn-icon">➕</span>
+                        <span class="btn-text">첫 타이머 추가</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Ad Section - 체크리스트 요구사항 -->
+            <div class="ad-section">
+                <div class="ad-placeholder">300x250 네이티브 광고</div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Timer Card Template - 체크리스트 정확한 구조 (320px × 330px) -->
+    <template id="timer-card-template">
+        <div class="timer-card timer-other" data-timer-id="">
+            
+            <!-- Timer Header (40px) -->
+            <div class="timer-header">
+                <input type="text" class="timer-name" placeholder="타이머 이름" maxlength="20">
+                <select class="timer-category">
+                    <option value="work">업무</option>
+                    <option value="study">공부</option>
+                    <option value="exercise">운동</option>
+                    <option value="cooking">요리</option>
+                    <option value="break">휴식</option>
+                    <option value="other">기타</option>
+                </select>
+                <button class="copy-btn" aria-label="복제" title="타이머 복제">📋</button>
+                <button class="delete-btn" aria-label="삭제" title="타이머 삭제">🗑️</button>
+            </div>
+            
+            <!-- Timer Display (120px) -->
+            <div class="timer-display">
+                <div class="timer-circle">
+                    <!-- SVG 원형 타이머 - 체크리스트 필수 -->
+                    <svg class="progress-ring" width="100" height="100">
+                        <circle class="progress-ring-circle" cx="50" cy="50" r="40" 
+                                stroke-width="4" fill="transparent"></circle>
+                    </svg>
+                    <div class="timer-time">05:00</div>
+                    <div class="timer-status">준비</div>
+                </div>
+                <!-- 진행률 바 - 체크리스트 필수 -->
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                    <span class="progress-text">0%</span>
+                </div>
+            </div>
+            
+            <!-- Timer Input (60px) -->
+            <div class="timer-input">
+                <div class="time-inputs">
+                    분 <input type="number" class="minutes" min="0" max="59" value="5">
+                    초 <input type="number" class="seconds" min="0" max="59" value="0">
+                </div>
+                <!-- 프리셋 버튼들 - 체크리스트 필수 [5분][10분][15분][30분] -->
+                <div class="preset-buttons">
+                    <button class="preset-btn" data-minutes="5">5분</button>
+                    <button class="preset-btn" data-minutes="10">10분</button>
+                    <button class="preset-btn" data-minutes="15">15분</button>
+                    <button class="preset-btn" data-minutes="30">30분</button>
+                </div>
+            </div>
+            
+            <!-- Timer Controls (40px) -->
+            <div class="timer-controls">
+                <button class="start-btn">▶️ 시작</button>
+                <button class="stop-btn" style="display:none">⏸️ 정지</button>
+                <button class="reset-btn">🔄 리셋</button>
+            </div>
+            
+            <!-- Advanced Settings (40px, 접이식) - 체크리스트 필수 -->
+            <details class="advanced-settings">
+                <summary>고급 설정 <span class="dropdown-arrow">▼</span></summary>
+                <div class="settings-content">
+                    <label class="setting-item">
+                        <input type="checkbox" class="auto-restart"> 완료 후 자동 재시작
+                    </label>
+                    <label class="setting-item">
+                        <input type="checkbox" class="sound-enabled" checked> 알림음
+                    </label>
+                    <label class="setting-item">
+                        <input type="checkbox" class="notification-enabled" checked> 브라우저 알림
+                    </label>
+                    <div class="repeat-setting">
+                        반복: <input type="number" class="repeat-count" min="0" value="0"> (0=무한)
+                    </div>
+                </div>
+            </details>
+            
+            <!-- Timer Stats (30px) - 체크리스트 필수 -->
+            <div class="timer-stats">
+                <span>완료 횟수: <span class="completed-count">0</span></span>
+                <span>남은 반복: <span class="remaining-repeats">∞</span></span>
+            </div>
+            
+        </div>
+    </template>
+
+    <!-- Notification Container -->
+    <div id="notification-container" class="notification-container" aria-live="polite"></div>
+
+    <!-- Scripts -->
+    <script src="../assets/js/i18n.js"></script>
+    <script src="../assets/js/timer-i18n-integration.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/multi.js"></script>
+    <script src="../assets/js/pwa-utils.js"></script>
+</body>
+</html>

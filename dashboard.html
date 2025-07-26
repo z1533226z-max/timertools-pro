@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="TimerTools Pro 통계 대시보드 - 사용 패턴, 생산성 지표, 목표 달성률을 직관적으로 분석">
+    <title>통계 대시보드 - TimerTools Pro</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/dashboard.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" role="banner">
+        <nav class="nav-container" role="navigation" aria-label="주 네비게이션">
+            <div class="nav-brand">
+                <h1 class="logo">
+                    <a href="/">TimerTools Pro</a>
+                </h1>
+            </div>
+            
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="/">홈</a></li>
+                <li class="nav-dropdown">
+                    <button class="nav-dropdown-btn" aria-expanded="false" aria-haspopup="true">도구</button>
+                    <ul class="nav-dropdown-menu">
+                        <li><a href="timer/basic.html">기본 타이머</a></li>
+                        <li><a href="timer/pomodoro.html">뽀모도로 타이머</a></li>
+                        <li><a href="timer/multi.html">멀티 타이머</a></li>
+                        <li><a href="timer/cooking.html">요리 타이머</a></li>
+                        <li><a href="timer/workout.html">운동 타이머</a></li>
+                    </ul>
+                </li>
+                <li><a href="guide/">가이드</a></li>
+                <li><a href="blog/">블로그</a></li>
+                <li><a href="dashboard.html" aria-current="page">📊 대시보드</a></li>
+                <li class="nav-settings">
+                    <button class="theme-toggle" aria-label="다크 모드 토글" title="테마 전환">
+                        <span class="theme-icon">🌙</span>
+                    </button>
+                </li>
+            </ul>
+            
+            <button class="nav-toggle" aria-label="네비게이션 메뉴 토글" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content" class="main-content">
+        <!-- Dashboard Header -->
+        <div class="dashboard-header">
+            <div class="container">
+                <h1 class="dashboard-title">📊 내 통계 대시보드</h1>
+                <div class="dashboard-nav">
+                    <button class="nav-tab active" data-tab="overview">개요</button>
+                    <button class="nav-tab" data-tab="detailed">상세 분석</button>
+                    <button class="nav-tab" data-tab="goals">목표 관리</button>
+                    <button class="nav-tab" data-tab="reports">리포트</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="dashboard-container">
+            <!-- Overview Tab -->
+            <section class="dashboard-tab-content active" id="overview-tab">
+                <div class="overview-layout">
+                    <!-- Left Column: Main Stats -->
+                    <div class="main-stats-section">
+                        <!-- KPI Cards -->
+                        <div class="kpi-cards">
+                            <div class="kpi-card" data-period="today">
+                                <div class="kpi-icon">📊</div>
+                                <div class="kpi-content">
+                                    <h3>오늘</h3>
+                                    <div class="kpi-value" id="today-time">2시간 45분</div>
+                                    <div class="kpi-change positive" id="today-change">↗️ +15분</div>
+                                </div>
+                            </div>
+                            <div class="kpi-card" data-period="week">
+                                <div class="kpi-icon">📈</div>
+                                <div class="kpi-content">
+                                    <h3>이번주</h3>
+                                    <div class="kpi-value" id="week-time">8시간 30분</div>
+                                    <div class="kpi-change positive" id="week-change">↗️ +2시간</div>
+                                </div>
+                            </div>
+                            <div class="kpi-card" data-period="month">
+                                <div class="kpi-icon">📅</div>
+                                <div class="kpi-content">
+                                    <h3>이번달</h3>
+                                    <div class="kpi-value" id="month-time">32시간 15분</div>
+                                    <div class="kpi-change neutral" id="month-change">→ +15분</div>
+                                </div>
+                            </div>
+                            <div class="kpi-card" data-period="total">
+                                <div class="kpi-icon">🏆</div>
+                                <div class="kpi-content">
+                                    <h3>전체</h3>
+                                    <div class="kpi-value" id="total-time">240시간</div>
+                                    <div class="kpi-change positive" id="total-change">꾸준히 증가중</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Today's Summary -->
+                        <div class="today-summary">
+                            <h2>오늘의 요약</h2>
+                            <div class="summary-content">
+                                <div class="summary-item">
+                                    <span class="summary-icon">🎯</span>
+                                    <span class="summary-text">목표: <span id="daily-goal-progress">4/6 뽀모도로 (67%)</span></span>
+                                </div>
+                                <div class="summary-item">
+                                    <span class="summary-icon">⏱️</span>
+                                    <span class="summary-text">총 작업 시간: <span id="total-work-time">2시간 45분</span></span>
+                                </div>
+                                <div class="summary-item">
+                                    <span class="summary-icon">📈</span>
+                                    <span class="summary-text">생산성 점수: <span id="productivity-score">85/100</span></span>
+                                </div>
+                                <div class="summary-item">
+                                    <span class="summary-icon">🔥</span>
+                                    <span class="summary-text">연속 일수: <span id="streak-days">7일</span></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Hourly Activity Chart -->
+                        <div class="chart-section">
+                            <h2>시간대별 활동 분석</h2>
+                            <div class="chart-container">
+                                <canvas id="hourlyActivityChart"></canvas>
+                            </div>
+                        </div>
+
+                        <!-- Category Distribution Chart -->
+                        <div class="chart-section">
+                            <h2>카테고리별 사용 시간</h2>
+                            <div class="chart-toggle">
+                                <button class="chart-toggle-btn active" data-chart="bar">막대 차트</button>
+                                <button class="chart-toggle-btn" data-chart="doughnut">도넛 차트</button>
+                            </div>
+                            <div class="chart-container">
+                                <canvas id="categoryChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Sidebar -->
+                    <div class="sidebar-section">
+                        <!-- Quick Start -->
+                        <div class="sidebar-widget">
+                            <h3>빠른 시작</h3>
+                            <div class="quick-start-buttons">
+                                <a href="timer/pomodoro.html" class="quick-btn">🍅 뽀모도로</a>
+                                <a href="timer/basic.html" class="quick-btn">⏰ 기본타이머</a>
+                                <a href="timer/multi.html" class="quick-btn">⚡ 멀티타이머</a>
+                                <a href="timer/cooking.html" class="quick-btn">🍳 요리타이머</a>
+                                <a href="timer/workout.html" class="quick-btn">💪 운동타이머</a>
+                            </div>
+                        </div>
+
+                        <!-- Weekly Goal Progress -->
+                        <div class="sidebar-widget">
+                            <h3>이번 주 목표 진행률</h3>
+                            <div class="goal-progress-circle">
+                                <div class="progress-ring">
+                                    <svg class="progress-svg" width="120" height="120">
+                                        <circle class="progress-ring-bg" cx="60" cy="60" r="54" stroke="#e5e7eb" stroke-width="12" fill="none"/>
+                                        <circle class="progress-ring-fill" cx="60" cy="60" r="54" stroke="#3b82f6" stroke-width="12" fill="none" stroke-dasharray="339.292" stroke-dashoffset="111.766"/>
+                                    </svg>
+                                    <div class="progress-text">
+                                        <span class="progress-percentage">67%</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="goal-details">
+                                <p>주간 목표: 30 뽀모도로</p>
+                                <p>완료: <span id="weekly-completed">20개</span></p>
+                            </div>
+                        </div>
+
+                        <!-- Recent Achievements -->
+                        <div class="sidebar-widget">
+                            <h3>최근 성취</h3>
+                            <div class="achievements-list">
+                                <div class="achievement-item">
+                                    <span class="achievement-icon">🏆</span>
+                                    <span class="achievement-text">7일 연속</span>
+                                </div>
+                                <div class="achievement-item">
+                                    <span class="achievement-icon">🎯</span>
+                                    <span class="achievement-text">주간목표 달성</span>
+                                </div>
+                                <div class="achievement-item">
+                                    <span class="achievement-icon">📈</span>
+                                    <span class="achievement-text">개인기록 갱신</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="dashboard-actions">
+                    <button class="action-btn btn-primary" id="export-btn">📤 내보내기</button>
+                    <button class="action-btn btn-secondary" id="goals-btn">🎯 목표설정</button>
+                    <button class="action-btn btn-outline" id="detailed-btn">📊 상세보기</button>
+                </div>
+            </section>
+
+            <!-- Detailed Analysis Tab -->
+            <section class="dashboard-tab-content" id="detailed-tab">
+                <div class="detailed-analysis">
+                    <!-- Date Range Selector -->
+                    <div class="date-range-selector">
+                        <h2>상세 분석</h2>
+                        <div class="date-presets">
+                            <button class="date-preset-btn active" data-range="today">오늘</button>
+                            <button class="date-preset-btn" data-range="yesterday">어제</button>
+                            <button class="date-preset-btn" data-range="week">이번주</button>
+                            <button class="date-preset-btn" data-range="last-week">지난주</button>
+                            <button class="date-preset-btn" data-range="month">이번달</button>
+                            <button class="date-preset-btn" data-range="last-month">지난달</button>
+                            <button class="date-preset-btn" data-range="7days">최근 7일</button>
+                            <button class="date-preset-btn" data-range="30days">최근 30일</button>
+                        </div>
+                        <div class="custom-date-range">
+                            <input type="date" id="start-date" value="2025-01-15">
+                            <span>-</span>
+                            <input type="date" id="end-date" value="2025-01-21">
+                            <button class="btn btn-primary" id="apply-range">적용</button>
+                        </div>
+                    </div>
+
+                    <!-- Daily Trend Chart -->
+                    <div class="analysis-section">
+                        <h3>일별 트렌드</h3>
+                        <div class="chart-container large">
+                            <canvas id="dailyTrendChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Weekly Heatmap -->
+                    <div class="analysis-section">
+                        <h3>주별 히트맵</h3>
+                        <div class="heatmap-container">
+                            <div class="heatmap-grid" id="weeklyHeatmap">
+                                <!-- Heatmap will be generated dynamically -->
+                            </div>
+                            <div class="heatmap-legend">
+                                <span>낮음</span>
+                                <div class="legend-scale">
+                                    <div class="legend-item" data-level="0"></div>
+                                    <div class="legend-item" data-level="1"></div>
+                                    <div class="legend-item" data-level="2"></div>
+                                    <div class="legend-item" data-level="3"></div>
+                                    <div class="legend-item" data-level="4"></div>
+                                </div>
+                                <span>높음</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Timer Type Statistics -->
+                    <div class="analysis-section">
+                        <h3>타이머 유형별 사용 통계</h3>
+                        <div class="timer-stats-grid">
+                            <div class="timer-stat-card">
+                                <h4>🍅 뽀모도로</h4>
+                                <div class="stat-item">
+                                    <span>세션 수</span>
+                                    <span id="pomodoro-sessions">24</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span>완료율</span>
+                                    <span id="pomodoro-completion">87%</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span>평균 집중도</span>
+                                    <span id="pomodoro-focus">85점</span>
+                                </div>
+                            </div>
+                            <div class="timer-stat-card">
+                                <h4>⏰ 기본 타이머</h4>
+                                <div class="stat-item">
+                                    <span>평균 설정 시간</span>
+                                    <span id="basic-avg-time">18분</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span>사용 빈도</span>
+                                    <span id="basic-frequency">12회</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span>완료율</span>
+                                    <span id="basic-completion">92%</span>
+                                </div>
+                            </div>
+                            <div class="timer-stat-card">
+                                <h4>⚡ 멀티 타이머</h4>
+                                <div class="stat-item">
+                                    <span>동시 실행 개수</span>
+                                    <span id="multi-concurrent">2.4개</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span>사용 빈도</span>
+                                    <span id="multi-frequency">8회</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span>완료율</span>
+                                    <span id="multi-completion">78%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Goals Management Tab -->
+            <section class="dashboard-tab-content" id="goals-tab">
+                <div class="goals-management">
+                    <div class="goals-header">
+                        <h2>목표 관리</h2>
+                        <button class="btn btn-primary" id="create-goal-btn">+ 새 목표 설정</button>
+                    </div>
+
+                    <!-- Active Goals -->
+                    <div class="goals-section">
+                        <h3>현재 활성 목표</h3>
+                        <div class="goals-list" id="active-goals">
+                            <!-- Goals will be dynamically generated -->
+                        </div>
+                    </div>
+
+                    <!-- Completed Goals -->
+                    <div class="goals-section">
+                        <h3>완료된 목표</h3>
+                        <div class="goals-list" id="completed-goals">
+                            <!-- Completed goals will be dynamically generated -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Reports Tab -->
+            <section class="dashboard-tab-content" id="reports-tab">
+                <div class="reports-section">
+                    <div class="reports-header">
+                        <h2>리포트 생성</h2>
+                        <p>원하는 형식으로 통계 리포트를 생성하고 내보내기할 수 있습니다.</p>
+                    </div>
+
+                    <div class="report-generator">
+                        <div class="report-config">
+                            <div class="config-group">
+                                <h3>📊 리포트 유형</h3>
+                                <div class="radio-group">
+                                    <label>
+                                        <input type="radio" name="report-type" value="daily">
+                                        <span>일일 요약 리포트</span>
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="report-type" value="weekly" checked>
+                                        <span>주간 분석 리포트</span>
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="report-type" value="monthly">
+                                        <span>월간 통계 리포트</span>
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="report-type" value="custom">
+                                        <span>사용자 정의 리포트</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="config-group">
+                                <h3>📅 기간 설정</h3>
+                                <div class="date-inputs">
+                                    <input type="date" id="report-start-date" value="2025-01-15">
+                                    <span>-</span>
+                                    <input type="date" id="report-end-date" value="2025-01-21">
+                                </div>
+                            </div>
+
+                            <div class="config-group">
+                                <h3>📋 포함 내용</h3>
+                                <div class="checkbox-group">
+                                    <label>
+                                        <input type="checkbox" name="report-content" value="time-stats" checked>
+                                        <span>시간 통계</span>
+                                    </label>
+                                    <label>
+                                        <input type="checkbox" name="report-content" value="goal-progress" checked>
+                                        <span>목표 달성률</span>
+                                    </label>
+                                    <label>
+                                        <input type="checkbox" name="report-content" value="category-analysis" checked>
+                                        <span>카테고리별 분석</span>
+                                    </label>
+                                    <label>
+                                        <input type="checkbox" name="report-content" value="trend-charts" checked>
+                                        <span>트렌드 차트</span>
+                                    </label>
+                                    <label>
+                                        <input type="checkbox" name="report-content" value="session-details">
+                                        <span>상세 세션 목록</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="config-group">
+                                <h3>📤 내보내기 형식</h3>
+                                <div class="format-buttons">
+                                    <button class="format-btn active" data-format="pdf">PDF</button>
+                                    <button class="format-btn" data-format="png">PNG</button>
+                                    <button class="format-btn" data-format="csv">CSV</button>
+                                    <button class="format-btn" data-format="json">JSON</button>
+                                </div>
+                            </div>
+
+                            <div class="config-actions">
+                                <button class="btn btn-outline" id="preview-report-btn">미리보기</button>
+                                <button class="btn btn-primary" id="generate-report-btn">생성하기</button>
+                            </div>
+                        </div>
+
+                        <div class="report-preview" id="report-preview">
+                            <!-- Report preview will be shown here -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Modals -->
+    
+    <!-- Goal Creation Modal -->
+    <div class="modal" id="goal-modal" style="display: none;">
+        <div class="modal-content large">
+            <h3>새 목표 설정</h3>
+            <form id="goal-form">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="goal-type">목표 유형:</label>
+                        <select id="goal-type" required>
+                            <option value="daily">일일</option>
+                            <option value="weekly">주간</option>
+                            <option value="monthly">월간</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="goal-timer-type">타이머 종류:</label>
+                        <select id="goal-timer-type" required>
+                            <option value="pomodoro">뽀모도로</option>
+                            <option value="basic">기본 타이머</option>
+                            <option value="multi">멀티 타이머</option>
+                            <option value="cooking">요리 타이머</option>
+                            <option value="workout">운동 타이머</option>
+                            <option value="all">전체 타이머</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="goal-target">목표 수치:</label>
+                        <div class="input-with-unit">
+                            <input type="number" id="goal-target" min="1" max="100" value="6" required>
+                            <select id="goal-unit">
+                                <option value="sessions">세션</option>
+                                <option value="minutes">분</option>
+                                <option value="hours">시간</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="goal-category">카테고리:</label>
+                        <select id="goal-category">
+                            <option value="work">업무</option>
+                            <option value="study">학습</option>
+                            <option value="exercise">운동</option>
+                            <option value="cooking">요리</option>
+                            <option value="break">휴식</option>
+                            <option value="other">기타</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="goal-start-date">시작일:</label>
+                        <input type="date" id="goal-start-date" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="goal-end-date">종료일:</label>
+                        <input type="date" id="goal-end-date" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>📱 알림 설정</label>
+                    <div class="checkbox-group">
+                        <label>
+                            <input type="checkbox" name="notifications" value="completion" checked>
+                            <span>목표 달성 시 알림</span>
+                        </label>
+                        <label>
+                            <input type="checkbox" name="notifications" value="day-end" checked>
+                            <span>하루 종료 시 진행률 알림</span>
+                        </label>
+                        <label>
+                            <input type="checkbox" name="notifications" value="behind-schedule">
+                            <span>목표 미달 시 격려 알림</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" id="cancel-goal">취소</button>
+                    <button type="submit" class="btn btn-primary">목표 생성</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Export Modal -->
+    <div class="modal" id="export-modal" style="display: none;">
+        <div class="modal-content">
+            <h3>📤 데이터 내보내기</h3>
+            <div class="export-options">
+                <div class="export-option">
+                    <h4>내보낼 데이터</h4>
+                    <div class="checkbox-group">
+                        <label>
+                            <input type="checkbox" name="export-data" value="stats" checked>
+                            <span>시간 통계</span>
+                        </label>
+                        <label>
+                            <input type="checkbox" name="export-data" value="goals" checked>
+                            <span>목표 진행률</span>
+                        </label>
+                        <label>
+                            <input type="checkbox" name="export-data" value="sessions">
+                            <span>세션 기록</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="export-option">
+                    <h4>기간 선택</h4>
+                    <div class="radio-group">
+                        <label>
+                            <input type="radio" name="export-period" value="today">
+                            <span>오늘</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="export-period" value="week" checked>
+                            <span>이번주</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="export-period" value="month">
+                            <span>이번달</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="export-period" value="all">
+                            <span>전체</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="export-option">
+                    <h4>파일 형식</h4>
+                    <div class="format-buttons">
+                        <button class="format-btn active" data-format="json">JSON</button>
+                        <button class="format-btn" data-format="csv">CSV</button>
+                        <button class="format-btn" data-format="pdf">PDF</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="modal-actions">
+                <button class="btn btn-secondary" id="cancel-export">취소</button>
+                <button class="btn btn-primary" id="confirm-export">내보내기</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/dashboard.js"></script>
+</body>
+</html>

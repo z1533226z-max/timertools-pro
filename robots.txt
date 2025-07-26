@@ -1,0 +1,91 @@
+# TimerTools Pro - Robots.txt
+# https://timertools.pro/robots.txt
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://timertools.pro/sitemap.xml
+
+# Preferred crawling schedule
+Crawl-delay: 1
+
+# Allow all timer tools
+Allow: /timer/
+Allow: /en/timer/
+
+# Allow guides and blog
+Allow: /guide/
+Allow: /en/guide/
+Allow: /blog/
+Allow: /en/blog/
+
+# Allow static pages
+Allow: /privacy.html
+Allow: /terms.html
+Allow: /contact.html
+
+# Disallow admin/dev files
+Disallow: /assets/icons/create_icons.py
+Disallow: /debug-script.js
+Disallow: /dev-commands.bat
+Disallow: /dev-instructions.md
+Disallow: /start-server.bat
+Disallow: /server.log
+Disallow: /test-timer.html
+Disallow: /nul
+
+# Disallow temporary/test files
+Disallow: /*.tmp
+Disallow: /*.log
+Disallow: /*.bak
+
+# Allow CSS and JS for proper rendering
+Allow: /assets/css/
+Allow: /assets/js/
+Allow: /assets/images/
+Allow: /assets/icons/
+
+# Special directives for search engines
+
+# Google
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+# Bing
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# Yandex
+User-agent: Yandex
+Allow: /
+Crawl-delay: 2
+
+# Naver (Korean search engine)
+User-agent: Yeti
+Allow: /
+Crawl-delay: 1
+
+# Daum (Korean search engine)  
+User-agent: DaumBot
+Allow: /
+Crawl-delay: 1
+
+# Block bad bots
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+# Archive
+User-agent: archive.org_bot
+Allow: /
+
+User-agent: Wayback
+Allow: /
