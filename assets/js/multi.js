@@ -1,386 +1,374 @@
-// ===== MULTI TIMER JAVASCRIPT - 설계문서 기반 재구현 ===== //
+// ===== MULTI TIMER IMPLEMENTATION ===== //
 
-class MultiTimerManager {
+class MultiTimer {
   constructor() {
-    this.timers = new Map();
-    this.nextTimerId = 1;
-    this.settings = {
-      notificationSound: 'classic',
-      volume: 70,
-      autoRemove: true,
-      sequentialMode: false
+    this.timers = [];
+    this.maxTimers = 6;
+    this.nextId = 1;
+    
+    // Default timer colors
+    this.colors = ['#3B82F6', '#10B981', '#F59E0B', '#EF4444', '#8B5CF6', '#EC4899'];
+    
+    // DOM elements
+    this.elements = {
+      grid: document.getElementById('timers-grid'),
+      emptyState: document.getElementById('empty-state'),
+      addBtn: document.getElementById('add-timer-btn'),
+      startAllBtn: document.getElementById('start-all-btn'),
+      stopAllBtn: document.getElementById('stop-all-btn'),
+      resetAllBtn: document.getElementById('reset-all-btn'),
+      totalCount: document.getElementById('total-count'),
+      runningCount: document.getElementById('running-count'),
+      completedCount: document.getElementById('completed-count')
     };
+    
     this.init();
   }
-
+  
   init() {
-    this.initializeElements();
     this.setupEventListeners();
-    this.loadFromStorage();
-    this.updateSummary();
-    this.updateEmptyState();
-    this.requestNotificationPermission();
-    this.loadSettings();
-    console.log('멀티 타이머 매니저 초기화 완료');
+    this.loadSavedTimers();
+    this.updateStats();
   }
-
-  // ===== INITIALIZATION ===== //
-  initializeElements() {
-    // Main control buttons
-    this.addTimerBtn = document.getElementById('add-timer-btn');
-    
-    // Grid and empty state
-    this.timersGrid = document.getElementById('timers-grid');
-    this.emptyState = document.getElementById('empty-state');
-    
-    // Templates
-    this.timerTemplate = document.getElementById('timer-card-template');
-    
-    // Summary elements - updated IDs based on new HTML
-    this.totalCountEl = document.getElementById('total-count');
-    this.runningCountEl = document.getElementById('running-count');
-    this.completedCountEl = document.getElementById('completed-count');
-    
-    // Settings elements
-    this.startAllBtn = document.getElementById('start-all-btn');
-    this.stopAllBtn = document.getElementById('stop-all-btn');
-    this.resetAllBtn = document.getElementById('reset-all-btn');
-    
-    // Notification container
-    this.notificationContainer = document.getElementById('notification-container');
-  }
-
+  
   setupEventListeners() {
-    // Main control buttons
-    this.addTimerBtn?.addEventListener('click', () => this.addNewTimer());
-    
-    // Management settings buttons
-    this.startAllBtn?.addEventListener('click', () => this.startAllTimers());
-    this.stopAllBtn?.addEventListener('click', () => this.stopAllTimers());
-    this.resetAllBtn?.addEventListener('click', () => this.resetAllTimers());
-    
-
-    // Global keyboard shortcuts
-    document.addEventListener('keydown', (e) => this.handleGlobalKeyboard(e));
-
-    // Page visibility change
-    document.addEventListener('visibilitychange', () => this.handleVisibilityChange());
-
-    // Beforeunload to save state
-    window.addEventListener('beforeunload', () => this.saveToStorage());
-  }
-
-
-  // ===== TIMER MANAGEMENT ===== //
-  addNewTimer(config = {}) {
-    const timerId = this.nextTimerId++;
-    const timer = new TimerInstance(timerId, config, this);
-    this.timers.set(timerId, timer);
-    
-    const element = this.createTimerElement(timer);
-    this.timersGrid.appendChild(element);
-    
-    this.updateSummary();
-    this.updateEmptyState();
-    this.saveToStorage();
-    
-    // Focus on timer name input
-    const nameInput = element.querySelector('.timer-name');
-    nameInput?.select();
-    
-    this.showNotification('success', '타이머 추가됨', `"${timer.name}" 타이머가 추가되었습니다.`);
-    
-    return timer;
-  }
-
-  removeTimer(timerId) {
-    const timer = this.timers.get(timerId);
-    if (!timer) return;
-
-    timer.destroy();
-    this.timers.delete(timerId);
-    
-    const element = document.querySelector(`[data-timer-id="${timerId}"]`);
-    element?.remove();
-    
-    this.updateSummary();
-    this.updateEmptyState();
-    this.saveToStorage();
-    
-    this.showNotification('success', '타이머 삭제됨', '타이머가 삭제되었습니다.');
-  }
-
-  duplicateTimer(timerId) {
-    const sourceTimer = this.timers.get(timerId);
-    if (!sourceTimer) return;
-
-    const config = {
-      name: `${sourceTimer.name} (복사본)`,
-      category: sourceTimer.category,
-      minutes: sourceTimer.originalMinutes,
-      seconds: sourceTimer.originalSeconds
-    };
-
-    this.addNewTimer(config);
-  }
-
-  startAllTimers() {
-    let startedCount = 0;
-    this.timers.forEach(timer => {
-      if (!timer.isRunning && !timer.isCompleted) {
-        timer.start();
-        startedCount++;
-      }
-    });
-    
-    if (startedCount > 0) {
-      this.showNotification('success', '전체 시작', `${startedCount}개의 타이머가 시작되었습니다.`);
-    } else {
-      this.showNotification('warning', '시작할 수 없음', '시작할 수 있는 타이머가 없습니다.');
-    }
-  }
-
-  pauseAllTimers() {
-    let pausedCount = 0;
-    this.timers.forEach(timer => {
-      if (timer.isRunning) {
-        timer.pause();
-        pausedCount++;
-      }
-    });
-    
-    if (pausedCount > 0) {
-      this.showNotification('success', '전체 일시정지', `${pausedCount}개의 타이머가 일시정지되었습니다.`);
-    } else {
-      this.showNotification('warning', '일시정지할 수 없음', '실행 중인 타이머가 없습니다.');
-    }
-  }
-
-  stopAllTimers() {
-    this.pauseAllTimers(); // 기능적으로 같음
-  }
-
-  resetAllTimers() {
-    const confirmed = confirm('모든 타이머를 리셋하시겠습니까?');
-    if (!confirmed) return;
-
-    let resetCount = 0;
-    this.timers.forEach(timer => {
-      timer.reset();
-      resetCount++;
-    });
-    
-    this.showNotification('success', '전체 리셋', `${resetCount}개의 타이머가 리셋되었습니다.`);
-  }
-
-
-  // ===== TIMER ELEMENT CREATION ===== //
-  createTimerElement(timer) {
-    const template = this.timerTemplate.content.cloneNode(true);
-    const card = template.querySelector('.timer-card');
-    
-    card.setAttribute('data-timer-id', timer.id);
-    card.className = `timer-card timer-${timer.category}`;
-    
-    // Set initial values
-    const nameInput = card.querySelector('.timer-name');
-    const categorySelect = card.querySelector('.timer-category');
-    const minutesInput = card.querySelector('.minutes');
-    const secondsInput = card.querySelector('.seconds');
-    const timerTime = card.querySelector('.timer-time');
-    const timerStatus = card.querySelector('.timer-status');
-    
-    nameInput.value = timer.name;
-    categorySelect.value = timer.category;
-    minutesInput.value = timer.originalMinutes;
-    secondsInput.value = timer.originalSeconds;
-    timerTime.textContent = timer.formatTime(timer.remainingSeconds);
-    timerStatus.textContent = '준비';
-    
-    // Set advanced settings values
-    const autoRestartCheck = card.querySelector('.auto-restart');
-    const soundEnabledCheck = card.querySelector('.sound-enabled');
-    const notificationEnabledCheck = card.querySelector('.notification-enabled');
-    const repeatCountInput = card.querySelector('.repeat-count');
-    
-    if (autoRestartCheck) autoRestartCheck.checked = timer.autoRestart;
-    if (soundEnabledCheck) soundEnabledCheck.checked = timer.soundEnabled;
-    if (notificationEnabledCheck) notificationEnabledCheck.checked = timer.notificationEnabled;
-    if (repeatCountInput) repeatCountInput.value = timer.repeatCount;
-    
-    // Setup event listeners for this timer
-    this.setupTimerEventListeners(card, timer);
-    
-    return card;
-  }
-
-  setupTimerEventListeners(card, timer) {
-    const timerId = timer.id;
-    
-    // Name input
-    const nameInput = card.querySelector('.timer-name');
-    nameInput.addEventListener('input', (e) => {
-      timer.setName(e.target.value);
-      this.saveToStorage();
-    });
-    
-    // Category select
-    const categorySelect = card.querySelector('.timer-category');
-    categorySelect.addEventListener('change', (e) => {
-      timer.setCategory(e.target.value);
-      card.className = `timer-card timer-${timer.category}`;
-      this.saveToStorage();
-    });
-    
-    // Time inputs
-    const minutesInput = card.querySelector('.minutes');
-    const secondsInput = card.querySelector('.seconds');
-    
-    minutesInput.addEventListener('change', (e) => {
-      timer.setTime(parseInt(e.target.value) || 0, timer.originalSeconds);
-      this.saveToStorage();
-    });
-    
-    secondsInput.addEventListener('change', (e) => {
-      timer.setTime(timer.originalMinutes, parseInt(e.target.value) || 0);
-      this.saveToStorage();
-    });
-    
-    // Preset buttons
-    const presetBtns = card.querySelectorAll('.preset-btn');
-    presetBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        const minutes = parseInt(btn.dataset.minutes) || 0;
-        timer.setTime(minutes, 0);
-        minutesInput.value = minutes;
-        secondsInput.value = 0;
-        this.saveToStorage();
-      });
-    });
-    
     // Control buttons
-    const startBtn = card.querySelector('.start-btn');
-    const stopBtn = card.querySelector('.stop-btn');
-    const resetBtn = card.querySelector('.reset-btn');
+    this.elements.addBtn?.addEventListener('click', () => this.addTimer());
+    this.elements.startAllBtn?.addEventListener('click', () => this.startAll());
+    this.elements.stopAllBtn?.addEventListener('click', () => this.stopAll());
+    this.elements.resetAllBtn?.addEventListener('click', () => this.resetAll());
     
-    startBtn.addEventListener('click', () => timer.start());
-    stopBtn.addEventListener('click', () => timer.pause());
-    resetBtn.addEventListener('click', () => timer.reset());
-    
-    // Action buttons
-    const copyBtn = card.querySelector('.copy-btn');
-    const deleteBtn = card.querySelector('.delete-btn');
-    
-    copyBtn.addEventListener('click', () => this.duplicateTimer(timerId));
-    deleteBtn.addEventListener('click', () => {
-      if (confirm('이 타이머를 삭제하시겠습니까?')) {
-        this.removeTimer(timerId);
+    // Keyboard shortcuts
+    document.addEventListener('keydown', (e) => {
+      if (e.ctrlKey && e.key === 'n') {
+        e.preventDefault();
+        this.addTimer();
       }
     });
-    
-    // Advanced settings
-    const autoRestartCheck = card.querySelector('.auto-restart');
-    const soundEnabledCheck = card.querySelector('.sound-enabled');
-    const notificationEnabledCheck = card.querySelector('.notification-enabled');
-    const repeatCountInput = card.querySelector('.repeat-count');
-    
-    autoRestartCheck.addEventListener('change', (e) => {
-      timer.autoRestart = e.target.checked;
-      this.saveToStorage();
-    });
-    
-    soundEnabledCheck.addEventListener('change', (e) => {
-      timer.soundEnabled = e.target.checked;
-      this.saveToStorage();
-    });
-    
-    notificationEnabledCheck.addEventListener('change', (e) => {
-      timer.notificationEnabled = e.target.checked;
-      this.saveToStorage();
-    });
-    
-    repeatCountInput.addEventListener('change', (e) => {
-      timer.repeatCount = parseInt(e.target.value) || 0;
-      timer.updateStats();
-      this.saveToStorage();
-    });
   }
-
-  // ===== UI UPDATES ===== //
-  updateSummary() {
-    const total = this.timers.size;
-    let running = 0;
-    let completed = 0;
+  
+  addTimer(config = {}) {
+    if (this.timers.length >= this.maxTimers) {
+      this.showMessage('최대 6개까지만 추가할 수 있습니다');
+      return;
+    }
     
-    this.timers.forEach(timer => {
-      if (timer.isRunning) running++;
-      if (timer.isCompleted) completed++;
-    });
+    const timer = {
+      id: this.nextId++,
+      name: config.name || `타이머 ${this.nextId}`,
+      totalSeconds: config.totalSeconds || 300, // Default 5 minutes
+      currentSeconds: 0,
+      isRunning: false,
+      isCompleted: false,
+      color: config.color || this.colors[this.timers.length % this.colors.length],
+      intervalId: null
+    };
     
-    if (this.totalCountEl) this.totalCountEl.textContent = total;
-    if (this.runningCountEl) this.runningCountEl.textContent = running;
-    if (this.completedCountEl) this.completedCountEl.textContent = completed;
-  }
-
-  updateEmptyState() {
-    if (this.emptyState) {
-      this.emptyState.style.display = this.timers.size === 0 ? 'block' : 'none';
+    this.timers.push(timer);
+    this.renderTimer(timer);
+    this.updateStats();
+    this.saveTimers();
+    
+    // Hide empty state
+    if (this.elements.emptyState) {
+      this.elements.emptyState.style.display = 'none';
     }
   }
-
-  // ===== NOTIFICATIONS & SOUND ===== //
-  requestNotificationPermission() {
-    if ('Notification' in window && Notification.permission === 'default') {
-      Notification.requestPermission();
-    }
-  }
-
-  showNotification(type, title, message, timerName = null) {
-    // Browser notification
-    if ('Notification' in window && Notification.permission === 'granted') {
-      const notification = new Notification(title, {
-        body: timerName ? `${timerName}: ${message}` : message,
-        icon: '../assets/icons/icon-192.png'
-      });
+  
+  renderTimer(timer) {
+    const timerEl = document.createElement('div');
+    timerEl.className = 'timer-card';
+    timerEl.id = `timer-${timer.id}`;
+    timerEl.style.borderTopColor = timer.color;
+    
+    timerEl.innerHTML = `
+      <div class="timer-header">
+        <input type="text" class="timer-name" value="${timer.name}" placeholder="타이머 이름">
+        <button class="timer-remove" aria-label="타이머 제거">✕</button>
+      </div>
       
-      setTimeout(() => notification.close(), 5000);
-    }
-    
-    // In-app notification
-    this.showInAppNotification(type, title, message);
-  }
-
-  showInAppNotification(type, title, message) {
-    const notification = document.createElement('div');
-    notification.className = `notification ${type} show`;
-    
-    notification.innerHTML = `
-      <div class="notification-content">
-        <strong>${title}</strong>
-        <div>${message}</div>
+      <div class="timer-display">
+        <div class="timer-circle" style="border-color: ${timer.color}">
+          <svg class="timer-svg" viewBox="0 0 120 120">
+            <circle class="timer-bg" cx="60" cy="60" r="54" />
+            <circle class="timer-progress" cx="60" cy="60" r="54" 
+                    style="stroke: ${timer.color}" />
+          </svg>
+          <div class="timer-time">${this.formatTime(timer.totalSeconds - timer.currentSeconds)}</div>
+        </div>
+      </div>
+      
+      <div class="timer-inputs">
+        <div class="time-input-group">
+          <label>분</label>
+          <input type="number" class="minutes-input" min="0" max="99" value="${Math.floor(timer.totalSeconds / 60)}">
+        </div>
+        <div class="time-input-group">
+          <label>초</label>
+          <input type="number" class="seconds-input" min="0" max="59" value="${timer.totalSeconds % 60}">
+        </div>
+      </div>
+      
+      <div class="timer-controls">
+        <button class="timer-btn start-btn" data-timer-id="${timer.id}">
+          <span class="btn-icon">▶️</span>
+          <span class="btn-text">시작</span>
+        </button>
+        <button class="timer-btn stop-btn" data-timer-id="${timer.id}" style="display: none;">
+          <span class="btn-icon">⏸️</span>
+          <span class="btn-text">정지</span>
+        </button>
+        <button class="timer-btn reset-btn" data-timer-id="${timer.id}">
+          <span class="btn-icon">🔄</span>
+          <span class="btn-text">리셋</span>
+        </button>
+      </div>
+      
+      <div class="timer-status ${timer.isCompleted ? 'completed' : ''}">
+        ${timer.isCompleted ? '✅ 완료' : '⏱️ 대기중'}
       </div>
     `;
     
-    this.notificationContainer.appendChild(notification);
+    // Add event listeners
+    const nameInput = timerEl.querySelector('.timer-name');
+    const removeBtn = timerEl.querySelector('.timer-remove');
+    const minutesInput = timerEl.querySelector('.minutes-input');
+    const secondsInput = timerEl.querySelector('.seconds-input');
+    const startBtn = timerEl.querySelector('.start-btn');
+    const stopBtn = timerEl.querySelector('.stop-btn');
+    const resetBtn = timerEl.querySelector('.reset-btn');
     
-    // Auto remove after 4 seconds
-    setTimeout(() => {
-      notification.classList.remove('show');
-      setTimeout(() => {
-        if (notification.parentNode) {
-          notification.remove();
-        }
-      }, 300);
-    }, 4000);
-  }
-
-  playNotificationSound() {
-    this.createNotificationSound();
-  }
-
-  createNotificationSound() {
-    if (!this.settings || this.settings.volume === 0) return;
+    nameInput.addEventListener('change', (e) => {
+      timer.name = e.target.value;
+      this.saveTimers();
+    });
     
+    removeBtn.addEventListener('click', () => this.removeTimer(timer.id));
+    
+    const updateTime = () => {
+      const minutes = parseInt(minutesInput.value) || 0;
+      const seconds = parseInt(secondsInput.value) || 0;
+      timer.totalSeconds = minutes * 60 + seconds;
+      timer.currentSeconds = 0;
+      this.updateTimerDisplay(timer);
+      this.saveTimers();
+    };
+    
+    minutesInput.addEventListener('change', updateTime);
+    secondsInput.addEventListener('change', updateTime);
+    
+    startBtn.addEventListener('click', () => this.startTimer(timer.id));
+    stopBtn.addEventListener('click', () => this.stopTimer(timer.id));
+    resetBtn.addEventListener('click', () => this.resetTimer(timer.id));
+    
+    // Append to grid
+    this.elements.grid.appendChild(timerEl);
+  }
+  
+  startTimer(id) {
+    const timer = this.timers.find(t => t.id === id);
+    if (!timer || timer.isRunning) return;
+    
+    timer.isRunning = true;
+    timer.isCompleted = false;
+    
+    // Update UI
+    const timerEl = document.getElementById(`timer-${id}`);
+    timerEl.querySelector('.start-btn').style.display = 'none';
+    timerEl.querySelector('.stop-btn').style.display = 'inline-flex';
+    timerEl.querySelector('.timer-status').textContent = '⏱️ 실행 중';
+    timerEl.querySelector('.timer-status').classList.remove('completed');
+    timerEl.classList.add('running');
+    
+    // Disable inputs
+    timerEl.querySelector('.minutes-input').disabled = true;
+    timerEl.querySelector('.seconds-input').disabled = true;
+    
+    // Start interval
+    timer.intervalId = setInterval(() => {
+      timer.currentSeconds++;
+      
+      if (timer.currentSeconds >= timer.totalSeconds) {
+        this.completeTimer(id);
+      } else {
+        this.updateTimerDisplay(timer);
+      }
+    }, 1000);
+    
+    // Record start
+    if (window.recordTimerStart) {
+      window.recordTimerStart('multi');
+    }
+    
+    this.updateStats();
+    this.saveTimers();
+  }
+  
+  stopTimer(id) {
+    const timer = this.timers.find(t => t.id === id);
+    if (!timer || !timer.isRunning) return;
+    
+    timer.isRunning = false;
+    clearInterval(timer.intervalId);
+    
+    // Update UI
+    const timerEl = document.getElementById(`timer-${id}`);
+    timerEl.querySelector('.stop-btn').style.display = 'none';
+    timerEl.querySelector('.start-btn').style.display = 'inline-flex';
+    timerEl.querySelector('.timer-status').textContent = '⏸️ 일시정지';
+    timerEl.classList.remove('running');
+    
+    // Enable inputs
+    timerEl.querySelector('.minutes-input').disabled = false;
+    timerEl.querySelector('.seconds-input').disabled = false;
+    
+    this.updateStats();
+    this.saveTimers();
+  }
+  
+  resetTimer(id) {
+    const timer = this.timers.find(t => t.id === id);
+    if (!timer) return;
+    
+    // Stop if running
+    if (timer.isRunning) {
+      this.stopTimer(id);
+    }
+    
+    timer.currentSeconds = 0;
+    timer.isCompleted = false;
+    
+    // Update UI
+    const timerEl = document.getElementById(`timer-${id}`);
+    timerEl.querySelector('.timer-status').textContent = '⏱️ 대기중';
+    timerEl.querySelector('.timer-status').classList.remove('completed');
+    
+    this.updateTimerDisplay(timer);
+    this.updateStats();
+    this.saveTimers();
+  }
+  
+  completeTimer(id) {
+    const timer = this.timers.find(t => t.id === id);
+    if (!timer) return;
+    
+    timer.isRunning = false;
+    timer.isCompleted = true;
+    clearInterval(timer.intervalId);
+    
+    // Update UI
+    const timerEl = document.getElementById(`timer-${id}`);
+    timerEl.querySelector('.stop-btn').style.display = 'none';
+    timerEl.querySelector('.start-btn').style.display = 'inline-flex';
+    timerEl.querySelector('.timer-status').textContent = '✅ 완료';
+    timerEl.querySelector('.timer-status').classList.add('completed');
+    timerEl.classList.remove('running');
+    timerEl.classList.add('completed');
+    
+    // Enable inputs
+    timerEl.querySelector('.minutes-input').disabled = false;
+    timerEl.querySelector('.seconds-input').disabled = false;
+    
+    // Play sound and notification
+    this.playCompletionSound();
+    this.showNotification(timer.name);
+    
+    // Record completion
+    if (window.recordTimerComplete) {
+      const minutes = Math.ceil(timer.totalSeconds / 60);
+      window.recordTimerComplete('multi', minutes);
+    }
+    
+    // Flash animation
+    timerEl.classList.add('flash');
+    setTimeout(() => timerEl.classList.remove('flash'), 1000);
+    
+    this.updateStats();
+    this.saveTimers();
+  }
+  
+  removeTimer(id) {
+    const timer = this.timers.find(t => t.id === id);
+    if (!timer) return;
+    
+    // Stop if running
+    if (timer.isRunning) {
+      clearInterval(timer.intervalId);
+    }
+    
+    // Remove from array
+    this.timers = this.timers.filter(t => t.id !== id);
+    
+    // Remove from DOM
+    const timerEl = document.getElementById(`timer-${id}`);
+    timerEl?.remove();
+    
+    // Show empty state if no timers
+    if (this.timers.length === 0 && this.elements.emptyState) {
+      this.elements.emptyState.style.display = 'flex';
+    }
+    
+    this.updateStats();
+    this.saveTimers();
+  }
+  
+  startAll() {
+    this.timers.forEach(timer => {
+      if (!timer.isRunning && !timer.isCompleted) {
+        this.startTimer(timer.id);
+      }
+    });
+  }
+  
+  stopAll() {
+    this.timers.forEach(timer => {
+      if (timer.isRunning) {
+        this.stopTimer(timer.id);
+      }
+    });
+  }
+  
+  resetAll() {
+    this.timers.forEach(timer => {
+      this.resetTimer(timer.id);
+    });
+  }
+  
+  updateTimerDisplay(timer) {
+    const timerEl = document.getElementById(`timer-${timer.id}`);
+    if (!timerEl) return;
+    
+    const remainingSeconds = timer.totalSeconds - timer.currentSeconds;
+    const timeDisplay = timerEl.querySelector('.timer-time');
+    timeDisplay.textContent = this.formatTime(remainingSeconds);
+    
+    // Update progress circle
+    const progress = timer.currentSeconds / timer.totalSeconds;
+    const circle = timerEl.querySelector('.timer-progress');
+    const circumference = 2 * Math.PI * 54;
+    const offset = circumference * (1 - progress);
+    
+    circle.style.strokeDasharray = circumference;
+    circle.style.strokeDashoffset = offset;
+  }
+  
+  updateStats() {
+    const total = this.timers.length;
+    const running = this.timers.filter(t => t.isRunning).length;
+    const completed = this.timers.filter(t => t.isCompleted).length;
+    
+    if (this.elements.totalCount) this.elements.totalCount.textContent = total;
+    if (this.elements.runningCount) this.elements.runningCount.textContent = running;
+    if (this.elements.completedCount) this.elements.completedCount.textContent = completed;
+  }
+  
+  formatTime(seconds) {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+  }
+  
+  playCompletionSound() {
     try {
       const audioContext = new (window.AudioContext || window.webkitAudioContext)();
       const oscillator = audioContext.createOscillator();
@@ -389,509 +377,121 @@ class MultiTimerManager {
       oscillator.connect(gainNode);
       gainNode.connect(audioContext.destination);
       
-      // Different sounds based on setting
-      const soundConfig = this.getSoundConfig();
-      oscillator.frequency.value = soundConfig.frequency;
-      oscillator.type = soundConfig.type;
+      // Chord progression for completion
+      oscillator.frequency.setValueAtTime(440, audioContext.currentTime);
+      oscillator.frequency.setValueAtTime(554, audioContext.currentTime + 0.1);
+      oscillator.frequency.setValueAtTime(659, audioContext.currentTime + 0.2);
       
-      const volume = this.settings.volume / 100 * 0.3;
-      gainNode.gain.setValueAtTime(volume, audioContext.currentTime);
-      gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + soundConfig.duration);
+      oscillator.type = 'sine';
+      gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+      gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.3);
       
       oscillator.start(audioContext.currentTime);
-      oscillator.stop(audioContext.currentTime + soundConfig.duration);
+      oscillator.stop(audioContext.currentTime + 0.3);
     } catch (error) {
-      console.error('오디오 재생 실패:', error);
+      // Silent fail
     }
   }
-
-  getSoundConfig() {
-    switch (this.settings.notificationSound) {
-      case 'gentle':
-        return { frequency: 523.25, type: 'sine', duration: 0.8 };
-      case 'sharp':
-        return { frequency: 1000, type: 'square', duration: 0.3 };
-      case 'chime':
-        return { frequency: 659.25, type: 'triangle', duration: 1.0 };
-      default: // classic
-        return { frequency: 800, type: 'sine', duration: 0.5 };
+  
+  showNotification(timerName) {
+    if ('Notification' in window && Notification.permission === 'granted') {
+      new Notification('⏰ 타이머 완료!', {
+        body: `${timerName}이(가) 완료되었습니다.`,
+        icon: '/assets/icons/icon-192x192.png',
+        badge: '/assets/icons/icon-72x72.png',
+        vibrate: [200, 100, 200]
+      });
     }
   }
-
-  testNotificationSound() {
-    this.playNotificationSound();
-  }
-
-  // ===== KEYBOARD HANDLING ===== //
-  handleGlobalKeyboard(e) {
-    // Ctrl + Enter = 타이머 추가
-    if (e.ctrlKey && e.key === 'Enter') {
-      e.preventDefault();
-      this.addNewTimer();
-    }
+  
+  showMessage(text) {
+    // Create toast message
+    const toast = document.createElement('div');
+    toast.className = 'toast-message';
+    toast.textContent = text;
+    toast.style.cssText = `
+      position: fixed;
+      top: 80px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #333;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 8px;
+      z-index: 1000;
+      animation: fadeInOut 2s ease;
+    `;
     
-    // Ctrl + A = 모두 시작
-    if (e.ctrlKey && e.key === 'a') {
-      e.preventDefault();
-      this.startAllTimers();
-    }
+    document.body.appendChild(toast);
+    setTimeout(() => toast.remove(), 2000);
+  }
+  
+  saveTimers() {
+    const data = this.timers.map(timer => ({
+      name: timer.name,
+      totalSeconds: timer.totalSeconds,
+      currentSeconds: timer.currentSeconds,
+      color: timer.color,
+      isCompleted: timer.isCompleted
+    }));
     
-    // Ctrl + P = 모두 일시정지
-    if (e.ctrlKey && e.key === 'p') {
-      e.preventDefault();
-      this.pauseAllTimers();
-    }
+    localStorage.setItem('multi_timers', JSON.stringify(data));
   }
-
-  // ===== VISIBILITY HANDLING ===== //
-  handleVisibilityChange() {
-    if (document.hidden) {
-      this.saveToStorage();
-    } else {
-      this.timers.forEach(timer => timer.updateDisplay());
-    }
-  }
-
-  // ===== SETTINGS PERSISTENCE ===== //
-  saveSettings() {
-    localStorage.setItem('multiTimerSettings', JSON.stringify(this.settings));
-  }
-
-  loadSettings() {
-    try {
-      const settings = JSON.parse(localStorage.getItem('multiTimerSettings') || '{}');
-      this.settings = { ...this.settings, ...settings };
-      
-      // Update UI elements
-      if (this.notificationSoundSelect) {
-        this.notificationSoundSelect.value = this.settings.notificationSound;
-      }
-      if (this.volumeSlider) {
-        this.volumeSlider.value = this.settings.volume;
-      }
-      if (this.autoRemoveCheckbox) {
-        this.autoRemoveCheckbox.checked = this.settings.autoRemove;
-      }
-      if (this.sequentialModeCheckbox) {
-        this.sequentialModeCheckbox.checked = this.settings.sequentialMode;
-      }
-    } catch (error) {
-      console.error('설정 로드 오류:', error);
-    }
-  }
-
-  // ===== DATA PERSISTENCE ===== //
-  saveToStorage() {
-    const data = {
-      nextTimerId: this.nextTimerId,
-      timers: Array.from(this.timers.values()).map(timer => timer.serialize())
-    };
-    
-    localStorage.setItem('multiTimerData', JSON.stringify(data));
-  }
-
-  loadFromStorage() {
-    try {
-      const data = JSON.parse(localStorage.getItem('multiTimerData') || '{}');
-      
-      if (data.nextTimerId) {
-        this.nextTimerId = data.nextTimerId;
-      }
-      
-      if (data.timers && Array.isArray(data.timers)) {
-        data.timers.forEach(timerData => {
-          const timer = new TimerInstance(timerData.id, timerData, this);
-          this.timers.set(timer.id, timer);
-          
-          const element = this.createTimerElement(timer);
-          this.timersGrid.appendChild(element);
-          
-          timer.deserialize(timerData);
+  
+  loadSavedTimers() {
+    const saved = localStorage.getItem('multi_timers');
+    if (saved) {
+      try {
+        const data = JSON.parse(saved);
+        data.forEach(config => {
+          this.addTimer(config);
         });
+      } catch (error) {
+        // Silent fail
       }
-    } catch (error) {
-      console.error('타이머 데이터 로드 오류:', error);
+    }
+    
+    // Add a default timer if none exist
+    if (this.timers.length === 0) {
+      this.addTimer({ name: '타이머 1', totalSeconds: 300 });
     }
   }
 }
 
-// ===== TIMER INSTANCE CLASS ===== //
-class TimerInstance {
-  constructor(id, config = {}, manager) {
-    this.id = id;
-    this.manager = manager;
-    this.interval = null;
-    
-    // Timer state
-    this.name = config.name || `타이머 ${id}`;
-    this.category = config.category || 'other';
-    this.originalMinutes = config.minutes || 5;
-    this.originalSeconds = config.seconds || 0;
-    this.totalSeconds = this.originalMinutes * 60 + this.originalSeconds;
-    this.remainingSeconds = this.totalSeconds;
-    
-    // Timer status
-    this.isRunning = false;
-    this.isPaused = false;
-    this.isCompleted = false;
-    
-    // Auto-remove timeout
-    this.autoRemoveTimeout = null;
-    
-    // Advanced settings
-    this.autoRestart = false;
-    this.soundEnabled = true;
-    this.notificationEnabled = true;
-    this.repeatCount = 0;
-    this.currentRepeats = 0;
-  }
-
-  // ===== TIMER CONTROLS ===== //
-  start() {
-    if (this.isRunning || this.isCompleted) return;
-    
-    this.isRunning = true;
-    this.isPaused = false;
-    
-    this.interval = setInterval(() => {
-      this.tick();
-    }, 1000);
-    
-    this.updateDisplay();
-    this.updateButtonStates();
-    this.manager.updateSummary();
-    this.manager.saveToStorage();
-  }
-
-  pause() {
-    if (!this.isRunning) return;
-    
-    this.isRunning = false;
-    this.isPaused = true;
-    
-    if (this.interval) {
-      clearInterval(this.interval);
-      this.interval = null;
-    }
-    
-    this.updateDisplay();
-    this.updateButtonStates();
-    this.manager.updateSummary();
-    this.manager.saveToStorage();
-  }
-
-  reset() {
-    this.isRunning = false;
-    this.isPaused = false;
-    this.isCompleted = false;
-    this.remainingSeconds = this.totalSeconds;
-    
-    if (this.interval) {
-      clearInterval(this.interval);
-      this.interval = null;
-    }
-    
-    if (this.autoRemoveTimeout) {
-      clearTimeout(this.autoRemoveTimeout);
-      this.autoRemoveTimeout = null;
-    }
-    
-    this.updateDisplay();
-    this.updateButtonStates();
-    this.updateProgress();
-    this.manager.updateSummary();
-    this.manager.saveToStorage();
-  }
-
-  tick() {
-    if (this.remainingSeconds <= 0) {
-      this.complete();
-      return;
-    }
-    
-    this.remainingSeconds--;
-    this.updateDisplay();
-    this.updateProgress();
-  }
-
-  complete() {
-    this.isRunning = false;
-    this.isCompleted = true;
-    
-    if (this.interval) {
-      clearInterval(this.interval);
-      this.interval = null;
-    }
-    
-    // Update repeat count
-    this.currentRepeats++;
-    
-    // Play completion sound if enabled
-    if (this.soundEnabled) {
-      this.manager.playNotificationSound();
-    }
-    
-    // Show notification if enabled
-    if (this.notificationEnabled) {
-      this.manager.showNotification(
-        'success',
-        '타이머 완료!',
-        `${this.name}: 시간이 완료되었습니다. (완료: ${this.currentRepeats}회)`,
-        this.name
-      );
-    }
-    
-    // Check for auto-restart and repeat functionality
-    if (this.autoRestart && (this.repeatCount === 0 || this.currentRepeats < this.repeatCount)) {
-      setTimeout(() => {
-        this.reset();
-        this.start();
-      }, 2000); // 2 second delay before restart
-      return;
-    }
-    
-    // Auto-remove if enabled and no more repeats
-    if (this.manager.settings.autoRemove && this.repeatCount > 0 && this.currentRepeats >= this.repeatCount) {
-      this.autoRemoveTimeout = setTimeout(() => {
-        this.manager.removeTimer(this.id);
-      }, 30000); // 30 seconds
-    }
-    
-    this.updateDisplay();
-    this.updateButtonStates();
-    this.updateProgress();
-    this.updateStats();
-    this.manager.updateSummary();
-    this.manager.saveToStorage();
-  }
-
-  // ===== CONFIGURATION ===== //
-  setName(name) {
-    this.name = name || `타이머 ${this.id}`;
+// Add required styles
+const style = document.createElement('style');
+style.textContent = `
+  @keyframes fadeInOut {
+    0% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+    20% { opacity: 1; transform: translateX(-50%) translateY(0); }
+    80% { opacity: 1; transform: translateX(-50%) translateY(0); }
+    100% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
   }
   
-  setCategory(category) {
-    this.category = category || 'other';
+  @keyframes flash {
+    0%, 100% { background: white; }
+    50% { background: #10B981; }
   }
   
-  setAdvancedSettings(settings) {
-    this.autoRestart = settings.autoRestart || false;
-    this.soundEnabled = settings.soundEnabled !== false;
-    this.notificationEnabled = settings.notificationEnabled !== false;
-    this.repeatCount = settings.repeatCount || 0;
-    this.currentRepeats = 0;
-  }
-
-  setTime(minutes, seconds) {
-    this.originalMinutes = Math.max(0, Math.min(59, minutes));
-    this.originalSeconds = Math.max(0, Math.min(59, seconds));
-    this.totalSeconds = this.originalMinutes * 60 + this.originalSeconds;
-    
-    if (!this.isRunning) {
-      this.remainingSeconds = this.totalSeconds;
-      this.updateDisplay();
-      this.updateProgress();
-    }
-  }
-
-  // ===== UI UPDATES ===== //
-  updateDisplay() {
-    const card = document.querySelector(`[data-timer-id="${this.id}"]`);
-    if (!card) return;
-    
-    const timerTime = card.querySelector('.timer-time');
-    const timerStatus = card.querySelector('.timer-status');
-    const progressText = card.querySelector('.progress-text');
-    
-    if (timerTime) {
-      timerTime.textContent = this.formatTime(this.remainingSeconds);
-    }
-    
-    if (timerStatus) {
-      timerStatus.textContent = this.getStatusText();
-    }
-    
-    if (progressText) {
-      const progress = this.totalSeconds > 0 ? ((this.totalSeconds - this.remainingSeconds) / this.totalSeconds * 100) : 0;
-      progressText.textContent = `${Math.round(progress)}%`;
-    }
-    
-    // Update card class
-    card.className = `timer-card timer-${this.category} ${this.getStateClass()}`;
-    
-    // Update stats display
-    this.updateStats();
-  }
-
-  updateButtonStates() {
-    const card = document.querySelector(`[data-timer-id="${this.id}"]`);
-    if (!card) return;
-    
-    const startBtn = card.querySelector('.start-btn');
-    const stopBtn = card.querySelector('.stop-btn');
-    
-    if (this.isRunning) {
-      if (startBtn) startBtn.style.display = 'none';
-      if (stopBtn) stopBtn.style.display = 'flex';
-    } else {
-      if (startBtn) startBtn.style.display = 'flex';
-      if (stopBtn) stopBtn.style.display = 'none';
-    }
-    
-    // Disable inputs when running
-    const inputs = card.querySelectorAll('input');
-    inputs.forEach(input => {
-      input.disabled = this.isRunning;
-    });
-  }
-
-  updateProgress() {
-    const card = document.querySelector(`[data-timer-id="${this.id}"]`);
-    if (!card) return;
-    
-    // Update SVG circle progress
-    const progressRingCircle = card.querySelector('.progress-ring-circle');
-    if (progressRingCircle) {
-      const circumference = 2 * Math.PI * 40; // radius = 40
-      const progress = this.totalSeconds > 0 ? (this.totalSeconds - this.remainingSeconds) / this.totalSeconds : 0;
-      const offset = circumference - (progress * circumference);
-      
-      progressRingCircle.style.strokeDasharray = circumference;
-      progressRingCircle.style.strokeDashoffset = offset;
-    }
-    
-    // Update progress bar
-    const progressFill = card.querySelector('.progress-fill');
-    if (progressFill) {
-      const progress = this.totalSeconds > 0 ? (this.totalSeconds - this.remainingSeconds) / this.totalSeconds : 0;
-      progressFill.style.width = `${progress * 100}%`;
-    }
-  }
-
-  getStateClass() {
-    if (this.isCompleted) return 'completed';
-    if (this.isRunning) return 'running';
-    if (this.isPaused) return 'paused';
-    return '';
+  .timer-card.running {
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
   }
   
-  getStatusText() {
-    if (this.isCompleted) return '완료';
-    if (this.isRunning) return '실행중';
-    if (this.isPaused) return '일시정지';
-    return '준비';
+  .timer-card.completed {
+    animation: flash 1s ease;
   }
   
-  updateStats() {
-    const card = document.querySelector(`[data-timer-id="${this.id}"]`);
-    if (!card) return;
-    
-    const completedCountEl = card.querySelector('.completed-count');
-    const remainingRepeatsEl = card.querySelector('.remaining-repeats');
-    
-    if (completedCountEl) {
-      completedCountEl.textContent = this.currentRepeats;
-    }
-    
-    if (remainingRepeatsEl) {
-      if (this.repeatCount === 0) {
-        remainingRepeatsEl.textContent = '∞';
-      } else {
-        const remaining = Math.max(0, this.repeatCount - this.currentRepeats);
-        remainingRepeatsEl.textContent = remaining;
-      }
-    }
+  .timer-card.flash {
+    animation: flash 1s ease;
   }
+`;
+document.head.appendChild(style);
 
-  formatTime(seconds) {
-    const mins = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
-  }
-
-  // ===== SERIALIZATION ===== //
-  serialize() {
-    return {
-      id: this.id,
-      name: this.name,
-      category: this.category,
-      minutes: this.originalMinutes,
-      seconds: this.originalSeconds,
-      remainingSeconds: this.remainingSeconds,
-      isRunning: this.isRunning,
-      isPaused: this.isPaused,
-      isCompleted: this.isCompleted,
-      autoRestart: this.autoRestart,
-      soundEnabled: this.soundEnabled,
-      notificationEnabled: this.notificationEnabled,
-      repeatCount: this.repeatCount,
-      currentRepeats: this.currentRepeats
-    };
-  }
-
-  deserialize(data) {
-    this.name = data.name || this.name;
-    this.category = data.category || this.category;
-    
-    // Restore advanced settings
-    this.autoRestart = data.autoRestart || false;
-    this.soundEnabled = data.soundEnabled !== false;
-    this.notificationEnabled = data.notificationEnabled !== false;
-    this.repeatCount = data.repeatCount || 0;
-    this.currentRepeats = data.currentRepeats || 0;
-    
-    // Don't restore running state, reset to paused if was running
-    if (data.isRunning) {
-      this.isPaused = true;
-      this.remainingSeconds = data.remainingSeconds || this.totalSeconds;
-    } else {
-      this.isPaused = data.isPaused || false;
-      this.isCompleted = data.isCompleted || false;
-      this.remainingSeconds = data.remainingSeconds || this.totalSeconds;
-    }
-    
-    this.updateDisplay();
-    this.updateButtonStates();
-    this.updateProgress();
-    this.updateStats();
-  }
-
-  destroy() {
-    if (this.interval) {
-      clearInterval(this.interval);
-      this.interval = null;
-    }
-    
-    if (this.autoRemoveTimeout) {
-      clearTimeout(this.autoRemoveTimeout);
-      this.autoRemoveTimeout = null;
-    }
-  }
-}
-
-// ===== GLOBAL FUNCTIONS ===== //
-window.addTimer = function() {
-  if (window.multiTimerManager) {
-    window.multiTimerManager.addNewTimer();
-  }
-};
-
-// For empty state button compatibility
-window.addNewTimer = window.addTimer;
-
-// ===== INITIALIZATION ===== //
+// Initialize
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', () => {
-    window.multiTimerManager = new MultiTimerManager();
+    window.multiTimer = new MultiTimer();
   });
 } else {
-  window.multiTimerManager = new MultiTimerManager();
+  window.multiTimer = new MultiTimer();
 }
-
-// ===== ERROR HANDLING ===== //
-window.addEventListener('error', (e) => {
-  console.error('멀티 타이머 오류:', e.error);
-  if (window.multiTimerManager) {
-    window.multiTimerManager.showNotification('error', '오류 발생', '예상치 못한 오류가 발생했습니다.');
-  }
-});

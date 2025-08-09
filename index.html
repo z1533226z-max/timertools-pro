@@ -8,17 +8,17 @@
     <title>TimerTools Pro - 완벽한 시간 관리 도구 | 온라인 타이머 뽀모도로 생산성 향상</title>
     
     <!-- Language and SEO -->
-    <link rel="canonical" href="https://timertools.pro/">
-    <link rel="alternate" hreflang="ko" href="https://timertools.pro/">
-    <link rel="alternate" hreflang="en" href="https://timertools.pro/en/">
-    <link rel="alternate" hreflang="x-default" href="https://timertools.pro/">
+    <link rel="canonical" href="https://gon.ai.kr/">
+    <link rel="alternate" hreflang="ko" href="https://gon.ai.kr/">
+    <link rel="alternate" hreflang="en" href="https://gon.ai.kr/en/">
+    <link rel="alternate" hreflang="x-default" href="https://gon.ai.kr/">
     
     <!-- Open Graph Meta Tags -->
     <meta property="og:title" content="TimerTools Pro - 완벽한 시간 관리 도구">
     <meta property="og:description" content="온라인 타이머, 뽀모도로, 멀티 타이머로 생산성을 높이고 집중력을 향상시키세요. 무료 시간 관리 도구">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://timertools.pro/">
-    <meta property="og:image" content="https://timertools.pro/assets/images/og-image-ko.jpg">
+    <meta property="og:url" content="https://gon.ai.kr/">
+    <meta property="og:image" content="https://gon.ai.kr/assets/images/og-image-ko.jpg">
     <meta property="og:locale" content="ko_KR">
     <meta property="og:locale:alternate" content="en_US">
     <meta property="og:site_name" content="TimerTools Pro">
@@ -27,7 +27,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="TimerTools Pro - 완벽한 시간 관리 도구">
     <meta name="twitter:description" content="온라인 타이머, 뽀모도로, 멀티 타이머로 생산성 향상">
-    <meta name="twitter:image" content="https://timertools.pro/assets/images/twitter-card-ko.jpg">
+    <meta name="twitter:image" content="https://gon.ai.kr/assets/images/twitter-card-ko.jpg">
     
     <!-- Additional SEO -->
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
@@ -305,6 +305,9 @@
     </footer>
 
     <!-- JavaScript -->
+    <script src="assets/js/utils.js"></script>
+    <script src="assets/js/timer-settings.js"></script>
+    <script src="assets/js/stats-manager.js"></script>
     <script src="assets/js/seo-performance.js"></script>
     <script src="assets/js/seo-i18n.js"></script>
     <script src="assets/js/main.js"></script>
@@ -315,7 +318,7 @@
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('/sw.js')
                     .then((registration) => {
-                        console.log('SW registered: ', registration);
+                        // SW registered
                         
                         // Check for updates
                         registration.addEventListener('updatefound', () => {
@@ -329,7 +332,7 @@
                         });
                     })
                     .catch((registrationError) => {
-                        console.log('SW registration failed: ', registrationError);
+                        // SW registration failed
                     });
             });
         }
@@ -447,7 +450,7 @@
                 if (deferredPrompt) {
                     deferredPrompt.prompt();
                     const { outcome } = await deferredPrompt.userChoice;
-                    console.log(`User response to install prompt: ${outcome}`);
+                    // User response to install prompt
                     deferredPrompt = null;
                 }
                 installBanner.remove();

@@ -209,6 +209,11 @@ class BasicTimer {
     this.isPaused = false;
     this.remainingSeconds = this.totalSeconds;
     
+    // Record timer start
+    if (window.recordTimerStart) {
+      window.recordTimerStart('basic');
+    }
+    
     // Initialize audio context on user interaction
     this.initAudio();
     
@@ -296,6 +301,17 @@ class BasicTimer {
     this.remainingSeconds = 0;
     
     clearInterval(this.intervalId);
+    
+    // Record statistics
+    if (window.recordTimerComplete && this.totalSeconds > 0) {
+      const minutes = Math.ceil(this.totalSeconds / 60);
+      window.recordTimerComplete('basic', minutes);
+    }
+    
+    // Save settings and stats if available
+    if (window.timerSettings && this.totalSeconds > 0) {
+      window.timerSettings.recordSession(Math.ceil(this.totalSeconds / 60), 'basic');
+    }
     
     this.updateDisplay();
     this.updateProgress();

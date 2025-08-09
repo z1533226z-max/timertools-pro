@@ -2,6 +2,11 @@ const CACHE_NAME = 'timertools-v1.0.0';
 const BASE_CACHE = 'base-cache-v1';
 const RUNTIME_CACHE = 'runtime-cache-v1';
 
+// Production mode check for Service Worker
+const isProduction = !self.location.hostname.includes('localhost') && !self.location.hostname.includes('127.0.0.1');
+const log = (...args) => { if (!isProduction) console.log(...args); };
+const logError = (...args) => console.error(...args); // Always show errors
+
 // Base resources to cache immediately
 const BASE_RESOURCES = [
     '/',
@@ -49,27 +54,27 @@ const RUNTIME_STRATEGIES = {
 
 // Install event - cache base resources
 self.addEventListener('install', (event) => {
-    console.log('[SW] Installing service worker');
+    log('[SW] Installing service worker');
     
     event.waitUntil(
         caches.open(BASE_CACHE)
             .then((cache) => {
-                console.log('[SW] Caching base resources');
+                log('[SW] Caching base resources');
                 return cache.addAll(BASE_RESOURCES);
             })
             .then(() => {
-                console.log('[SW] Base resources cached successfully');
+                log('[SW] Base resources cached successfully');
                 return self.skipWaiting();
             })
             .catch((error) => {
-                console.error('[SW] Failed to cache base resources:', error);
+                logError('[SW] Failed to cache base resources:', error);
             })
     );
 });
 
 // Activate event - clean up old caches
 self.addEventListener('activate', (event) => {
-    console.log('[SW] Activating service worker');
+    log('[SW] Activating service worker');
     
     event.waitUntil(
         caches.keys()
@@ -77,14 +82,14 @@ self.addEventListener('activate', (event) => {
                 return Promise.all(
                     cacheNames.map((cacheName) => {
                         if (cacheName !== BASE_CACHE && cacheName !== RUNTIME_CACHE) {
-                            console.log('[SW] Deleting old cache:', cacheName);
+                            log('[SW] Deleting old cache:', cacheName);
                             return caches.delete(cacheName);
                         }
                     })
                 );
             })
             .then(() => {
-                console.log('[SW] Service worker activated');
+                log('[SW] Service worker activated');
                 return self.clients.claim();
             })
     );

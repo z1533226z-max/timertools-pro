@@ -15,17 +15,17 @@ class TimerToolsApp {
     
     // Initialize i18n if available
     if (window.i18n) {
-      console.log('i18n system ready');
+      // i18n system ready
     } else {
       document.addEventListener('i18n-ready', () => {
-        console.log('i18n system initialized');
+        // i18n system initialized
       });
     }
     
     // Defer non-critical setup to avoid blocking main thread
     this.deferNonCriticalSetup();
     
-    console.log('TimerTools Pro initialized');
+    // TimerTools Pro initialized
   }
   
   deferNonCriticalSetup() {
@@ -48,14 +48,14 @@ class TimerToolsApp {
     // Apply saved theme immediately to prevent flash
     const savedTheme = localStorage.getItem('theme') || 'light';
     document.documentElement.setAttribute('data-theme', savedTheme);
-    console.log('🎨 Theme applied:', savedTheme);
+    // Theme applied: savedTheme
     
     // Wait for DOM to be ready for theme toggle functionality
     const initThemeToggle = () => {
       const themeToggle = document.querySelector('.theme-toggle');
       const themeIcon = document.querySelector('.theme-icon');
       
-      console.log('🎨 Theme elements found:', { toggle: !!themeToggle, icon: !!themeIcon });
+      // Theme elements found
       
       // Update icon to match current theme
       this.updateThemeIcon(savedTheme);
@@ -65,7 +65,7 @@ class TimerToolsApp {
           const currentTheme = document.documentElement.getAttribute('data-theme');
           const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
           
-          console.log('🎨 Theme toggling:', currentTheme, '→', newTheme);
+          // Theme toggling: currentTheme → newTheme
           
           // Apply theme with force refresh
           document.documentElement.setAttribute('data-theme', newTheme);
@@ -83,14 +83,14 @@ class TimerToolsApp {
             const appliedTheme = document.documentElement.getAttribute('data-theme');
             const computedStyle = getComputedStyle(document.documentElement);
             const bgColor = computedStyle.getPropertyValue('--bg-primary');
-            console.log('🎨 Theme verification:', { theme: appliedTheme, bgColor });
+            // Theme verification
           }, 50);
           
           // Announce theme change to screen readers
           this.announceToScreenReader(`${newTheme === 'dark' ? '다크' : '라이트'} 모드로 변경되었습니다`);
         });
       } else {
-        console.warn('⚠️ Theme toggle button not found - retrying in 100ms');
+        // Theme toggle button not found - retrying
         setTimeout(initThemeToggle, 100);
       }
     };
@@ -114,7 +114,7 @@ class TimerToolsApp {
       const systemTheme = mediaQuery.matches ? 'dark' : 'light';
       document.documentElement.setAttribute('data-theme', systemTheme);
       this.updateThemeIcon(systemTheme);
-      console.log('🎨 System theme detected:', systemTheme);
+      // System theme detected: systemTheme
     }
     
     // Listen for system theme changes
@@ -123,7 +123,7 @@ class TimerToolsApp {
         const systemTheme = e.matches ? 'dark' : 'light';
         document.documentElement.setAttribute('data-theme', systemTheme);
         this.updateThemeIcon(systemTheme);
-        console.log('🎨 System theme changed:', systemTheme);
+        // System theme changed: systemTheme
       }
     });
   }
@@ -133,9 +133,9 @@ class TimerToolsApp {
     if (themeIcon) {
       const newIcon = theme === 'dark' ? '☀️' : '🌙';
       themeIcon.textContent = newIcon;
-      console.log('🎨 Icon updated:', theme, '→', newIcon);
+      // Icon updated
     } else {
-      console.warn('⚠️ Theme icon element not found');
+      // Theme icon element not found
     }
   }
   

@@ -416,9 +416,24 @@ class WorkoutTimer {
      * Initialize the workout timer application
      */
     init() {
-        this.bindEvents();
-        this.loadUserSettings();
-        this.showProgramSelection();
+        // Ensure DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => {
+                // Defer non-critical initialization
+                requestAnimationFrame(() => {
+                    this.bindEvents();
+                    this.loadUserSettings();
+                    this.showProgramSelection();
+                });
+            });
+        } else {
+            // DOM is already loaded - still defer for performance
+            requestAnimationFrame(() => {
+                this.bindEvents();
+                this.loadUserSettings();
+                this.showProgramSelection();
+            });
+        }
     }
     
     /**
@@ -1030,9 +1045,9 @@ class WorkoutTimer {
      * Update rest screen display
      */
     updateRestScreen() {
-        const restTimeEl = document.getElementById('rest-time');
-        const restProgressEl = document.getElementById('rest-progress');
-        const restInfoEl = document.getElementById('rest-info');
+        const restTimeEl = document.querySelector('#rest-screen #rest-time');
+        const restProgressEl = document.querySelector('#rest-screen #rest-progress');
+        const restInfoEl = document.querySelector('#rest-screen #rest-info');
         
         if (restTimeEl) {
             const minutes = Math.floor(this.restTime / 60);
@@ -1824,9 +1839,14 @@ class WorkoutTimer {
 }
 
 // Initialize workout timer when DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+        window.workoutTimer = new WorkoutTimer();
+    });
+} else {
+    // DOM is already loaded
     window.workoutTimer = new WorkoutTimer();
-});
+}
 
 // Export for module usage
 if (typeof module !== 'undefined' && module.exports) {

@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: http://gon.ai.kr/sitemap.xml
+Sitemap: https://gon.ai.kr/sitemap.xml
 
 # Allow access to CSS and JS files
 Allow: /assets/
