@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Simple and accurate basic timer - precise time measurement with hour/minute/second settings. Free online timer for enhanced productivity">
+    <meta name="keywords" content="basic timer, online timer, time measurement, timer settings, productivity, focus, work time, countdown timer">
+    <title>Basic Timer - Free Online Timer | TimerTools Pro</title>
+    
+    <!-- Language and SEO -->
+    <link rel="canonical" href="https://timertools.pro/en/timer/basic.html">
+    <link rel="alternate" hreflang="ko" href="https://timertools.pro/timer/basic.html">
+    <link rel="alternate" hreflang="en" href="https://timertools.pro/en/timer/basic.html">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Basic Timer - Free Online Timer">
+    <meta property="og:description" content="Simple and effective online timer with hour/minute/second settings for precise time measurement">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://timertools.pro/en/timer/basic.html">
+    <meta property="og:image" content="https://timertools.pro/assets/images/basic-timer-og-en.jpg">
+    <meta property="og:locale" content="en_US">
+    
+    <!-- Additional SEO -->
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="TimerTools Pro">
+    
+    <link rel="icon" type="image/svg+xml" href="../../assets/images/favicon.svg">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/styles.css">
+    <link rel="stylesheet" href="../../assets/css/timer.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <header class="header" role="banner">
+        <nav class="nav-container" role="navigation">
+            <div class="nav-brand">
+                <h1 class="logo"><a href="../index.html">TimerTools Pro</a></h1>
+            </div>
+            
+            <div class="breadcrumb">
+                <a href="../index.html">Home</a> &gt; <span aria-current="page">Basic Timer</span>
+                <button class="favorite-btn" aria-label="Add to favorites" title="Favorite">⭐</button>
+            </div>
+        </nav>
+        
+        <div class="ad-space ad-mobile-banner" aria-hidden="true">
+            <div class="ad-placeholder">320x50 Mobile Banner</div>
+        </div>
+    </header>
+
+    <main id="main-content" class="timer-main" role="main">
+        <div class="container">
+            <div class="timer-layout">
+                <!-- Timer Section -->
+                <section class="timer-section" aria-labelledby="timer-title">
+                    <h2 id="timer-title" class="timer-title">Basic Timer</h2>
+                    
+                    <div class="timer-display" role="timer" aria-live="polite" aria-atomic="true">
+                        <div class="timer-circle">
+                            <svg class="timer-svg" viewBox="0 0 200 200" aria-hidden="true">
+                                <circle class="timer-bg" cx="100" cy="100" r="90" />
+                                <circle class="timer-progress" cx="100" cy="100" r="90" />
+                            </svg>
+                            <div class="timer-time" id="timer-display">05:00</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timer-controls">
+                        <div class="time-inputs" role="group" aria-labelledby="time-setting-label">
+                            <label id="time-setting-label" class="sr-only">Time Setting</label>
+                            <div class="input-group">
+                                <label for="hours">Hours</label>
+                                <input type="number" id="hours" min="0" max="23" value="0" aria-describedby="hours-desc">
+                                <small id="hours-desc" class="sr-only">Set hours from 0 to 23</small>
+                            </div>
+                            <div class="input-group">
+                                <label for="minutes">Minutes</label>
+                                <input type="number" id="minutes" min="0" max="59" value="5" aria-describedby="minutes-desc">
+                                <small id="minutes-desc" class="sr-only">Set minutes from 0 to 59</small>
+                            </div>
+                            <div class="input-group">
+                                <label for="seconds">Seconds</label>
+                                <input type="number" id="seconds" min="0" max="59" value="0" aria-describedby="seconds-desc">
+                                <small id="seconds-desc" class="sr-only">Set seconds from 0 to 59</small>
+                            </div>
+                        </div>
+                        
+                        <div class="control-buttons">
+                            <button id="start-btn" class="btn btn-primary timer-btn" aria-describedby="start-desc">
+                                <span class="btn-icon">▶️</span>
+                                <span class="btn-text">Start</span>
+                            </button>
+                            <button id="pause-btn" class="btn btn-secondary timer-btn" style="display: none;" aria-describedby="pause-desc">
+                                <span class="btn-icon">⏸️</span>
+                                <span class="btn-text">Pause</span>
+                            </button>
+                            <button id="reset-btn" class="btn btn-outline timer-btn" aria-describedby="reset-desc">
+                                <span class="btn-icon">🔄</span>
+                                <span class="btn-text">Reset</span>
+                            </button>
+                            <div id="start-desc" class="sr-only">Start the timer</div>
+                            <div id="pause-desc" class="sr-only">Pause the timer</div>
+                            <div id="reset-desc" class="sr-only">Reset the timer</div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Sidebar -->
+                <aside class="timer-sidebar">
+                    <!-- Ad Space -->
+                    <div class="ad-space ad-rectangle" aria-hidden="true">
+                        <div class="ad-placeholder">300x250 Ad</div>
+                    </div>
+                    
+                    <!-- Presets -->
+                    <div class="presets-section">
+                        <h3>Quick Settings</h3>
+                        <div class="preset-buttons" role="group" aria-label="Preset time buttons">
+                            <button class="preset-btn" data-time="60">1 min</button>
+                            <button class="preset-btn" data-time="180">3 min</button>
+                            <button class="preset-btn" data-time="300">5 min</button>
+                            <button class="preset-btn" data-time="600">10 min</button>
+                            <button class="preset-btn" data-time="900">15 min</button>
+                            <button class="preset-btn" data-time="1800">30 min</button>
+                            <button class="preset-btn" data-time="2700">45 min</button>
+                            <button class="preset-btn" data-time="3600">60 min</button>
+                        </div>
+                        <button class="btn btn-outline custom-preset-btn">Save Custom</button>
+                    </div>
+                </aside>
+            </div>
+        </div>
+        
+        <!-- Settings Panel -->
+        <section class="settings-panel" aria-labelledby="settings-title">
+            <div class="container">
+                <button class="settings-toggle" aria-expanded="false" aria-controls="settings-content">
+                    <span class="settings-icon">🔧</span>
+                    <span id="settings-title">Settings</span>
+                    <span class="toggle-icon" aria-hidden="true">▼</span>
+                </button>
+                
+                <div id="settings-content" class="settings-content" hidden>
+                    <div class="settings-grid">
+                        <div class="setting-group">
+                            <h4>Alarm Settings</h4>
+                            <div class="setting-item">
+                                <label for="alarm-sound">Alarm Sound</label>
+                                <select id="alarm-sound">
+                                    <option value="classic">Classic</option>
+                                    <option value="digital">Digital</option>
+                                    <option value="bell">Bell</option>
+                                    <option value="chime">Chime</option>
+                                </select>
+                                <button class="btn btn-sm test-sound">Test</button>
+                            </div>
+                            <div class="setting-item">
+                                <label for="volume">Volume</label>
+                                <input type="range" id="volume" min="0" max="100" value="70" aria-describedby="volume-desc">
+                                <span id="volume-desc" class="volume-display">70%</span>
+                            </div>
+                            <div class="setting-item">
+                                <label>
+                                    <input type="checkbox" id="browser-notification" checked>
+                                    Enable browser notifications
+                                </label>
+                            </div>
+                            <div class="setting-item">
+                                <label>
+                                    <input type="checkbox" id="desktop-notification" checked>
+                                    Enable desktop notifications
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="setting-group">
+                            <h4>Visual Effects</h4>
+                            <div class="setting-item">
+                                <label for="theme-select">Theme</label>
+                                <select id="theme-select">
+                                    <option value="default">Default</option>
+                                    <option value="minimal">Minimal</option>
+                                    <option value="colorful">Colorful</option>
+                                </select>
+                            </div>
+                            <div class="setting-item">
+                                <label for="brightness">Brightness</label>
+                                <input type="range" id="brightness" min="50" max="100" value="100">
+                                <span class="brightness-display">100%</span>
+                            </div>
+                            <div class="setting-item">
+                                <button class="btn btn-outline fullscreen-btn">Fullscreen Mode</button>
+                            </div>
+                            <div class="setting-item">
+                                <label>
+                                    <input type="checkbox" id="auto-repeat">
+                                    Auto repeat
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Native Ad -->
+        <section class="ad-space ad-native" aria-hidden="true">
+            <div class="container">
+                <div class="ad-placeholder">336x280 Native Ad</div>
+            </div>
+        </section>
+        
+        <!-- Guide Section -->
+        <section class="guide-section" aria-labelledby="guide-title">
+            <div class="container">
+                <h2 id="guide-title">📖 How to Use Basic Timer</h2>
+                
+                <ol class="usage-steps">
+                    <li>
+                        <strong>Set Time:</strong> Set your desired time in hours/minutes/seconds or use preset buttons
+                    </li>
+                    <li>
+                        <strong>Start Timer:</strong> Click the start button to begin countdown
+                    </li>
+                    <li>
+                        <strong>Completion Alert:</strong> Get notified with alarm sound and browser notification when timer completes
+                    </li>
+                </ol>
+                
+                <div class="tips-section">
+                    <h3>💡 Useful Tips</h3>
+                    <ul>
+                        <li>Save frequently used times as presets</li>
+                        <li>Keyboard shortcuts: Spacebar (start/stop), R (reset)</li>
+                        <li>Use fullscreen mode for better focus</li>
+                        <li>Allow browser notifications to get alerts from other tabs</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Related Tools -->
+        <section class="related-tools" aria-labelledby="related-title">
+            <div class="container">
+                <h2 id="related-title">Recommended Related Tools</h2>
+                
+                <div class="related-cards">
+                    <article class="related-card">
+                        <div class="tool-icon">🍅</div>
+                        <h3>Pomodoro Timer</h3>
+                        <p>25-minute focus + 5-minute break for productivity boost</p>
+                        <a href="pomodoro.html" class="btn btn-outline">Get Started</a>
+                    </article>
+                    
+                    <article class="related-card">
+                        <div class="tool-icon">⚡</div>
+                        <h3>Multi Timer</h3>
+                        <p>Manage multiple timers simultaneously</p>
+                        <a href="multi.html" class="btn btn-outline">Get Started</a>
+                    </article>
+                    
+                    <article class="related-card">
+                        <div class="tool-icon">🍳</div>
+                        <h3>Cooking Timer</h3>
+                        <p>Recipe-optimized timer for cooking</p>
+                        <a href="cooking.html" class="btn btn-outline">Get Started</a>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="footer" role="contentinfo">
+        <div class="ad-space ad-footer" aria-hidden="true">
+            <div class="ad-placeholder">728x90 Footer Ad</div>
+        </div>
+        
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-links">
+                    <a href="../../privacy.html">Privacy Policy</a>
+                    <a href="../../terms.html">Terms of Service</a>
+                    <a href="../../contact.html">Contact</a>
+                </div>
+            </div>
+            <div class="footer-copyright">
+                <p>&copy; 2024 TimerTools Pro. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Audio elements for notifications -->
+    <audio id="alarm-audio">
+        <source src="../../assets/audio/classic.mp3" type="audio/mpeg">
+        <source src="../../assets/audio/classic.ogg" type="audio/ogg">
+    </audio>
+    
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/timer.js"></script>
+</body>
+</html>

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Boost productivity with Pomodoro Technique. 25-minute focus + 5-minute break automatic cycling for efficient time management">
+    <meta name="keywords" content="pomodoro, pomodoro timer, pomodoro technique, productivity, focus, time management, 25 minute timer, work efficiency">
+    <title>Pomodoro Timer - 25-Minute Focus for Enhanced Productivity | TimerTools Pro</title>
+    
+    <!-- Language and SEO -->
+    <link rel="canonical" href="https://timertools.pro/en/timer/pomodoro.html">
+    <link rel="alternate" hreflang="ko" href="https://timertools.pro/timer/pomodoro.html">
+    <link rel="alternate" hreflang="en" href="https://timertools.pro/en/timer/pomodoro.html">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Pomodoro Timer - 25-Minute Focus for Enhanced Productivity">
+    <meta property="og:description" content="Pomodoro Technique with 25-minute focus + 5-minute break automatic cycling. Efficient time management and productivity boost">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://timertools.pro/en/timer/pomodoro.html">
+    <meta property="og:image" content="https://timertools.pro/assets/images/pomodoro-timer-og-en.jpg">
+    <meta property="og:locale" content="en_US">
+    
+    <!-- Additional SEO -->
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="TimerTools Pro">
+    
+    <link rel="icon" type="image/svg+xml" href="../../assets/images/favicon.svg">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/styles.css">
+    <link rel="stylesheet" href="../../assets/css/timer.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <header class="header" role="banner">
+        <nav class="nav-container" role="navigation">
+            <div class="nav-brand">
+                <div class="logo"><a href="../index.html">TimerTools Pro</a></div>
+            </div>
+            
+            <div class="breadcrumb">
+                <a href="../index.html">Home</a> &gt; <span aria-current="page">Pomodoro Timer</span>
+                <button class="favorite-btn" aria-label="Add to favorites" title="Favorite">⭐</button>
+            </div>
+        </nav>
+        
+        <div class="ad-space ad-mobile-banner" aria-hidden="true">
+            <div class="ad-placeholder">320x50 Mobile Banner</div>
+        </div>
+    </header>
+
+    <main id="main-content" class="timer-main" role="main">
+        <div class="container">
+            <div class="timer-layout">
+                <!-- Timer Section -->
+                <section class="timer-section pomodoro-section" aria-labelledby="timer-title">
+                    <h1 id="timer-title" class="timer-title">Pomodoro Timer</h1>
+                    
+                    <!-- Session Status -->
+                    <div class="session-status">
+                        <div class="session-type" id="session-type">Work Time</div>
+                        <div class="session-counter">
+                            Session <span id="session-count">1</span> / <span id="total-sessions">4</span>
+                        </div>
+                    </div>
+                    
+                    <div class="timer-display" role="timer" aria-live="polite" aria-atomic="true">
+                        <div class="timer-circle">
+                            <svg class="timer-svg" viewBox="0 0 200 200" aria-hidden="true">
+                                <circle class="timer-bg" cx="100" cy="100" r="90" />
+                                <circle class="timer-progress" cx="100" cy="100" r="90" />
+                            </svg>
+                            <div class="timer-time" id="timer-display">25:00</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timer-controls">
+                        <div class="control-buttons">
+                            <button id="start-btn" class="btn btn-primary timer-btn">
+                                <span class="btn-icon">▶️</span>
+                                <span class="btn-text">Start</span>
+                            </button>
+                            <button id="pause-btn" class="btn btn-secondary timer-btn" style="display: none;">
+                                <span class="btn-icon">⏸️</span>
+                                <span class="btn-text">Pause</span>
+                            </button>
+                            <button id="skip-btn" class="btn btn-outline timer-btn">
+                                <span class="btn-icon">⏭️</span>
+                                <span class="btn-text">Skip</span>
+                            </button>
+                            <button id="reset-btn" class="btn btn-outline timer-btn">
+                                <span class="btn-icon">🔄</span>
+                                <span class="btn-text">Reset</span>
+                            </button>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Sidebar -->
+                <aside class="timer-sidebar">
+                    <!-- Ad Space -->
+                    <div class="ad-space ad-rectangle" aria-hidden="true">
+                        <div class="ad-placeholder">300x250 Ad</div>
+                    </div>
+                    
+                    <!-- Settings -->
+                    <div class="settings-section">
+                        <h3>Time Settings</h3>
+                        <div class="time-settings">
+                            <div class="setting-item">
+                                <label for="work-time">Work Time (minutes)</label>
+                                <input type="number" id="work-time" min="1" max="60" value="25">
+                            </div>
+                            <div class="setting-item">
+                                <label for="break-time">Break Time (minutes)</label>
+                                <input type="number" id="break-time" min="1" max="30" value="5">
+                            </div>
+                            <div class="setting-item">
+                                <label for="long-break-time">Long Break Time (minutes)</label>
+                                <input type="number" id="long-break-time" min="5" max="60" value="15">
+                            </div>
+                            <div class="setting-item">
+                                <label for="sessions-before-long-break">Sessions Before Long Break</label>
+                                <input type="number" id="sessions-before-long-break" min="2" max="8" value="4">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Audio Settings -->
+                    <div class="settings-section">
+                        <h3>Notification Settings</h3>
+                        <div class="audio-settings">
+                            <div class="setting-item">
+                                <label for="volume">Volume</label>
+                                <input type="range" id="volume" min="0" max="100" value="70">
+                                <span class="volume-display">70%</span>
+                            </div>
+                            <div class="setting-item">
+                                <label>
+                                    <input type="checkbox" id="notifications" checked>
+                                    Enable browser notifications
+                                </label>
+                            </div>
+                            <div class="setting-item">
+                                <button class="btn btn-outline fullscreen-btn">Fullscreen Mode</button>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+        
+        <!-- Native Ad -->
+        <section class="ad-space ad-native" aria-hidden="true">
+            <div class="container">
+                <div class="ad-placeholder">336x280 Native Ad</div>
+            </div>
+        </section>
+        
+        <!-- Guide Section -->
+        <section class="guide-section" aria-labelledby="guide-title">
+            <div class="container">
+                <h2 id="guide-title">🍅 What is the Pomodoro Technique?</h2>
+                
+                <div class="pomodoro-guide">
+                    <div class="guide-content">
+                        <p>The Pomodoro Technique is a time management method that uses 25-minute focused work sessions followed by 5-minute breaks.</p>
+                        
+                        <ol class="usage-steps">
+                            <li><strong>25-minute Focus:</strong> Concentrate on a single task</li>
+                            <li><strong>5-minute Break:</strong> Short break to recharge</li>
+                            <li><strong>Repeat 4 Sessions:</strong> After 4 pomodoros, take a longer break (15 minutes)</li>
+                            <li><strong>Continue:</strong> Repeat until daily goals are achieved</li>
+                        </ol>
+                        
+                        <div class="benefits">
+                            <h3>💡 Benefits of Pomodoro Technique</h3>
+                            <ul>
+                                <li>Enhanced focus and productivity</li>
+                                <li>Prevents fatigue accumulation</li>
+                                <li>Visualizes work progress</li>
+                                <li>Prevents multitasking</li>
+                                <li>Reduces burnout risk</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Related Tools -->
+        <section class="related-tools" aria-labelledby="related-title">
+            <div class="container">
+                <h2 id="related-title">Recommended Related Tools</h2>
+                
+                <div class="related-cards">
+                    <article class="related-card">
+                        <div class="tool-icon">⏰</div>
+                        <h3>Basic Timer</h3>
+                        <p>Set custom time intervals with flexible basic timer</p>
+                        <a href="basic.html" class="btn btn-outline">Get Started</a>
+                    </article>
+                    
+                    <article class="related-card">
+                        <div class="tool-icon">⚡</div>
+                        <h3>Multi Timer</h3>
+                        <p>Manage multiple tasks simultaneously with multi-timer</p>
+                        <a href="multi.html" class="btn btn-outline">Get Started</a>
+                    </article>
+                    
+                    <article class="related-card">
+                        <div class="tool-icon">💪</div>
+                        <h3>Workout Timer</h3>
+                        <p>HIIT and interval training specialized timer</p>
+                        <a href="workout.html" class="btn btn-outline">Get Started</a>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="footer" role="contentinfo">
+        <div class="ad-space ad-footer" aria-hidden="true">
+            <div class="ad-placeholder">728x90 Footer Ad</div>
+        </div>
+        
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-links">
+                    <a href="../../privacy.html">Privacy Policy</a>
+                    <a href="../../terms.html">Terms of Service</a>
+                    <a href="../../contact.html">Contact</a>
+                </div>
+            </div>
+            <div class="footer-copyright">
+                <p>&copy; 2024 TimerTools Pro. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Audio elements for notifications -->
+    <audio id="alarm-audio">
+        <source src="../../assets/audio/classic.mp3" type="audio/mpeg">
+        <source src="../../assets/audio/classic.ogg" type="audio/ogg">
+    </audio>
+    
+    <script src="../../assets/js/seo-performance.js"></script>
+    <script src="../../assets/js/seo-i18n.js"></script>
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/pomodoro.js"></script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timer Test</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/timer.css">
+</head>
+<body>
+    <div class="container">
+        <div class="timer-section">
+            <h2>Timer Test</h2>
+            
+            <div class="timer-display" role="timer" aria-live="polite" aria-atomic="true">
+                <div class="timer-circle">
+                    <svg class="timer-svg" viewBox="0 0 200 200">
+                        <circle class="timer-bg" cx="100" cy="100" r="90" />
+                        <circle class="timer-progress" cx="100" cy="100" r="90" />
+                    </svg>
+                    <div class="timer-time" id="timer-display">05:00</div>
+                </div>
+            </div>
+            
+            <div class="timer-controls">
+                <div class="time-inputs">
+                    <div class="input-group">
+                        <label for="hours">시</label>
+                        <input type="number" id="hours" min="0" max="23" value="0">
+                    </div>
+                    <div class="input-group">
+                        <label for="minutes">분</label>
+                        <input type="number" id="minutes" min="0" max="59" value="5">
+                    </div>
+                    <div class="input-group">
+                        <label for="seconds">초</label>
+                        <input type="number" id="seconds" min="0" max="59" value="0">
+                    </div>
+                </div>
+                
+                <div class="control-buttons">
+                    <button id="start-btn" class="btn btn-primary timer-btn">
+                        <span class="btn-text">시작</span>
+                    </button>
+                    <button id="pause-btn" class="btn btn-secondary timer-btn" style="display: none;">
+                        <span class="btn-text">일시정지</span>
+                    </button>
+                    <button id="reset-btn" class="btn btn-outline timer-btn">
+                        <span class="btn-text">리셋</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        console.log('Test page loaded');
+        
+        // Quick test
+        document.addEventListener('DOMContentLoaded', () => {
+            const progressCircle = document.querySelector('.timer-progress');
+            console.log('Progress circle element:', progressCircle);
+            
+            if (progressCircle) {
+                const circumference = 565.48;
+                progressCircle.style.strokeDasharray = circumference;
+                progressCircle.style.strokeDashoffset = circumference;
+                console.log('Progress circle styles set');
+                
+                // Test animation after 2 seconds
+                setTimeout(() => {
+                    progressCircle.style.strokeDashoffset = circumference * 0.5;
+                    console.log('Animation test: 50% progress');
+                }, 2000);
+            }
+        });
+    </script>
+    
+    <script src="assets/js/timer.js"></script>
+</body>
+</html>

@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Complete time management solution with online timer, pomodoro technique, and multi-timer tools for enhanced productivity and focus">
+    <meta name="keywords" content="timer, pomodoro, time management, productivity, focus, online timer, productivity tools, time tracking, concentration, work efficiency">
+    <title>TimerTools Pro - Perfect Time Management Tool | Online Timer Pomodoro Productivity</title>
+    
+    <!-- Language and SEO -->
+    <link rel="canonical" href="https://timertools.pro/en/">
+    <link rel="alternate" hreflang="ko" href="https://timertools.pro/">
+    <link rel="alternate" hreflang="en" href="https://timertools.pro/en/">
+    <link rel="alternate" hreflang="x-default" href="https://timertools.pro/">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="TimerTools Pro - Perfect Time Management Tool">
+    <meta property="og:description" content="Boost productivity and improve focus with online timer, pomodoro technique, and multi-timer tools. Free time management solution">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://timertools.pro/en/">
+    <meta property="og:image" content="https://timertools.pro/assets/images/og-image-en.jpg">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:locale:alternate" content="ko_KR">
+    <meta property="og:site_name" content="TimerTools Pro">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="TimerTools Pro - Perfect Time Management Tool">
+    <meta name="twitter:description" content="Online timer, pomodoro technique, multi-timer for enhanced productivity">
+    <meta name="twitter:image" content="https://timertools.pro/assets/images/twitter-card-en.jpg">
+    
+    <!-- Additional SEO -->
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <meta name="googlebot" content="index, follow">
+    <meta name="author" content="TimerTools Pro">
+    <meta name="language" content="English">
+    <meta name="geo.region" content="US">
+    <meta name="geo.country" content="US">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="../manifest.json">
+    <meta name="theme-color" content="#667eea">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Timer Tools">
+    
+    <!-- Favicon and Icons -->
+    <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg">
+    <link rel="apple-touch-icon" href="../assets/icons/icon-192.png">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+    <!-- Skip Navigation Link for Accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <!-- Header -->
+    <header class="header" role="banner">
+        <nav class="nav-container" role="navigation" aria-label="Main navigation">
+            <div class="nav-brand">
+                <div class="logo">
+                    <a href="index.html">TimerTools Pro</a>
+                </div>
+            </div>
+            
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="index.html" aria-current="page">Home</a></li>
+                <li class="nav-dropdown">
+                    <button class="nav-dropdown-btn" aria-expanded="false" aria-haspopup="true">Tools</button>
+                    <ul class="nav-dropdown-menu">
+                        <li><a href="timer/basic.html">Basic Timer</a></li>
+                        <li><a href="timer/pomodoro.html">Pomodoro Timer</a></li>
+                        <li><a href="timer/multi.html">Multi Timer</a></li>
+                        <li><a href="timer/cooking.html">Cooking Timer</a></li>
+                        <li><a href="timer/workout.html">Workout Timer</a></li>
+                    </ul>
+                </li>
+                <li><a href="guide/">Guide</a></li>
+                <li><a href="blog/">Blog</a></li>
+                <li class="nav-settings">
+                    <button class="theme-toggle" aria-label="Toggle dark mode" title="Switch theme">
+                        <span class="theme-icon">🌙</span>
+                    </button>
+                    <select class="language-select" aria-label="Select language">
+                        <option value="en">English</option>
+                        <option value="ko">한국어</option>
+                    </select>
+                </li>
+            </ul>
+            
+            <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-label="Open menu">
+                <span class="hamburger"></span>
+            </button>
+        </nav>
+        
+        <!-- Top Ad Space -->
+        <div class="ad-space ad-leaderboard" aria-hidden="true">
+            <div class="ad-placeholder">728x90 Advertisement</div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content" role="main">
+        <!-- Hero Section -->
+        <section class="hero" aria-labelledby="hero-title">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-text">
+                        <h1 id="hero-title" class="hero-title">Online Timer and Pomodoro<br>Perfect Productivity Tools</h1>
+                        <p class="hero-subtitle">Boost your productivity and achieve your goals. Improve focus with simple yet powerful timer tools.</p>
+                        <div class="hero-actions">
+                            <a href="timer/basic.html" class="btn btn-primary">Get Started Now</a>
+                            <button class="btn btn-secondary" onclick="showDemo()">View Demo</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Sidebar Ad Space -->
+                    <aside class="hero-sidebar" aria-hidden="true">
+                        <div class="ad-space ad-rectangle">
+                            <div class="ad-placeholder">300x250 Ad</div>
+                        </div>
+                        
+                        <div class="stats-widget">
+                            <h3>Usage Statistics</h3>
+                            <div class="stat-item">
+                                <span class="stat-number">12,547</span>
+                                <span class="stat-label">Active users today</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">8,923</span>
+                                <span class="stat-label">Sessions completed</span>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </section>
+
+        <!-- Timer Tools Section -->
+        <section class="tools-grid" aria-labelledby="tools-title">
+            <div class="container">
+                <h2 id="tools-title" class="section-title">Online Timer Tools for Enhanced Productivity</h2>
+                
+                <div class="tools-cards">
+                    <article class="tool-card">
+                        <div class="tool-icon" aria-hidden="true">⏰</div>
+                        <h3 class="tool-title">Basic Timer</h3>
+                        <p class="tool-description">Simple countdown timer for precise time measurement.</p>
+                        <ul class="tool-features">
+                            <li>Hour/minute/second setting</li>
+                            <li>Save preset times</li>
+                            <li>Customizable alarm sounds</li>
+                        </ul>
+                        <a href="timer/basic.html" class="tool-link">Get Started →</a>
+                    </article>
+                    
+                    <article class="tool-card featured">
+                        <div class="tool-icon" aria-hidden="true">🍅</div>
+                        <h3 class="tool-title">Pomodoro Timer</h3>
+                        <p class="tool-description">Maximize productivity with 25-minute focus + 5-minute break cycles.</p>
+                        <ul class="tool-features">
+                            <li>Automatic session switching</li>
+                            <li>Daily statistics tracking</li>
+                            <li>Task tag management</li>
+                        </ul>
+                        <a href="timer/pomodoro.html" class="tool-link">Get Started →</a>
+                    </article>
+                    
+                    <article class="tool-card">
+                        <div class="tool-icon" aria-hidden="true">⚡</div>
+                        <h3 class="tool-title">Multi Timer</h3>
+                        <p class="tool-description">Run up to 6 timers simultaneously for enhanced efficiency.</p>
+                        <ul class="tool-features">
+                            <li>6 concurrent timers</li>
+                            <li>Individual alarm settings</li>
+                            <li>Color-coded organization</li>
+                        </ul>
+                        <a href="timer/multi.html" class="tool-link">Get Started →</a>
+                    </article>
+                    
+                    <article class="tool-card">
+                        <div class="tool-icon" aria-hidden="true">🍳</div>
+                        <h3 class="tool-title">Cooking Timer</h3>
+                        <p class="tool-description">Recipe-optimized timer for perfect cooking results.</p>
+                        <ul class="tool-features">
+                            <li>Recipe-specific timings</li>
+                            <li>Step-by-step alerts</li>
+                            <li>Cooking guides</li>
+                        </ul>
+                        <a href="timer/cooking.html" class="tool-link">Get Started →</a>
+                    </article>
+                    
+                    <article class="tool-card">
+                        <div class="tool-icon" aria-hidden="true">💪</div>
+                        <h3 class="tool-title">Workout Timer</h3>
+                        <p class="tool-description">Professional timer for HIIT and interval training.</p>
+                        <ul class="tool-features">
+                            <li>HIIT programs</li>
+                            <li>Interval settings</li>
+                            <li>Workout routine saving</li>
+                        </ul>
+                        <a href="timer/workout.html" class="tool-link">Get Started →</a>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Native Ad Space -->
+        <section class="ad-space ad-native" aria-hidden="true">
+            <div class="container">
+                <div class="ad-placeholder">336x280 Native Ad</div>
+            </div>
+        </section>
+
+        <!-- Guide Section -->
+        <section class="guide-section" aria-labelledby="guide-title">
+            <div class="container">
+                <h2 id="guide-title" class="section-title">3 Steps to Perfect Time Management</h2>
+                
+                <ol class="guide-steps">
+                    <li class="guide-step">
+                        <div class="step-number" aria-hidden="true">1</div>
+                        <h3>Choose Timer</h3>
+                        <p>Select the timer that suits your purpose</p>
+                    </li>
+                    <li class="guide-step">
+                        <div class="step-number" aria-hidden="true">2</div>
+                        <h3>Set Time</h3>
+                        <p>Set your desired time or use presets</p>
+                    </li>
+                    <li class="guide-step">
+                        <div class="step-number" aria-hidden="true">3</div>
+                        <h3>Start Focus</h3>
+                        <p>Stay focused until the timer completes</p>
+                    </li>
+                </ol>
+                
+                <div class="guide-actions">
+                    <a href="guide/" class="btn btn-outline">View Detailed Guide</a>
+                    <button class="btn btn-outline" onclick="playVideo()">Video Tutorial</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="testimonials" aria-labelledby="testimonials-title">
+            <div class="container">
+                <h2 id="testimonials-title" class="section-title">User Reviews</h2>
+                
+                <div class="testimonial-cards">
+                    <blockquote class="testimonial">
+                        <p>"This timer boosted my productivity by 200%!"</p>
+                        <cite>- John D.</cite>
+                    </blockquote>
+                    
+                    <blockquote class="testimonial">
+                        <p>"Essential tool for cooking - perfect timing every time"</p>
+                        <cite>- Sarah M.</cite>
+                    </blockquote>
+                    
+                    <blockquote class="testimonial">
+                        <p>"Never knew workout routine management could be this easy"</p>
+                        <cite>- Mike R.</cite>
+                    </blockquote>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <!-- Footer Ad Space -->
+        <div class="ad-space ad-footer" aria-hidden="true">
+            <div class="ad-placeholder">728x90 Footer Ad</div>
+        </div>
+        
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-links">
+                    <a href="../privacy.html">Privacy Policy</a>
+                    <a href="../terms.html">Terms of Service</a>
+                    <a href="../contact.html">Contact</a>
+                </div>
+                
+                <div class="footer-social">
+                    <a href="#" aria-label="Facebook">📘</a>
+                    <a href="#" aria-label="Twitter">🐦</a>
+                    <a href="#" aria-label="Instagram">📷</a>
+                </div>
+            </div>
+            
+            <div class="footer-copyright">
+                <p>&copy; 2024 TimerTools Pro. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="../assets/js/seo-performance.js"></script>
+    <script src="../assets/js/seo-i18n.js"></script>
+    <script src="../assets/js/main.js"></script>
+    
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then((registration) => {
+                        console.log('SW registered: ', registration);
+                        
+                        // Check for updates
+                        registration.addEventListener('updatefound', () => {
+                            const newWorker = registration.installing;
+                            newWorker.addEventListener('statechange', () => {
+                                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                                    // New content available
+                                    showUpdateNotification();
+                                }
+                            });
+                        });
+                    })
+                    .catch((registrationError) => {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
+
+        function showUpdateNotification() {
+            const notification = document.createElement('div');
+            notification.className = 'update-notification';
+            notification.innerHTML = `
+                <div class="update-content">
+                    <span>New version available!</span>
+                    <button onclick="updateApp()">Update</button>
+                    <button onclick="dismissUpdate()">Later</button>
+                </div>
+            `;
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: #4CAF50;
+                color: white;
+                padding: 1rem;
+                border-radius: 8px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+                z-index: 1000;
+                font-family: inherit;
+            `;
+            document.body.appendChild(notification);
+        }
+
+        function updateApp() {
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.getRegistration().then((registration) => {
+                    if (registration && registration.waiting) {
+                        registration.waiting.postMessage({ type: 'SKIP_WAITING' });
+                        window.location.reload();
+                    }
+                });
+            }
+        }
+
+        function dismissUpdate() {
+            const notification = document.querySelector('.update-notification');
+            if (notification) {
+                notification.remove();
+            }
+        }
+
+        // Background sync for analytics
+        if ('serviceWorker' in navigator && 'sync' in window.ServiceWorkerRegistration.prototype) {
+            navigator.serviceWorker.ready.then((registration) => {
+                // Register for background sync when data needs to be sent
+                window.addEventListener('beforeunload', () => {
+                    registration.sync.register('background-sync-timer-data');
+                });
+            });
+        }
+
+        // PWA Install Prompt
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            
+            // Show install button after a delay
+            setTimeout(showInstallPrompt, 10000);
+        });
+
+        function showInstallPrompt() {
+            if (!deferredPrompt) return;
+            
+            const installBanner = document.createElement('div');
+            installBanner.innerHTML = `
+                <div style="
+                    position: fixed;
+                    bottom: 20px;
+                    left: 20px;
+                    right: 20px;
+                    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                    color: white;
+                    padding: 1rem;
+                    border-radius: 12px;
+                    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+                    text-align: center;
+                    z-index: 1000;
+                    font-family: inherit;
+                ">
+                    <p style="margin: 0 0 0.5rem 0; font-weight: 500;">
+                        📱 Add Timer Tools to your home screen for faster access!
+                    </p>
+                    <button onclick="installPWA()" style="
+                        background: rgba(255,255,255,0.2);
+                        color: white;
+                        border: 1px solid rgba(255,255,255,0.3);
+                        padding: 0.5rem 1rem;
+                        border-radius: 6px;
+                        cursor: pointer;
+                        margin-right: 0.5rem;
+                        font-weight: 500;
+                    ">Install</button>
+                    <button onclick="dismissInstallPrompt()" style="
+                        background: transparent;
+                        color: rgba(255,255,255,0.8);
+                        border: none;
+                        padding: 0.5rem 1rem;
+                        border-radius: 6px;
+                        cursor: pointer;
+                        font-weight: 500;
+                    ">Later</button>
+                </div>
+            `;
+            
+            document.body.appendChild(installBanner);
+            
+            window.installPWA = async () => {
+                if (deferredPrompt) {
+                    deferredPrompt.prompt();
+                    const { outcome } = await deferredPrompt.userChoice;
+                    console.log(`User response to install prompt: ${outcome}`);
+                    deferredPrompt = null;
+                }
+                installBanner.remove();
+            };
+            
+            window.dismissInstallPrompt = () => {
+                installBanner.remove();
+                localStorage.setItem('installPromptDismissed', Date.now());
+            };
+        }
+
+        // Check if install prompt was recently dismissed
+        window.addEventListener('load', () => {
+            const dismissed = localStorage.getItem('installPromptDismissed');
+            if (dismissed && Date.now() - dismissed < 7 * 24 * 60 * 60 * 1000) {
+                // Don't show for 7 days
+                window.addEventListener('beforeinstallprompt', (e) => e.preventDefault());
+            }
+        });
+    </script>
+</body>
+</html>
