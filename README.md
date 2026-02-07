@@ -1,112 +1,36 @@
-# TimerTools Pro ⏰
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-완벽한 시간 관리를 위한 올인원 타이머 도구
+## Getting Started
 
-## 🌟 주요 기능
+First, run the development server:
 
-### 📱 활성화된 타이머
-- **기본 타이머**: 간단한 카운트다운 타이머 ✅
-- **뽀모도로 타이머**: 25분 집중 + 5분 휴식 사이클 ✅
-
-### 🔄 개발 예정 타이머
-- **멀티 타이머**: 최대 6개 타이머 동시 실행
-- **요리 타이머**: 레시피별 최적화된 단계별 타이머
-- **운동 타이머**: HIIT와 인터벌 트레이닝 전용
-
-## ✨ 핵심 특징
-- 🌙 **다크/라이트 모드** 자동 전환
-- 📱 **완전 반응형** 디자인 (모바일 최적화)
-- ♿ **웹 접근성** 완벽 지원 (WCAG 준수)
-- 📦 **PWA 지원** (홈 화면 설치 가능)
-- 🔊 **다양한 알림음** 및 브라우저 알림
-- 💾 **로컬 저장소** 활용 (설정 및 통계 저장)
-
-## 🚀 시작하기
-
-### 로컬 실행
 ```bash
-# 방법 1: 배치 파일 실행
-start-server.bat
-
-# 방법 2: Python 서버
-python -m http.server 8000
-
-# 브라우저에서 확인
-http://localhost:8000
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
 ```
 
-## 🛠️ 기술 스택
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-- **HTML5**: 시맨틱 태그, ARIA 접근성
-- **CSS3**: CSS 변수, Grid/Flexbox, 미디어 쿼리
-- **JavaScript (ES6+)**: 클래스 기반 모듈러 아키텍처
-- **Service Worker**: PWA 및 오프라인 지원
-- **Web APIs**: Notification, LocalStorage, Audio
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-## 📂 프로젝트 구조
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-```
-TimerTools/
-├── index.html              # 메인 홈페이지
-├── timer/                  # 타이머 페이지들
-│   ├── basic.html         # 기본 타이머
-│   ├── pomodoro.html      # 뽀모도로 타이머
-│   ├── multi.html         # 멀티 타이머 (개발 예정)
-│   ├── cooking.html       # 요리 타이머 (개발 예정)
-│   └── workout.html       # 운동 타이머 (개발 예정)
-├── assets/
-│   ├── css/               # 스타일시트
-│   ├── js/                # JavaScript 파일
-│   ├── icons/             # PWA 아이콘
-│   └── images/            # 이미지 파일
-├── manifest.json          # PWA 매니페스트
-├── sw.js                  # Service Worker
-├── robots.txt             # 검색엔진 설정
-├── sitemap.xml            # 사이트맵
-└── start-server.bat       # 로컬 서버 실행
-```
+## Learn More
 
-## 🎯 사용법
+To learn more about Next.js, take a look at the following resources:
 
-### 기본 타이머
-1. 시/분/초 설정
-2. 시작 버튼 클릭
-3. 타이머 완료 시 알림
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-### 뽀모도로 타이머
-1. 작업 내용 입력 (선택사항)
-2. 25분 집중 세션 시작
-3. 5분 휴식 후 다음 사이클
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## ⚙️ 설정 옵션
+## Deploy on Vercel
 
-- **알림음**: 클래식, 디지털, 벨, 차임
-- **볼륨 조절**: 0-100% 슬라이더
-- **브라우저 알림**: 활성화/비활성화
-- **자동 시작**: 다음 세션 자동 진행
-- **테마**: 라이트/다크/시스템 따라가기
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-## 🔧 개발 환경
-
-### 요구사항
-- 모던 웹 브라우저 (Chrome, Firefox, Safari, Edge)
-- 로컬 서버 (개발 시)
-
-### 배포
-- GitHub Pages 자동 배포 지원
-- PWA 설치 가능
-- 오프라인 사용 지원
-
-## 🤝 기여하기
-
-1. 이슈 리포트: 문제점 발견 시 상세히 기록
-2. 기능 제안: 새로운 아이디어 환영
-3. 코드 개선: 성능 최적화 및 버그 수정
-
-## 📄 라이선스
-
-© 2024 TimerTools Pro. All rights reserved.
-
----
-
-**완벽한 시간 관리를 위한 올인원 타이머 도구**
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
