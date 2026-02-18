@@ -9,18 +9,18 @@
       gtag('js', new Date());
       gtag('config', 'G-BNRL6FRMMM');
     </script>
-    
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="간단하고 정확한 기본 타이머 - 시/분/초 설정으로 정확한 시간 측정이 가능합니다. 생산성 향상을 위한 무료 온라인 타이머">
     <meta name="keywords" content="기본 타이머, 온라인 타이머, 시간 측정, 타이머 설정, 생산성, 집중, 작업 시간, 시분초 타이머">
-    <title>기본 타이머 - 무료 온라인 타이머 | TimerTools Pro</title>
-    
+    <title>기본 타이머 - 무료 온라인 타이머 | GON.AI</title>
+
     <!-- Language and SEO -->
     <link rel="canonical" href="https://gon.ai.kr/timer/basic.html">
     <link rel="alternate" hreflang="ko" href="https://gon.ai.kr/timer/basic.html">
     <link rel="alternate" hreflang="en" href="https://gon.ai.kr/en/timer/basic.html">
-    
+
     <!-- Open Graph Meta Tags -->
     <meta property="og:title" content="기본 타이머 - 무료 온라인 타이머">
     <meta property="og:description" content="시/분/초 설정으로 정확한 시간 측정이 가능한 간단하고 효과적인 온라인 타이머">
@@ -28,29 +28,32 @@
     <meta property="og:url" content="https://gon.ai.kr/timer/basic.html">
     <meta property="og:image" content="https://gon.ai.kr/assets/images/basic-timer-og.jpg">
     <meta property="og:locale" content="ko_KR">
-    
+
     <!-- Additional SEO -->
     <meta name="robots" content="index, follow">
-    <meta name="author" content="TimerTools Pro">
-    
+    <meta name="author" content="GON.AI">
+    <meta name="theme-color" content="#0c0c0e">
+
     <!-- Google AdSense -->
     <meta name="google-adsense-account" content="ca-pub-7479840445702290">
-    
+
     <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Fonts (preconnect) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
     <link rel="stylesheet" href="../assets/css/styles.css">
     <link rel="stylesheet" href="../assets/css/basic-timer.css">
-    
+
     <!-- Google AdSense Script -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7479840445702290"
-         crossorigin="anonymous"></script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7479840445702290"
          crossorigin="anonymous"></script>
 </head>
 <body>
     <!-- Skip Link -->
     <a href="#main-content" class="skip-link">메인 콘텐츠로 건너뛰기</a>
-    
+
     <!-- Header -->
     <header class="header" role="banner">
         <nav class="nav-container">
@@ -62,13 +65,13 @@
                     </a>
                 </h1>
             </div>
-            
+
             <div class="breadcrumb">
-                <a href="../index.html" data-i18n="nav.home">홈</a> 
-                <span class="separator">›</span> 
+                <a href="../index.html" data-i18n="nav.home">홈</a>
+                <span class="separator">›</span>
                 <span aria-current="page" data-i18n="nav.basic-timer">기본 타이머</span>
-                <a href="https://lotto.gon.ai.kr" target="_blank" class="lotto-link" style="margin-left: 1rem;">🎲 로또AI</a>
-                <select class="language-select" aria-label="언어 선택" style="margin-left: 1rem;">
+                <a href="https://lotto.gon.ai.kr" target="_blank" class="lotto-link" style="margin-left: auto;">🎲 로또AI</a>
+                <select class="language-select" aria-label="언어 선택" style="margin-left: var(--space-3);">
                     <option value="ko">한국어</option>
                     <option value="en">English</option>
                 </select>
@@ -82,50 +85,46 @@
             <!-- Timer Display Section -->
             <section class="timer-display-section" aria-labelledby="timer-title">
                 <h1 id="timer-title" class="timer-title" data-i18n="nav.basic-timer">기본 타이머</h1>
-                
+
                 <!-- Circular Timer Display -->
                 <div class="timer-display" role="timer" aria-live="polite">
                     <div class="timer-circle">
                         <svg class="progress-ring" width="280" height="280" viewBox="0 0 280 280">
-                            <!-- Background Circle -->
                             <circle class="progress-ring-bg"
                                     cx="140" cy="140" r="120"
                                     fill="none"
-                                    stroke="var(--color-border)"
                                     stroke-width="8"/>
-                            <!-- Progress Circle -->
                             <circle class="progress-ring-progress"
                                     cx="140" cy="140" r="120"
                                     fill="none"
-                                    stroke="var(--color-primary)"
                                     stroke-width="12"
                                     stroke-linecap="round"
                                     stroke-dasharray="754"
                                     stroke-dashoffset="754"
                                     transform="rotate(-90 140 140)"/>
                         </svg>
-                        
+
                         <!-- Time Display -->
                         <div class="time-display" id="time-display">00:00</div>
-                        
+
                         <!-- Status Indicator -->
                         <div class="status-indicator" id="status-indicator" data-i18n="timer.ready">준비</div>
                     </div>
                 </div>
-                
+
                 <!-- Time Input Controls -->
                 <div class="time-inputs" role="group" aria-labelledby="input-label">
                     <label id="input-label" class="sr-only">시간 설정</label>
-                    
+
                     <div class="input-group">
                         <label for="minutes" data-i18n="timer.minutes">분</label>
-                        <input type="number" id="minutes" min="0" max="59" value="5" 
+                        <input type="number" id="minutes" min="0" max="59" value="5"
                                aria-describedby="minutes-help">
                         <span id="minutes-help" class="sr-only">0분부터 59분까지 설정 가능</span>
                     </div>
-                    
+
                     <div class="input-separator">:</div>
-                    
+
                     <div class="input-group">
                         <label for="seconds" data-i18n="timer.seconds">초</label>
                         <input type="number" id="seconds" min="0" max="59" value="0"
@@ -133,34 +132,33 @@
                         <span id="seconds-help" class="sr-only">0초부터 59초까지 설정 가능</span>
                     </div>
                 </div>
-                
+
                 <!-- Control Buttons -->
                 <div class="timer-controls">
-                    <button id="start-btn" class="btn btn-primary btn-large" 
+                    <button id="start-btn" class="btn btn-primary btn-large"
                             aria-describedby="start-help">
                         <span class="btn-icon">▶</span>
                         <span class="btn-text" data-i18n="timer.start">시작</span>
                     </button>
-                    
-                    <button id="pause-btn" class="btn btn-secondary btn-large" 
+
+                    <button id="pause-btn" class="btn btn-secondary btn-large"
                             style="display: none;" aria-describedby="pause-help">
                         <span class="btn-icon">⏸</span>
                         <span class="btn-text" data-i18n="timer.pause">일시정지</span>
                     </button>
-                    
+
                     <button id="reset-btn" class="btn btn-outline btn-large"
                             aria-describedby="reset-help">
                         <span class="btn-icon">↻</span>
                         <span class="btn-text" data-i18n="timer.reset">리셋</span>
                     </button>
-                    
-                    <!-- Screen Reader Help Text -->
+
                     <div id="start-help" class="sr-only">타이머를 시작합니다</div>
                     <div id="pause-help" class="sr-only">타이머를 일시정지합니다</div>
                     <div id="reset-help" class="sr-only">타이머를 초기화합니다</div>
                 </div>
             </section>
-            
+
             <!-- Quick Presets -->
             <section class="presets-section" aria-labelledby="presets-title">
                 <h2 id="presets-title" class="section-title" data-i18n="timer.presets">빠른 설정</h2>
@@ -173,7 +171,7 @@
                     <button class="preset-btn" data-minutes="30" data-seconds="0">30분</button>
                 </div>
             </section>
-            
+
             <!-- Settings Panel -->
             <section class="settings-section" aria-labelledby="settings-title">
                 <button class="settings-toggle" aria-expanded="false" aria-controls="settings-panel">
@@ -181,7 +179,7 @@
                     <span id="settings-title" data-i18n="timer.settings">설정</span>
                     <span class="toggle-arrow">▼</span>
                 </button>
-                
+
                 <div id="settings-panel" class="settings-panel" hidden>
                     <div class="settings-header">
                         <button class="settings-close" aria-label="설정 닫기" title="설정 닫기">
@@ -204,7 +202,7 @@
                                 <span class="volume-value">70%</span>
                             </div>
                         </div>
-                        
+
                         <div class="setting-group">
                             <h3>화면 설정</h3>
                             <div class="setting-item">
@@ -219,7 +217,7 @@
                 </div>
             </section>
         </div>
-        
+
         <!-- Instructions -->
         <section class="instructions-section" aria-labelledby="instructions-title">
             <div class="container">
@@ -244,7 +242,7 @@
             </div>
         </section>
     </main>
-    
+
     <!-- Footer -->
     <footer class="footer" role="contentinfo">
         <div class="container">
@@ -256,14 +254,14 @@
                 </div>
             </div>
             <div class="footer-copyright">
-                <p>&copy; 2024 TimerTools Pro. All rights reserved.</p>
+                <p>&copy; 2026 GON.AI. All rights reserved.</p>
             </div>
         </div>
     </footer>
-    
-    <!-- Live Region for Screen Reader Announcements -->
+
+    <!-- Live Region for Screen Reader -->
     <div id="announcements" aria-live="polite" aria-atomic="true" class="sr-only"></div>
-    
+
     <!-- Scripts -->
     <script src="../assets/js/utils.js"></script>
     <script src="../assets/js/timer-settings.js"></script>

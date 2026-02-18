@@ -9,398 +9,497 @@
       gtag('js', new Date());
       gtag('config', 'G-BNRL6FRMMM');
     </script>
-    
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="체계적인 운동 루틴을 완벽하게 관리하는 스마트 운동 타이머 - 세트/휴식 관리, 운동 프로그램 템플릿, 진행률 추적">
-    <title>운동 타이머 - TimerTools Pro</title>
-    
+    <meta name="description" content="체계적인 운동 루틴을 완벽하게 관리하는 스마트 운동 타이머 - 세트/휴식 관리, 운동 프로그램 템플릿, 진행률 추적. 상체, 하체, 유산소, HIIT, 타바타 프로그램 지원.">
+    <meta name="keywords" content="운동 타이머, 워크아웃 타이머, HIIT 타이머, 타바타 타이머, 세트 타이머, 휴식 타이머, workout timer">
+    <title>운동 타이머 - TimerTools Pro | gon.ai.kr</title>
+    <link rel="canonical" href="https://gon.ai.kr/timer/workout.html">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="운동 타이머 - TimerTools Pro">
+    <meta property="og:description" content="체계적인 운동 루틴을 완벽하게 관리하는 스마트 운동 타이머">
+    <meta property="og:url" content="https://gon.ai.kr/timer/workout.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="GON.AI TimerTools Pro">
+
     <!-- Google AdSense -->
     <meta name="google-adsense-account" content="ca-pub-7479840445702290">
-    
+
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg">
-    
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
     <!-- Stylesheets -->
     <link rel="stylesheet" href="../assets/css/styles.css">
-    <link rel="stylesheet" href="../assets/css/workout.css">
-    
+    <link rel="stylesheet" href="../assets/css/workout-timer.css">
+
     <!-- Google AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7479840445702290"
          crossorigin="anonymous"></script>
 </head>
 <body>
+    <a href="#main-content" class="skip-link">메인 콘텐츠로 건너뛰기</a>
+
     <!-- Header -->
     <header class="header" role="banner">
         <nav class="nav-container" role="navigation" aria-label="주 네비게이션">
             <div class="nav-brand">
                 <h1 class="logo">
-                    <a href="../index.html">TimerTools Pro</a>
+                    <a href="../index.html">
+                        <span class="logo-main">GON.AI</span>
+                        <span class="logo-sub">Timer + Lotto</span>
+                    </a>
                 </h1>
             </div>
-            
-            <ul class="nav-menu" id="nav-menu">
-                <li><a href="../index.html" data-i18n="nav.home">홈</a></li>
-                <li class="nav-dropdown">
-                    <button class="nav-dropdown-btn" aria-expanded="false" aria-haspopup="true" data-i18n="nav.timer_tools">도구</button>
-                    <ul class="nav-dropdown-menu">
-                        <li><a href="basic.html" data-i18n="nav.basic_timer">기본 타이머</a></li>
-                        <li><a href="pomodoro.html" data-i18n="nav.pomodoro_timer">뽀모도로 타이머</a></li>
-                        <li><a href="multi.html" data-i18n="nav.multi_timer">멀티 타이머</a></li>
-                        <li><a href="cooking.html" data-i18n="nav.cooking_timer">요리 타이머</a></li>
-                        <li><a href="workout.html" aria-current="page" data-i18n="nav.workout_timer">운동 타이머</a></li>
-                    </ul>
-                </li>
-                <li><a href="../blog/" data-i18n="nav.blog">블로그</a></li>
-                <li class="nav-settings">
-                    <button class="theme-toggle" aria-label="다크 모드 토글" title="테마 전환">
-                        <span class="theme-icon">🌙</span>
-                    </button>
-                </li>
-            </ul>
-            
-            <button class="nav-toggle" aria-label="네비게이션 메뉴 토글" aria-expanded="false">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
+
+            <div class="breadcrumb">
+                <a href="../index.html" data-i18n="nav.home">홈</a>
+                <span class="separator">&rsaquo;</span>
+                <span aria-current="page" data-i18n="nav.workout_timer">운동 타이머</span>
+                <a href="https://lotto.gon.ai.kr" target="_blank" rel="noopener" class="lotto-link">🎲 로또AI</a>
+                <select class="language-select" aria-label="언어 선택">
+                    <option value="ko">한국어</option>
+                    <option value="en">English</option>
+                </select>
+            </div>
         </nav>
     </header>
 
     <!-- Main Content -->
-    <main id="main-content" class="main-content">
-        <!-- Breadcrumb -->
-        <nav class="breadcrumb" aria-label="현재 위치">
-            <ol>
-                <li><a href="../index.html">홈</a></li>
-                <li aria-current="page">운동 타이머</li>
-            </ol>
-            <button class="favorites-btn" aria-label="즐겨찾기에 추가" title="즐겨찾기">
-                <span>⭐</span>
-            </button>
-        </nav>
+    <main id="main-content" class="workout-main" role="main">
+        <div class="container">
+            <div class="workout-container">
 
-        <div class="workout-container">
-            <!-- Program Selection Screen -->
-            <section class="program-selection" id="program-selection">
-                <h2 class="section-title">💪 운동 프로그램 선택</h2>
-                
-                <div class="program-categories">
-                    <h3>운동 유형별 프로그램</h3>
-                    <div class="program-grid">
-                        <button class="program-card" data-program="upper-body">
-                            <div class="program-icon">💪</div>
-                            <div class="program-name">상체 운동</div>
-                            <div class="program-time">20-45분</div>
-                            <div class="program-difficulty">초급/중급/고급</div>
-                        </button>
-                        <button class="program-card" data-program="lower-body">
-                            <div class="program-icon">🦵</div>
-                            <div class="program-name">하체 운동</div>
-                            <div class="program-time">25-50분</div>
-                            <div class="program-difficulty">초급/중급/고급</div>
-                        </button>
-                        <button class="program-card" data-program="cardio">
-                            <div class="program-icon">❤️</div>
-                            <div class="program-name">유산소 운동</div>
-                            <div class="program-time">15-60분</div>
-                            <div class="program-difficulty">저강도/중강도/고강도</div>
-                        </button>
-                        <button class="program-card" data-program="stretching">
-                            <div class="program-icon">🧘</div>
-                            <div class="program-name">스트레칭</div>
-                            <div class="program-time">5-30분</div>
-                            <div class="program-difficulty">워밍업/쿨다운/회복</div>
-                        </button>
-                        <button class="program-card" data-program="full-body">
-                            <div class="program-icon">⚖️</div>
-                            <div class="program-name">전신 운동</div>
-                            <div class="program-time">30-60분</div>
-                            <div class="program-difficulty">초급/중급/고급</div>
-                        </button>
+                <!-- ========================================
+                     Screen 1: Program Selection
+                     ======================================== -->
+                <section class="workout-screen" id="program-selection">
+                    <div class="screen-header">
+                        <h2 class="screen-title">운동 프로그램 선택</h2>
+                        <p class="screen-subtitle">목표에 맞는 운동 프로그램을 선택하세요</p>
                     </div>
-                </div>
 
-                <div class="quick-start">
-                    <h3>빠른 시작</h3>
-                    <div class="quick-options">
-                        <button class="quick-btn" data-quick="hiit">🔥 HIIT (20분)</button>
-                        <button class="quick-btn" data-quick="tabata">⚡ 타바타 (4분)</button>
-                        <button class="quick-btn" data-quick="circuit">🔄 서킷 (30분)</button>
-                        <button class="quick-btn" data-quick="strength">💪 근력 (45분)</button>
+                    <!-- Program Cards -->
+                    <div class="program-categories">
+                        <h3 class="category-title">운동 유형별 프로그램</h3>
+                        <div class="program-grid">
+                            <button class="program-card" data-program="upper-body">
+                                <div class="program-card-icon">💪</div>
+                                <div class="program-card-content">
+                                    <div class="program-card-name">상체 운동</div>
+                                    <div class="program-card-time">20-45분</div>
+                                    <div class="program-card-difficulty">초급 / 중급 / 고급</div>
+                                </div>
+                                <div class="program-card-arrow">&rarr;</div>
+                            </button>
+                            <button class="program-card" data-program="lower-body">
+                                <div class="program-card-icon">🦵</div>
+                                <div class="program-card-content">
+                                    <div class="program-card-name">하체 운동</div>
+                                    <div class="program-card-time">25-50분</div>
+                                    <div class="program-card-difficulty">초급 / 중급 / 고급</div>
+                                </div>
+                                <div class="program-card-arrow">&rarr;</div>
+                            </button>
+                            <button class="program-card" data-program="cardio">
+                                <div class="program-card-icon">❤️</div>
+                                <div class="program-card-content">
+                                    <div class="program-card-name">유산소 운동</div>
+                                    <div class="program-card-time">15-60분</div>
+                                    <div class="program-card-difficulty">저강도 / 중강도 / 고강도</div>
+                                </div>
+                                <div class="program-card-arrow">&rarr;</div>
+                            </button>
+                        </div>
                     </div>
-                </div>
 
-                <div class="custom-program">
-                    <h3>커스텀 프로그램</h3>
-                    <form class="custom-form" id="custom-program-form">
-                        <div class="form-group">
-                            <label for="program-name">프로그램명:</label>
-                            <input type="text" id="program-name" placeholder="예: 나만의 상체운동" required>
+                    <!-- Quick Start -->
+                    <div class="quick-start-section">
+                        <h3 class="category-title">빠른 시작</h3>
+                        <div class="quick-start-grid">
+                            <button class="quick-btn" data-quick="hiit">
+                                <span class="quick-btn-icon">🔥</span>
+                                <span class="quick-btn-label">HIIT</span>
+                                <span class="quick-btn-time">20분</span>
+                            </button>
+                            <button class="quick-btn" data-quick="tabata">
+                                <span class="quick-btn-icon">⚡</span>
+                                <span class="quick-btn-label">타바타</span>
+                                <span class="quick-btn-time">4분</span>
+                            </button>
                         </div>
-                        <div class="form-group">
-                            <label for="exercise-count">운동 개수:</label>
-                            <input type="number" id="exercise-count" min="1" max="10" value="3" required>
-                            <span>개</span>
-                        </div>
-                        <div class="form-group">
-                            <label for="set-count">기본 세트 수:</label>
-                            <input type="number" id="set-count" min="1" max="8" value="3" required>
-                            <span>세트</span>
-                        </div>
-                        <button type="submit" class="btn btn-primary">다음: 운동 설정하기 →</button>
-                    </form>
-                </div>
-            </section>
-
-            <!-- Program Configuration Screen -->
-            <section class="program-configuration" id="program-configuration" style="display: none;">
-                <h2 class="section-title">💪 <span id="config-program-name">상체 운동</span> - 프로그램 설정</h2>
-                
-                <div class="difficulty-selection" id="difficulty-selection">
-                    <h3>난이도 선택</h3>
-                    <div class="difficulty-options">
-                        <button class="difficulty-btn" data-difficulty="beginner">
-                            <span class="difficulty-label">초급</span>
-                            <span class="difficulty-desc">2-3세트, 짧은 시간</span>
-                        </button>
-                        <button class="difficulty-btn" data-difficulty="intermediate">
-                            <span class="difficulty-label">중급</span>
-                            <span class="difficulty-desc">3-4세트, 표준 시간</span>
-                        </button>
-                        <button class="difficulty-btn" data-difficulty="advanced">
-                            <span class="difficulty-label">고급</span>
-                            <span class="difficulty-desc">4-5세트, 긴 시간</span>
-                        </button>
                     </div>
-                </div>
-                
-                <div class="exercises-config-container" id="exercises-config-container">
-                    <!-- Exercises configuration will be dynamically generated -->
-                </div>
-                
-                <div class="config-summary">
-                    <p>총 예상시간: <span id="config-total-time">25분</span></p>
-                    <p>총 운동 개수: <span id="config-exercise-count">3개</span></p>
-                </div>
-                
-                <div class="config-actions">
-                    <button class="btn btn-success btn-large" id="start-workout">운동 시작하기</button>
-                    <button class="btn btn-secondary" id="save-program">프로그램 저장</button>
-                    <button class="btn btn-outline" id="back-to-program-selection">← 뒤로</button>
-                </div>
-            </section>
 
-            <!-- Main Workout Timer Screen -->
-            <section class="workout-timer-main" id="workout-timer-main" style="display: none;">
-                <div class="desktop-layout">
-                    <!-- Left Column: Main Timer -->
-                    <div class="main-timer-section">
-                        <div class="timer-card">
-                            <h2>💪 운동 메인 타이머</h2>
-                            <div class="current-exercise-info">
-                                <span class="exercise-indicator" id="exercise-indicator">현재: 푸시업 세트 2/3</span>
-                            </div>
-                            
-                            <div class="timer-display">
-                                <div class="time-circle">
-                                    <div class="time-remaining" id="main-time">00:45</div>
-                                    <div class="exercise-status" id="exercise-status">💪 운동중</div>
+                    <!-- Custom Program -->
+                    <div class="custom-program-section">
+                        <h3 class="category-title">커스텀 프로그램 만들기</h3>
+                        <form id="custom-program-form" class="custom-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="program-name">프로그램명</label>
+                                    <input type="text" id="program-name" placeholder="예: 나만의 상체운동" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exercise-count">운동 개수</label>
+                                    <div class="input-with-unit">
+                                        <input type="number" id="exercise-count" min="1" max="10" value="3" required>
+                                        <span class="input-unit">개</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="set-count">기본 세트 수</label>
+                                    <div class="input-with-unit">
+                                        <input type="number" id="set-count" min="1" max="8" value="3" required>
+                                        <span class="input-unit">세트</span>
+                                    </div>
                                 </div>
                             </div>
-                            
-                            <div class="progress-container">
-                                <div class="progress-bar">
-                                    <div class="progress-fill" id="main-progress" style="width: 75%"></div>
+                            <button type="submit" class="btn btn-primary custom-submit-btn">프로그램 설정하기 &rarr;</button>
+                        </form>
+                    </div>
+                </section>
+
+                <!-- ========================================
+                     Screen 2: Program Configuration
+                     ======================================== -->
+                <section class="workout-screen" id="program-configuration" style="display: none;">
+                    <div class="screen-header">
+                        <h2 class="screen-title"><span id="config-program-name">상체 운동</span></h2>
+                        <p class="screen-subtitle">난이도와 세부 설정을 조정하세요</p>
+                    </div>
+
+                    <!-- Difficulty Selection -->
+                    <div class="difficulty-selection" id="difficulty-selection">
+                        <h3 class="category-title">난이도 선택</h3>
+                        <div class="difficulty-grid">
+                            <!-- Strength difficulties -->
+                            <button class="difficulty-btn" data-difficulty="beginner">
+                                <span class="difficulty-icon">🟢</span>
+                                <span class="difficulty-label">초급</span>
+                                <span class="difficulty-desc">2-3세트, 짧은 시간</span>
+                            </button>
+                            <button class="difficulty-btn" data-difficulty="intermediate">
+                                <span class="difficulty-icon">🟡</span>
+                                <span class="difficulty-label">중급</span>
+                                <span class="difficulty-desc">3-4세트, 표준 시간</span>
+                            </button>
+                            <button class="difficulty-btn" data-difficulty="advanced">
+                                <span class="difficulty-icon">🔴</span>
+                                <span class="difficulty-label">고급</span>
+                                <span class="difficulty-desc">4-5세트, 긴 시간</span>
+                            </button>
+                            <!-- Cardio difficulties -->
+                            <button class="difficulty-btn" data-difficulty="low-intensity">
+                                <span class="difficulty-icon">🟢</span>
+                                <span class="difficulty-label">저강도</span>
+                                <span class="difficulty-desc">편안한 페이스</span>
+                            </button>
+                            <button class="difficulty-btn" data-difficulty="moderate-intensity">
+                                <span class="difficulty-icon">🟡</span>
+                                <span class="difficulty-label">중강도</span>
+                                <span class="difficulty-desc">적당한 강도</span>
+                            </button>
+                            <button class="difficulty-btn" data-difficulty="high-intensity">
+                                <span class="difficulty-icon">🔴</span>
+                                <span class="difficulty-label">고강도</span>
+                                <span class="difficulty-desc">최대 강도</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Exercises Configuration -->
+                    <div class="exercises-config" id="exercises-config-container">
+                        <!-- Dynamically populated by JS -->
+                    </div>
+
+                    <!-- Configuration Summary -->
+                    <div class="config-summary">
+                        <div class="summary-item">
+                            <span class="summary-label">총 예상시간</span>
+                            <span class="summary-value" id="config-total-time">--분</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">운동 개수</span>
+                            <span class="summary-value" id="config-exercise-count">--개</span>
+                        </div>
+                    </div>
+
+                    <!-- Configuration Actions -->
+                    <div class="config-actions">
+                        <button class="btn btn-primary btn-large" id="start-workout">운동 시작하기</button>
+                        <button class="btn btn-outline" id="back-to-program-selection">&larr; 프로그램 선택으로</button>
+                    </div>
+                </section>
+
+                <!-- ========================================
+                     Screen 3: Workout Timer Main
+                     ======================================== -->
+                <section class="workout-screen" id="workout-timer-main" style="display: none;">
+                    <div class="timer-layout">
+                        <!-- Main Timer Area -->
+                        <div class="timer-main-area">
+                            <div class="timer-card">
+                                <!-- Exercise Indicator -->
+                                <div class="exercise-indicator-bar">
+                                    <span class="exercise-indicator" id="exercise-indicator">현재: 푸시업 세트 1/3</span>
                                 </div>
-                                <span class="progress-text">💪 75%</span>
-                            </div>
-                            
-                            <div class="timer-controls">
-                                <button class="btn btn-warning" id="pause-btn">⏸️ 일시정지</button>
-                                <button class="btn btn-info" id="rest-btn">⏭️ 휴식</button>
-                                <button class="btn btn-success" id="complete-set-btn">✅ 세트완료</button>
-                                <button class="btn btn-secondary" id="settings-btn">⚙️</button>
-                            </div>
-                        </div>
 
-                        <!-- Set Progress -->
-                        <div class="set-progress">
-                            <h3>세트 진행상황</h3>
-                            <div class="set-indicators" id="set-indicators">
-                                <!-- Set indicators will be dynamically generated -->
-                            </div>
-                            <div class="set-details" id="set-details">
-                                <div class="set-info">
-                                    <span>목표 횟수: <span id="target-reps">12회</span></span>
-                                    <span>휴식시간: <span id="rest-time">60초</span></span>
+                                <!-- Timer Display -->
+                                <div class="timer-display">
+                                    <div class="timer-ring">
+                                        <div class="timer-ring-inner">
+                                            <div class="timer-time" id="main-time">00:45</div>
+                                            <div class="timer-status" id="exercise-status">💪 운동중</div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="set-input">
-                                    <label for="actual-reps">실제 완료 횟수:</label>
-                                    <input type="number" id="actual-reps" min="0" max="100" value="12">
-                                    <button class="btn btn-small btn-primary" id="log-set">기록</button>
+
+                                <!-- Progress Bar -->
+                                <div class="timer-progress-container">
+                                    <div class="timer-progress-bar">
+                                        <div class="timer-progress-fill" id="main-progress" style="width: 0%"></div>
+                                    </div>
+                                    <span class="progress-text">0%</span>
+                                </div>
+
+                                <!-- Set Indicators -->
+                                <div class="set-progress-section">
+                                    <div class="set-indicators" id="set-indicators">
+                                        <!-- Dynamically populated by JS -->
+                                    </div>
+                                </div>
+
+                                <!-- Set Details -->
+                                <div class="set-details">
+                                    <div class="set-info-row">
+                                        <div class="set-info-item">
+                                            <span class="set-info-label">목표 횟수</span>
+                                            <span class="set-info-value" id="target-reps">--회</span>
+                                        </div>
+                                        <div class="set-info-item">
+                                            <span class="set-info-label">휴식시간</span>
+                                            <span class="set-info-value" id="rest-time">--초</span>
+                                        </div>
+                                    </div>
+                                    <div class="set-log-row">
+                                        <label for="actual-reps" class="set-log-label">실제 완료:</label>
+                                        <input type="number" id="actual-reps" min="0" max="100" value="12" class="set-log-input">
+                                        <button class="btn btn-primary btn-small" id="log-set">기록</button>
+                                    </div>
+                                </div>
+
+                                <!-- Timer Controls -->
+                                <div class="timer-controls">
+                                    <button class="btn btn-warning" id="pause-btn">⏸️ 일시정지</button>
+                                    <button class="btn btn-info" id="rest-btn">😌 휴식</button>
+                                    <button class="btn btn-success" id="complete-set-btn">✅ 세트완료</button>
+                                    <button class="btn btn-secondary btn-icon-only" id="settings-btn" aria-label="운동 설정">⚙️</button>
+                                </div>
+                            </div>
+
+                            <!-- Exercise Tips -->
+                            <div class="exercise-tips-card">
+                                <h3 class="tips-title">운동 가이드</h3>
+                                <p class="tip-text" id="exercise-tip">운동 팁이 여기에 표시됩니다.</p>
+                                <div class="tip-stats">
+                                    <span class="tip-stat">
+                                        <span class="tip-stat-icon">📊</span>
+                                        목표 심박수: <strong id="target-heartrate">--</strong>
+                                    </span>
+                                    <span class="tip-stat">
+                                        <span class="tip-stat-icon">⏰</span>
+                                        운동 시간: <strong id="exercise-duration">--</strong>
+                                    </span>
+                                    <span class="tip-stat">
+                                        <span class="tip-stat-icon">💤</span>
+                                        휴식: <strong id="rest-duration">--</strong>
+                                    </span>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- Right Column: Side Panel -->
-                    <div class="side-panel">
-                        <!-- Ad Space -->
-                        <div class="ad-space ad-rectangle" aria-label="광고">
-                            <div class="ad-placeholder">300x250 광고 영역</div>
-                        </div>
+                        <!-- Side Panel -->
+                        <div class="timer-side-panel">
+                            <!-- Program Progress -->
+                            <div class="program-progress-card">
+                                <h3 class="side-card-title">프로그램 진행</h3>
+                                <div class="exercises-list" id="exercises-list">
+                                    <!-- Dynamically populated by JS -->
+                                </div>
+                                <div class="program-time-info">
+                                    <div class="time-info-item">
+                                        <span class="time-info-label">총 시간</span>
+                                        <span class="time-info-value" id="total-program-time">--:--</span>
+                                    </div>
+                                    <div class="time-info-item">
+                                        <span class="time-info-label">남은 시간</span>
+                                        <span class="time-info-value" id="remaining-program-time">--:--</span>
+                                    </div>
+                                    <div class="time-info-item">
+                                        <span class="time-info-label">진행률</span>
+                                        <span class="time-info-value accent" id="program-progress-percent">0%</span>
+                                    </div>
+                                </div>
+                            </div>
 
-                        <!-- Program Presets -->
-                        <div class="program-presets">
-                            <h3>운동 프로그램</h3>
-                            <div class="preset-list">
-                                <button class="preset-btn" data-preset="upper">💪 상체운동</button>
-                                <button class="preset-btn" data-preset="lower">🦵 하체운동</button>
-                                <button class="preset-btn" data-preset="cardio">❤️ 유산소</button>
-                                <button class="preset-btn" data-preset="stretch">🧘 스트레칭</button>
-                                <button class="preset-btn" data-preset="full">⚖️ 전신운동</button>
-                                <button class="preset-btn preset-custom" id="add-custom-program">+ 커스텀</button>
+                            <!-- Program Controls -->
+                            <div class="program-controls-card">
+                                <button class="btn btn-primary btn-block" id="next-exercise-btn">다음 운동 &rarr;</button>
+                                <button class="btn btn-success btn-block" id="complete-program-btn">프로그램 완료</button>
+                            </div>
+
+                            <!-- Ad Space -->
+                            <div class="ad-space ad-rectangle" aria-label="광고">
+                                <!-- AdSense auto ads -->
+                            </div>
+
+                            <!-- Preset Sidebar -->
+                            <div class="preset-sidebar">
+                                <button class="btn btn-outline btn-block btn-small" id="add-custom-program">+ 운동 추가</button>
                             </div>
                         </div>
                     </div>
-                </div>
+                </section>
 
-                <!-- Workout Program Progress -->
-                <div class="program-progress">
-                    <h3>운동 프로그램</h3>
-                    <div class="exercises-list" id="exercises-list">
-                        <!-- Exercises will be dynamically loaded -->
-                    </div>
-                    <div class="program-summary">
-                        <span>총 예상시간: <span id="total-program-time">25분</span></span>
-                        <span>남은시간: <span id="remaining-program-time">18분</span></span>
-                        <span>진행률: <span id="program-progress-percent">40%</span></span>
-                    </div>
-                    <div class="program-controls">
-                        <button class="btn btn-primary" id="next-exercise-btn">다음 운동</button>
-                        <button class="btn btn-secondary" id="modify-program-btn">프로그램 수정</button>
-                        <button class="btn btn-success" id="complete-program-btn">완료</button>
-                    </div>
-                </div>
+                <!-- ========================================
+                     Screen 4: Rest Screen
+                     ======================================== -->
+                <section class="workout-screen rest-screen" id="rest-screen" style="display: none;">
+                    <div class="rest-overlay">
+                        <div class="rest-content">
+                            <div class="rest-header">
+                                <h2 class="rest-title">휴식 시간</h2>
+                                <p class="rest-subtitle">숨을 고르고 다음 세트를 준비하세요</p>
+                            </div>
 
-                <!-- Exercise Guide & Tips -->
-                <div class="exercise-tips">
-                    <h3>운동 가이드 & 팁</h3>
-                    <div class="tip-content">
-                        <div class="current-tip">
-                            <h4>💡 현재 운동 팁</h4>
-                            <p id="exercise-tip">푸시업 시 몸을 일직선으로 유지하고 가슴이 바닥에 닿을 정도로 깊게 내려가세요. 올라올 때는 팔을 완전히 펴주세요.</p>
-                        </div>
-                        <div class="exercise-guide">
-                            <span class="guide-item">📊 목표 심박수: <span id="target-heartrate">120-140 BPM</span></span>
-                            <span class="guide-item">⏰ 운동 시간: <span id="exercise-duration">45초</span></span>
-                            <span class="guide-item">💤 휴식: <span id="rest-duration">60초</span></span>
-                        </div>
-                    </div>
-                </div>
+                            <div class="rest-timer-display">
+                                <div class="rest-ring">
+                                    <div class="rest-ring-inner">
+                                        <div class="rest-countdown" id="rest-time">01:00</div>
+                                        <div class="rest-label">남은 휴식</div>
+                                    </div>
+                                </div>
+                            </div>
 
-                <!-- Native Ad Space -->
-                <div class="ad-space ad-native" aria-label="광고">
-                    <div class="ad-placeholder">336x280 네이티브 광고</div>
-                </div>
-            </section>
+                            <div class="rest-progress-container">
+                                <div class="rest-progress-bar">
+                                    <div class="rest-progress-fill" id="rest-progress" style="width: 0%"></div>
+                                </div>
+                            </div>
 
-            <!-- Rest Screen -->
-            <section class="rest-screen" id="rest-screen" style="display: none;">
-                <div class="rest-container">
-                    <h2>😌 휴식 시간</h2>
-                    <div class="rest-timer">
-                        <div class="rest-circle">
-                            <div class="rest-time" id="rest-time">01:00</div>
-                            <div class="rest-status">휴식 중</div>
-                        </div>
-                    </div>
-                    <div class="rest-progress">
-                        <div class="progress-bar">
-                            <div class="progress-fill" id="rest-progress" style="width: 50%"></div>
-                        </div>
-                    </div>
-                    <div class="rest-info" id="rest-info">
-                        <p>다음: 푸시업 세트 3/3</p>
-                        <p>물 한 모금 마시고 심호흡하세요</p>
-                    </div>
-                    <div class="rest-controls">
-                        <button class="btn btn-success btn-large" id="skip-rest-btn">휴식 건너뛰기</button>
-                        <button class="btn btn-secondary" id="extend-rest-btn">+30초 연장</button>
-                    </div>
-                </div>
-            </section>
+                            <div class="rest-next-info" id="rest-info">
+                                <p>다음 운동 정보가 여기에 표시됩니다</p>
+                            </div>
 
-            <!-- Workout Complete Screen -->
-            <section class="workout-complete" id="workout-complete" style="display: none;">
-                <div class="complete-container">
-                    <h2>🎉 운동 완료!</h2>
-                    <div class="complete-stats">
-                        <div class="stat-item">
-                            <span class="stat-number" id="total-workout-time">25분</span>
-                            <span class="stat-label">총 운동시간</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-number" id="total-sets">9세트</span>
-                            <span class="stat-label">완료한 세트</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-number" id="calories-burned">185kcal</span>
-                            <span class="stat-label">소모 칼로리</span>
+                            <div class="rest-actions">
+                                <button class="btn btn-success btn-large" id="skip-rest-btn">휴식 건너뛰기</button>
+                                <button class="btn btn-secondary" id="extend-rest-btn">+30초 연장</button>
+                            </div>
                         </div>
                     </div>
-                    <div class="rating-section">
-                        <h3>오늘 운동은 어떠셨나요?</h3>
-                        <div class="rating-buttons">
-                            <button class="rating-btn" data-rating="1">😫 힘들었어요</button>
-                            <button class="rating-btn" data-rating="2">😓 적당했어요</button>
-                            <button class="rating-btn" data-rating="3">😊 좋았어요</button>
-                            <button class="rating-btn" data-rating="4">💪 완벽했어요</button>
+                </section>
+
+                <!-- ========================================
+                     Screen 5: Workout Complete
+                     ======================================== -->
+                <section class="workout-screen" id="workout-complete" style="display: none;">
+                    <div class="complete-container">
+                        <div class="complete-celebration">
+                            <div class="complete-icon">🎉</div>
+                            <h2 class="complete-title">운동 완료!</h2>
+                            <p class="complete-message">오늘도 수고하셨습니다. 꾸준한 운동이 가장 중요합니다.</p>
+                        </div>
+
+                        <div class="complete-stats">
+                            <div class="complete-stat-item">
+                                <span class="complete-stat-number" id="total-workout-time">--분</span>
+                                <span class="complete-stat-label">총 운동시간</span>
+                            </div>
+                            <div class="complete-stat-item">
+                                <span class="complete-stat-number" id="total-sets">--세트</span>
+                                <span class="complete-stat-label">완료 세트</span>
+                            </div>
+                            <div class="complete-stat-item">
+                                <span class="complete-stat-number" id="calories-burned">--kcal</span>
+                                <span class="complete-stat-label">소모 칼로리</span>
+                            </div>
+                        </div>
+
+                        <div class="complete-rating">
+                            <h3 class="rating-title">오늘 운동은 어떠셨나요?</h3>
+                            <div class="rating-buttons">
+                                <button class="rating-btn" data-rating="1">
+                                    <span class="rating-emoji">😫</span>
+                                    <span class="rating-text">힘들었어요</span>
+                                </button>
+                                <button class="rating-btn" data-rating="2">
+                                    <span class="rating-emoji">😓</span>
+                                    <span class="rating-text">적당했어요</span>
+                                </button>
+                                <button class="rating-btn" data-rating="3">
+                                    <span class="rating-emoji">😊</span>
+                                    <span class="rating-text">좋았어요</span>
+                                </button>
+                                <button class="rating-btn" data-rating="4">
+                                    <span class="rating-emoji">💪</span>
+                                    <span class="rating-text">완벽했어요</span>
+                                </button>
+                                <button class="rating-btn" data-rating="5">
+                                    <span class="rating-emoji">🔥</span>
+                                    <span class="rating-text">최고였어요</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="complete-actions">
+                            <button class="btn btn-primary btn-large" id="save-workout-btn">운동 기록 저장</button>
+                            <button class="btn btn-outline" id="new-workout-btn">새 운동 시작</button>
                         </div>
                     </div>
-                    <div class="complete-actions">
-                        <button class="btn btn-primary" id="save-workout-btn">운동 기록 저장</button>
-                        <button class="btn btn-secondary" id="share-workout-btn">공유하기</button>
-                        <button class="btn btn-outline" id="new-workout-btn">새 운동 시작</button>
-                    </div>
-                </div>
-            </section>
+                </section>
+
+            </div>
         </div>
     </main>
 
-    <!-- Modals -->
-    
+    <!-- ========================================
+         Modals
+         ======================================== -->
+
     <!-- Exercise Settings Modal -->
     <div class="modal" id="exercise-settings-modal" style="display: none;">
         <div class="modal-content">
-            <h3>🏋️ 운동 설정</h3>
-            <div class="settings-options">
+            <div class="modal-header">
+                <h3 class="modal-title">운동 설정</h3>
+                <button class="modal-close" id="close-exercise-settings" aria-label="닫기">&times;</button>
+            </div>
+            <div class="modal-body">
                 <div class="setting-group">
-                    <label>세트 수:</label>
+                    <label for="setting-sets">세트 수</label>
                     <input type="number" id="setting-sets" min="1" max="10" value="3">
                 </div>
                 <div class="setting-group">
-                    <label>목표 횟수:</label>
+                    <label for="setting-reps">목표 횟수</label>
                     <input type="number" id="setting-reps" min="1" max="100" value="12">
                 </div>
                 <div class="setting-group">
-                    <label>휴식 시간 (초):</label>
+                    <label for="setting-rest">휴식 시간 (초)</label>
                     <input type="number" id="setting-rest" min="10" max="300" value="60">
                 </div>
                 <div class="setting-group">
-                    <label>운동 시간 (초):</label>
+                    <label for="setting-duration">운동 시간 (초)</label>
                     <input type="number" id="setting-duration" min="10" max="600" value="45">
                 </div>
             </div>
-            <div class="modal-actions">
+            <div class="modal-footer">
                 <button class="btn btn-primary" id="save-exercise-settings">저장</button>
-                <button class="btn btn-secondary" id="close-exercise-settings">닫기</button>
+                <button class="btn btn-secondary" id="close-exercise-settings-secondary" onclick="document.getElementById('exercise-settings-modal').style.display='none'">취소</button>
             </div>
         </div>
     </div>
@@ -408,53 +507,77 @@
     <!-- Add Exercise Modal -->
     <div class="modal" id="add-exercise-modal" style="display: none;">
         <div class="modal-content">
-            <h3>+ 운동 추가</h3>
+            <div class="modal-header">
+                <h3 class="modal-title">운동 추가</h3>
+                <button class="modal-close" id="close-add-exercise" aria-label="닫기">&times;</button>
+            </div>
             <form id="add-exercise-form">
-                <div class="form-group">
-                    <label for="new-exercise-name">운동명:</label>
-                    <input type="text" id="new-exercise-name" placeholder="예: 스쿼트" required>
+                <div class="modal-body">
+                    <div class="setting-group">
+                        <label for="new-exercise-name">운동명</label>
+                        <input type="text" id="new-exercise-name" placeholder="예: 스쿼트" required>
+                    </div>
+                    <div class="setting-group">
+                        <label for="new-exercise-type">운동 유형</label>
+                        <select id="new-exercise-type">
+                            <option value="strength">근력 운동</option>
+                            <option value="cardio">유산소 운동</option>
+                            <option value="flexibility">유연성 운동</option>
+                            <option value="balance">균형 운동</option>
+                        </select>
+                    </div>
+                    <div class="setting-group">
+                        <label for="new-exercise-icon">아이콘</label>
+                        <select id="new-exercise-icon">
+                            <option value="💪">💪 근력</option>
+                            <option value="🏃">🏃 유산소</option>
+                            <option value="🧘">🧘 유연성</option>
+                            <option value="⚖️">⚖️ 균형</option>
+                            <option value="🤸">🤸 전신</option>
+                            <option value="🔥">🔥 고강도</option>
+                        </select>
+                    </div>
+                    <div class="setting-row-inline">
+                        <div class="setting-group">
+                            <label for="new-exercise-sets">세트 수</label>
+                            <input type="number" id="new-exercise-sets" min="1" max="10" value="3" required>
+                        </div>
+                        <div class="setting-group">
+                            <label for="new-exercise-reps">목표 횟수</label>
+                            <input type="number" id="new-exercise-reps" min="1" max="100" value="12" required>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="new-exercise-type">운동 유형:</label>
-                    <select id="new-exercise-type">
-                        <option value="strength">근력 운동</option>
-                        <option value="cardio">유산소 운동</option>
-                        <option value="flexibility">유연성 운동</option>
-                        <option value="balance">균형 운동</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="new-exercise-icon">아이콘:</label>
-                    <select id="new-exercise-icon">
-                        <option value="💪">💪 근력</option>
-                        <option value="🏃">🏃 유산소</option>
-                        <option value="🧘">🧘 유연성</option>
-                        <option value="⚖️">⚖️ 균형</option>
-                        <option value="🤸">🤸 전신</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="new-exercise-sets">세트 수:</label>
-                    <input type="number" id="new-exercise-sets" min="1" max="10" value="3" required>
-                </div>
-                <div class="form-group">
-                    <label for="new-exercise-reps">목표 횟수:</label>
-                    <input type="number" id="new-exercise-reps" min="1" max="100" value="12" required>
-                </div>
-                <div class="modal-actions">
+                <div class="modal-footer">
                     <button type="submit" class="btn btn-primary">추가</button>
-                    <button type="button" class="btn btn-secondary" id="close-add-exercise">취소</button>
+                    <button type="button" class="btn btn-secondary" onclick="document.getElementById('add-exercise-modal').style.display='none'">취소</button>
                 </div>
             </form>
         </div>
     </div>
 
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-links">
+                    <a href="../privacy.html">개인정보보호</a>
+                    <a href="../terms.html">이용약관</a>
+                    <a href="../contact.html">문의하기</a>
+                </div>
+            </div>
+            <div class="footer-copyright">
+                <p>&copy; 2026 GON.AI TimerTools Pro. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
     <!-- Scripts -->
     <script src="../assets/js/utils.js"></script>
     <script src="../assets/js/timer-settings.js"></script>
     <script src="../assets/js/i18n.js"></script>
-    <script src="../assets/js/timer-i18n-integration.js"></script>
     <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/timer-i18n-integration.js"></script>
     <script src="../assets/js/workout.js"></script>
 </body>
 </html>

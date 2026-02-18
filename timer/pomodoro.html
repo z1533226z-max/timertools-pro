@@ -9,28 +9,45 @@
       gtag('js', new Date());
       gtag('config', 'G-BNRL6FRMMM');
     </script>
-    
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="뽀모도로 기법으로 생산성 향상 - 25분 집중 + 5분 휴식으로 최적의 작업 리듬을 만드세요">
-    <title>뽀모도로 타이머 - TimerTools Pro</title>
-    
+    <title>뽀모도로 타이머 - GON.AI | TimerTools Pro</title>
+
+    <!-- Language and SEO -->
+    <link rel="canonical" href="https://gon.ai.kr/timer/pomodoro.html">
+    <link rel="alternate" hreflang="ko" href="https://gon.ai.kr/timer/pomodoro.html">
+    <link rel="alternate" hreflang="en" href="https://gon.ai.kr/en/timer/pomodoro.html">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="뽀모도로 타이머 - GON.AI">
+    <meta property="og:description" content="25분 집중 + 5분 휴식으로 생산성을 극대화하세요">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://gon.ai.kr/timer/pomodoro.html">
+    <meta property="og:locale" content="ko_KR">
+
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="GON.AI">
+    <meta name="theme-color" content="#0c0c0e">
+
     <!-- Google AdSense -->
     <meta name="google-adsense-account" content="ca-pub-7479840445702290">
-    
+
     <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
     <link rel="stylesheet" href="../assets/css/styles.css">
-    <link rel="stylesheet" href="../assets/css/timer.css">
     <link rel="stylesheet" href="../assets/css/pomodoro.css">
-    
+
     <!-- Google AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7479840445702290"
          crossorigin="anonymous"></script>
 </head>
 <body>
     <a href="#main-content" class="skip-link">메인 콘텐츠로 건너뛰기</a>
-    
+
     <header class="header" role="banner">
         <nav class="nav-container" role="navigation">
             <div class="nav-brand">
@@ -41,19 +58,18 @@
                     </a>
                 </h1>
             </div>
-            
+
             <div class="breadcrumb">
-                <a href="../index.html" data-i18n="nav.home">홈</a> 
-                <span class="separator">›</span> 
+                <a href="../index.html" data-i18n="nav.home">홈</a>
+                <span class="separator">›</span>
                 <span aria-current="page" data-i18n="nav.pomodoro-timer">뽀모도로 타이머</span>
-                <a href="https://lotto.gon.ai.kr" target="_blank" class="lotto-link" style="margin-left: 1rem;">🎲 로또AI</a>
-                <select class="language-select" aria-label="언어 선택" style="margin-left: 1rem;">
+                <a href="https://lotto.gon.ai.kr" target="_blank" class="lotto-link" style="margin-left: auto;">🎲 로또AI</a>
+                <select class="language-select" aria-label="언어 선택" style="margin-left: var(--space-3);">
                     <option value="ko">한국어</option>
                     <option value="en">English</option>
                 </select>
             </div>
         </nav>
-        
     </header>
 
     <main id="main-content" class="pomodoro-main" role="main">
@@ -68,7 +84,7 @@
                             <span class="session-count" id="session-count">(1/4)</span>
                         </div>
                     </div>
-                    
+
                     <div class="pomodoro-display" role="timer" aria-live="polite" aria-atomic="true">
                         <div class="pomodoro-circle">
                             <svg class="pomodoro-svg" viewBox="0 0 200 200" aria-hidden="true">
@@ -79,7 +95,7 @@
                             <div class="pomodoro-status" id="pomodoro-status">준비</div>
                         </div>
                     </div>
-                    
+
                     <div class="tomato-progress" aria-label="오늘의 뽀모도로 진행 상황">
                         <div class="tomato-icons" id="tomato-icons">
                             <span class="tomato completed" aria-label="완료된 뽀모도로">🍅</span>
@@ -96,7 +112,7 @@
                             <span id="completed-count">완료: 3</span>
                         </div>
                     </div>
-                    
+
                     <div class="pomodoro-controls">
                         <button id="pomodoro-start" class="btn btn-primary pomodoro-btn" aria-describedby="start-help">
                             <span class="btn-icon">▶️</span>
@@ -114,7 +130,7 @@
                             <span class="btn-icon">🔄</span>
                             <span class="btn-text">리셋</span>
                         </button>
-                        
+
                         <div class="control-help" role="region" aria-label="버튼 도움말">
                             <div id="start-help" class="sr-only">현재 세션을 시작합니다</div>
                             <div id="pause-help" class="sr-only">타이머를 일시정지합니다</div>
@@ -123,10 +139,9 @@
                         </div>
                     </div>
                 </section>
-                
+
                 <!-- Sidebar -->
                 <aside class="pomodoro-sidebar">
-                    
                     <!-- Today's Statistics -->
                     <div class="stats-widget">
                         <h3>오늘 통계</h3>
@@ -161,7 +176,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <!-- Quick Settings -->
                     <div class="quick-settings">
                         <h3>빠른 설정</h3>
@@ -211,7 +226,7 @@
                 </aside>
             </div>
         </div>
-        
+
         <!-- Settings Panel -->
         <section class="pomodoro-settings-panel" aria-labelledby="pomodoro-settings-title">
             <div class="container">
@@ -220,7 +235,7 @@
                     <span id="pomodoro-settings-title">설정</span>
                     <span class="toggle-icon" aria-hidden="true">▼</span>
                 </button>
-                
+
                 <div id="pomodoro-settings-content" class="settings-content" hidden>
                     <div class="settings-header">
                         <button class="settings-close" aria-label="설정 닫기" title="설정 닫기">
@@ -243,7 +258,7 @@
                                 <span class="volume-value">70%</span>
                             </div>
                         </div>
-                        
+
                         <div class="setting-group">
                             <h4>화면 설정</h4>
                             <div class="setting-item">
@@ -254,66 +269,54 @@
                 </div>
             </div>
         </section>
-        
-        <!-- Native Ad -->
-        
+
         <!-- Guide Section -->
         <section class="guide-section" aria-labelledby="pomodoro-guide-title">
             <div class="container">
                 <h2 id="pomodoro-guide-title">🍅 뽀모도로 기법이란?</h2>
-                
+
                 <div class="guide-content">
                     <div class="guide-intro">
                         <p>이탈리아어로 토마토를 뜻하는 뽀모도로는 <strong>25분 집중 + 5분 휴식</strong>을 반복하는 시간 관리 기법입니다. 1980년대 이탈리아의 프란체스코 치릴로가 개발한 이 기법은 전 세계 수백만 명이 사용하는 검증된 생산성 향상 방법입니다.</p>
                     </div>
-                    
+
                     <div class="guide-steps">
                         <h3>📋 뽀모도로 기법 5단계</h3>
                         <ol class="pomodoro-steps">
-                            <li>
-                                <strong>작업 선택:</strong> 집중할 작업을 하나 정하고 목록에 적어둡니다.
-                            </li>
-                            <li>
-                                <strong>25분 집중:</strong> 타이머를 25분으로 설정하고 선택한 작업에만 몰두합니다.
-                            </li>
-                            <li>
-                                <strong>5분 휴식:</strong> 타이머가 울리면 5분간 휴식을 취합니다. 스트레칭, 물 마시기 등을 권장합니다.
-                            </li>
-                            <li>
-                                <strong>반복 진행:</strong> 2-3단계를 반복합니다. 이것이 하나의 뽀모도로입니다.
-                            </li>
-                            <li>
-                                <strong>긴 휴식:</strong> 4번의 뽀모도로를 완료한 후 15-30분의 긴 휴식을 취합니다.
-                            </li>
+                            <li><strong>작업 선택:</strong> 집중할 작업을 하나 정하고 목록에 적어둡니다.</li>
+                            <li><strong>25분 집중:</strong> 타이머를 25분으로 설정하고 선택한 작업에만 몰두합니다.</li>
+                            <li><strong>5분 휴식:</strong> 타이머가 울리면 5분간 휴식을 취합니다. 스트레칭, 물 마시기 등을 권장합니다.</li>
+                            <li><strong>반복 진행:</strong> 2-3단계를 반복합니다. 이것이 하나의 뽀모도로입니다.</li>
+                            <li><strong>긴 휴식:</strong> 4번의 뽀모도로를 완료한 후 15-30분의 긴 휴식을 취합니다.</li>
                         </ol>
                     </div>
-                    
+
                     <div class="guide-benefits">
                         <h3>📊 뽀모도로 기법의 효과</h3>
                         <div class="benefits-grid">
                             <div class="benefit-item">
                                 <div class="benefit-icon">🎯</div>
                                 <h4>집중력 향상</h4>
-                                <p>평균 73% 집중력 증가<br>한 번에 하나의 작업에만 몰두</p>
+                                <p>한 번에 하나의 작업에만 몰두하여 집중력 향상</p>
                             </div>
                             <div class="benefit-item">
                                 <div class="benefit-icon">⚡</div>
                                 <h4>작업 효율성</h4>
-                                <p>시간 압박감으로 효율성 증대<br>미루는 습관 개선</p>
+                                <p>시간 압박감으로 효율성 증대, 미루는 습관 개선</p>
                             </div>
                             <div class="benefit-item">
                                 <div class="benefit-icon">😌</div>
                                 <h4>스트레스 감소</h4>
-                                <p>정기적인 휴식으로 스트레스 완화<br>정신적 피로도 감소</p>
+                                <p>정기적인 휴식으로 스트레스 완화</p>
                             </div>
                             <div class="benefit-item">
                                 <div class="benefit-icon">🔄</div>
                                 <h4>번아웃 방지</h4>
-                                <p>강제 휴식으로 과로 방지<br>지속 가능한 작업 리듬</p>
+                                <p>강제 휴식으로 과로 방지, 지속 가능한 작업 리듬</p>
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="guide-tips">
                         <h3>💡 뽀모도로 성공 팁</h3>
                         <ul class="tips-list">
@@ -329,9 +332,8 @@
             </div>
         </section>
     </main>
-    
+
     <footer class="footer" role="contentinfo">
-        
         <div class="container">
             <div class="footer-content">
                 <div class="footer-links">
@@ -341,22 +343,22 @@
                 </div>
             </div>
             <div class="footer-copyright">
-                <p>&copy; 2024 TimerTools Pro. All rights reserved.</p>
+                <p>&copy; 2026 GON.AI. All rights reserved.</p>
             </div>
         </div>
     </footer>
-    
+
     <!-- Audio elements -->
     <audio id="work-complete-audio">
         <source src="../assets/audio/work-complete.mp3" type="audio/mpeg">
         <source src="../assets/audio/work-complete.ogg" type="audio/ogg">
     </audio>
-    
+
     <audio id="break-complete-audio">
         <source src="../assets/audio/break-complete.mp3" type="audio/mpeg">
         <source src="../assets/audio/break-complete.ogg" type="audio/ogg">
     </audio>
-    
+
     <script src="../assets/js/utils.js"></script>
     <script src="../assets/js/timer-settings.js"></script>
     <script src="../assets/js/i18n.js"></script>

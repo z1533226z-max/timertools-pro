@@ -9,334 +9,283 @@
       gtag('js', new Date());
       gtag('config', 'G-BNRL6FRMMM');
     </script>
-    
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="단계별 요리 프로세스를 관리하는 스마트 요리 타이머 - 온도 알림, 다중 요리 관리, 레시피 연동">
-    <title>요리 타이머 - TimerTools Pro</title>
-    
+    <meta name="description" content="요리 타이머 - 파스타, 스테이크, 김치찌개 등 레시피별 단계별 타이머. 정확한 조리 시간 관리를 위한 무료 온라인 요리 타이머">
+    <meta name="keywords" content="요리 타이머, 쿠킹 타이머, 레시피 타이머, 파스타 타이머, 스테이크 타이머, 김치찌개, 조리 시간, cooking timer">
+    <title>요리 타이머 - 레시피별 단계별 조리 타이머 | TimerTools Pro</title>
+
+    <!-- Language and SEO -->
+    <link rel="canonical" href="https://gon.ai.kr/timer/cooking.html">
+    <link rel="alternate" hreflang="ko" href="https://gon.ai.kr/timer/cooking.html">
+    <link rel="alternate" hreflang="en" href="https://gon.ai.kr/en/timer/cooking.html">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="요리 타이머 - 레시피별 단계별 조리 타이머">
+    <meta property="og:description" content="파스타, 스테이크, 김치찌개 등 레시피별 단계별 타이머로 완벽한 요리를 만드세요">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://gon.ai.kr/timer/cooking.html">
+    <meta property="og:image" content="https://gon.ai.kr/assets/images/cooking-timer-og.jpg">
+    <meta property="og:locale" content="ko_KR">
+
+    <!-- Additional SEO -->
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="TimerTools Pro">
+
     <!-- Google AdSense -->
     <meta name="google-adsense-account" content="ca-pub-7479840445702290">
-    
-    <!-- Favicon -->
+
     <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg">
-    
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Stylesheets -->
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/styles.css">
-    <link rel="stylesheet" href="../assets/css/cooking.css">
-    
-    <!-- Google AdSense -->
+    <link rel="stylesheet" href="../assets/css/cooking-timer.css">
+
+    <!-- Google AdSense Script -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7479840445702290"
+         crossorigin="anonymous"></script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7479840445702290"
          crossorigin="anonymous"></script>
 </head>
 <body>
+    <!-- Skip Link -->
+    <a href="#main-content" class="skip-link">메인 콘텐츠로 건너뛰기</a>
+
     <!-- Header -->
     <header class="header" role="banner">
-        <nav class="nav-container" role="navigation" aria-label="주 네비게이션">
+        <nav class="nav-container">
             <div class="nav-brand">
                 <h1 class="logo">
-                    <a href="../index.html">TimerTools Pro</a>
+                    <a href="../index.html">
+                        <span class="logo-main">GON.AI</span>
+                        <span class="logo-sub">Timer + Lotto</span>
+                    </a>
                 </h1>
             </div>
-            
-            <ul class="nav-menu" id="nav-menu">
-                <li><a href="../index.html" data-i18n="nav.home">홈</a></li>
-                <li class="nav-dropdown">
-                    <button class="nav-dropdown-btn" aria-expanded="false" aria-haspopup="true" data-i18n="nav.timer_tools">도구</button>
-                    <ul class="nav-dropdown-menu">
-                        <li><a href="basic.html" data-i18n="nav.basic_timer">기본 타이머</a></li>
-                        <li><a href="pomodoro.html" data-i18n="nav.pomodoro_timer">뽀모도로 타이머</a></li>
-                        <li><a href="multi.html" data-i18n="nav.multi_timer">멀티 타이머</a></li>
-                        <li><a href="cooking.html" aria-current="page" data-i18n="nav.cooking_timer">요리 타이머</a></li>
-                        <li><a href="workout.html" data-i18n="nav.workout_timer">운동 타이머</a></li>
-                    </ul>
-                </li>
-                <li><a href="../blog/" data-i18n="nav.blog">블로그</a></li>
-                <li class="nav-settings">
-                    <button class="theme-toggle" aria-label="다크 모드 토글" title="테마 전환">
-                        <span class="theme-icon">🌙</span>
-                    </button>
-                </li>
-            </ul>
-            
-            <button class="nav-toggle" aria-label="네비게이션 메뉴 토글" aria-expanded="false">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
+
+            <div class="breadcrumb">
+                <a href="../index.html" data-i18n="nav.home">홈</a>
+                <span class="separator">&rsaquo;</span>
+                <span aria-current="page" data-i18n="nav.cooking-timer">요리 타이머</span>
+                <a href="https://lotto.gon.ai.kr" target="_blank" class="lotto-link" style="margin-left: 1rem;">🎲 로또AI</a>
+                <select class="language-select" aria-label="언어 선택" style="margin-left: 1rem;">
+                    <option value="ko">한국어</option>
+                    <option value="en">English</option>
+                </select>
+            </div>
         </nav>
     </header>
 
     <!-- Main Content -->
-    <main id="main-content" class="main-content">
-        <!-- Breadcrumb -->
-        <nav class="breadcrumb" aria-label="현재 위치">
-            <ol>
-                <li><a href="../index.html" data-i18n="breadcrumb.home">홈</a></li>
-                <li aria-current="page" data-i18n="breadcrumb.cooking_timer">요리 타이머</li>
-            </ol>
-            <div class="breadcrumb-actions">
-                <select class="language-select" id="language-select" aria-label="언어 선택">
-                    <option value="ko">한국어</option>
-                    <option value="en">English</option>
-                    <option value="ja">日本語</option>
-                    <option value="zh">中文</option>
-                </select>
-                <button class="favorites-btn" aria-label="즐겨찾기에 추가" title="즐겨찾기" data-i18n-aria-label="aria.add_to_favorites" data-i18n-title="ui.favorites">
-                    <span>⭐</span>
-                </button>
-            </div>
-        </nav>
+    <main id="main-content" class="main-container cooking-page" role="main">
 
-        <div class="cooking-container">
-            <!-- Recipe Selection Screen -->
-            <section class="recipe-selection" id="recipe-selection">
-                <h2 class="section-title">📋 레시피 선택</h2>
-                
-                <div class="recipe-categories">
-                    <h3>인기 레시피</h3>
-                    <div class="recipe-grid">
-                        <button class="recipe-card" data-recipe="pasta">
-                            <div class="recipe-icon">🍝</div>
-                            <div class="recipe-name">파스타</div>
-                            <div class="recipe-time">20분</div>
-                        </button>
-                        <button class="recipe-card" data-recipe="steak">
-                            <div class="recipe-icon">🍖</div>
-                            <div class="recipe-name">스테이크</div>
-                            <div class="recipe-time">15분</div>
-                        </button>
-                        <button class="recipe-card" data-recipe="kimchi-stew">
-                            <div class="recipe-icon">🍲</div>
-                            <div class="recipe-name">김치찌개</div>
-                            <div class="recipe-time">30분</div>
-                        </button>
-                        <button class="recipe-card" data-recipe="cake">
-                            <div class="recipe-icon">🍰</div>
-                            <div class="recipe-name">케이크</div>
-                            <div class="recipe-time">60분</div>
-                        </button>
-                        <button class="recipe-card" data-recipe="salad">
-                            <div class="recipe-icon">🥗</div>
-                            <div class="recipe-name">샐러드</div>
-                            <div class="recipe-time">10분</div>
-                        </button>
-                    </div>
+        <!-- ============================================ -->
+        <!-- Screen 1: Recipe Selection                   -->
+        <!-- ============================================ -->
+        <div id="recipe-selection" class="recipe-selection">
+            <div class="cooking-container">
+                <div class="cooking-hero">
+                    <h2 class="cooking-title">요리 타이머</h2>
+                    <p class="cooking-subtitle">레시피를 선택하고 단계별로 완벽하게 요리하세요</p>
                 </div>
 
-                <div class="custom-recipe">
-                    <h3>커스텀 레시피</h3>
-                    <form class="custom-form" id="custom-recipe-form">
-                        <div class="form-group">
-                            <label for="recipe-name">요리명:</label>
-                            <input type="text" id="recipe-name" placeholder="예: 불고기" required>
+                <!-- Recipe Cards Grid -->
+                <section class="recipe-grid" aria-label="레시피 목록">
+                    <div class="recipe-card" data-recipe="pasta" tabindex="0" role="button" aria-label="파스타 - 20분, 4단계">
+                        <div class="recipe-card-icon">🍝</div>
+                        <h3 class="recipe-card-name">파스타</h3>
+                        <div class="recipe-card-meta">
+                            <span class="recipe-card-time">20분</span>
+                            <span class="recipe-card-steps">4단계</span>
                         </div>
-                        <div class="form-group">
-                            <label for="total-time">총 시간:</label>
-                            <input type="number" id="total-time" min="1" max="300" value="25" required>
-                            <span>분</span>
+                    </div>
+
+                    <div class="recipe-card" data-recipe="steak" tabindex="0" role="button" aria-label="스테이크 - 15분, 5단계">
+                        <div class="recipe-card-icon">🍖</div>
+                        <h3 class="recipe-card-name">스테이크</h3>
+                        <div class="recipe-card-meta">
+                            <span class="recipe-card-time">15분</span>
+                            <span class="recipe-card-steps">5단계</span>
                         </div>
-                        <div class="form-group">
-                            <label for="step-count">단계 수:</label>
-                            <input type="number" id="step-count" min="1" max="10" value="4" required>
-                            <span>개</span>
+                    </div>
+
+                    <div class="recipe-card" data-recipe="kimchi-stew" tabindex="0" role="button" aria-label="김치찌개 - 30분, 5단계">
+                        <div class="recipe-card-icon">🍲</div>
+                        <h3 class="recipe-card-name">김치찌개</h3>
+                        <div class="recipe-card-meta">
+                            <span class="recipe-card-time">30분</span>
+                            <span class="recipe-card-steps">5단계</span>
                         </div>
-                        <button type="submit" class="btn btn-primary">다음: 단계 설정하기 →</button>
+                    </div>
+
+                    <div class="recipe-card" data-recipe="cake" tabindex="0" role="button" aria-label="케이크 - 60분, 5단계">
+                        <div class="recipe-card-icon">🍰</div>
+                        <h3 class="recipe-card-name">케이크</h3>
+                        <div class="recipe-card-meta">
+                            <span class="recipe-card-time">60분</span>
+                            <span class="recipe-card-steps">5단계</span>
+                        </div>
+                    </div>
+
+                    <div class="recipe-card" data-recipe="salad" tabindex="0" role="button" aria-label="샐러드 - 10분, 3단계">
+                        <div class="recipe-card-icon">🥗</div>
+                        <h3 class="recipe-card-name">샐러드</h3>
+                        <div class="recipe-card-meta">
+                            <span class="recipe-card-time">10분</span>
+                            <span class="recipe-card-steps">3단계</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Custom Recipe Form -->
+                <section class="custom-recipe-section" aria-labelledby="custom-recipe-title">
+                    <h3 id="custom-recipe-title" class="custom-section-title">나만의 레시피</h3>
+                    <form id="custom-recipe-form" class="custom-recipe-form">
+                        <div class="custom-form-row">
+                            <div class="custom-form-group">
+                                <label for="recipe-name">레시피 이름</label>
+                                <input type="text" id="recipe-name" placeholder="예: 볶음밥" required>
+                            </div>
+                            <div class="custom-form-group">
+                                <label for="total-time">총 시간 (분)</label>
+                                <input type="number" id="total-time" min="1" max="180" placeholder="15" required>
+                            </div>
+                            <div class="custom-form-group">
+                                <label for="step-count">단계 수</label>
+                                <input type="number" id="step-count" min="1" max="10" placeholder="3" required>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary custom-submit-btn">
+                            레시피 만들기
+                        </button>
                     </form>
-                </div>
-            </section>
-
-            <!-- Step Configuration Screen -->
-            <section class="step-configuration" id="step-configuration" style="display: none;">
-                <h2 class="section-title">🍖 <span id="config-recipe-name">스테이크</span> - 단계 설정</h2>
-                
-                <div class="steps-config-container" id="steps-config-container">
-                    <!-- Steps configuration will be dynamically generated -->
-                </div>
-                
-                <div class="config-summary">
-                    <p>총 예상시간: <span id="config-total-time">15분</span></p>
-                </div>
-                
-                <div class="config-actions">
-                    <button class="btn btn-success btn-large" id="start-cooking">시작하기</button>
-                    <button class="btn btn-secondary" id="save-recipe">저장하기</button>
-                    <button class="btn btn-outline" id="back-to-selection">← 뒤로</button>
-                </div>
-            </section>
-
-            <!-- Main Cooking Timer Screen -->
-            <section class="cooking-timer-main" id="cooking-timer-main" style="display: none;">
-                <div class="desktop-layout">
-                    <!-- Left Column: Main Timer -->
-                    <div class="main-timer-section">
-                        <div class="timer-card">
-                            <h2>🍖 요리 메인 타이머</h2>
-                            <div class="current-step-info">
-                                <span class="step-indicator" id="step-indicator">현재 단계: 볶기 (2/5)</span>
-                            </div>
-                            
-                            <div class="timer-display">
-                                <div class="time-circle">
-                                    <div class="time-remaining" id="main-time">03:45</div>
-                                    <div class="step-status" id="step-status">볶는 중</div>
-                                </div>
-                            </div>
-                            
-                            <div class="progress-container">
-                                <div class="progress-bar">
-                                    <div class="progress-fill" id="main-progress" style="width: 75%"></div>
-                                </div>
-                                <span class="progress-text">🔥 75%</span>
-                            </div>
-                            
-                            <div class="timer-controls">
-                                <button class="btn btn-warning" id="pause-btn">⏸️ 일시정지</button>
-                                <button class="btn btn-success" id="next-step-btn">⏭️ 다음단계</button>
-                                <button class="btn btn-info" id="notification-btn">🔔</button>
-                                <button class="btn btn-secondary" id="settings-btn">⚙️</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Right Column: Side Panel -->
-                    <div class="side-panel">
-                        <!-- Ad Space -->
-                        <div class="ad-space ad-rectangle" aria-label="광고">
-                            <div class="ad-placeholder">300x250 광고 영역</div>
-                        </div>
-
-                        <!-- Recipe Presets -->
-                        <div class="recipe-presets">
-                            <h3>요리 프리셋</h3>
-                            <div class="preset-list">
-                                <button class="preset-btn" data-preset="pasta">🍝 파스타</button>
-                                <button class="preset-btn" data-preset="steak">🍖 스테이크</button>
-                                <button class="preset-btn" data-preset="stew">🍲 찌개</button>
-                                <button class="preset-btn" data-preset="baking">🍰 베이킹</button>
-                                <button class="preset-btn" data-preset="salad">🥗 샐러드</button>
-                                <button class="preset-btn preset-custom" id="add-custom">+ 커스텀</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Recipe Steps Progress -->
-                <div class="steps-progress">
-                    <h3>요리 단계 진행상황</h3>
-                    <div class="steps-list" id="steps-list">
-                        <!-- Steps will be dynamically loaded -->
-                    </div>
-                    <div class="time-summary">
-                        <span>총 예상시간: <span id="total-time-display">20:45</span></span>
-                        <span>남은시간: <span id="remaining-time-display">17:45</span></span>
-                    </div>
-                </div>
-
-                <!-- Multiple Cooking Management -->
-                <div class="multi-cooking">
-                    <h3>동시 요리 관리</h3>
-                    <div class="cooking-list" id="cooking-list">
-                        <!-- Multiple cooking items will be added here -->
-                    </div>
-                    <div class="multi-cooking-controls">
-                        <button class="btn btn-primary" id="add-cooking">+ 요리 추가</button>
-                        <button class="btn btn-success" id="start-all">전체 시작</button>
-                        <button class="btn btn-warning" id="stop-all">전체 정지</button>
-                    </div>
-                </div>
-
-                <!-- Cooking Tips & Guide -->
-                <div class="cooking-tips">
-                    <h3>요리 팁 & 가이드</h3>
-                    <div class="tip-content">
-                        <div class="current-tip">
-                            <h4>💡 현재 단계 팁</h4>
-                            <p id="step-tip">볶을 때는 중불에서 재료가 눌어붙지 않도록 자주 저어주세요. 양파가 투명해질 때까지 볶는 것이 포인트입니다!</p>
-                        </div>
-                        <div class="cooking-guide">
-                            <span class="guide-item">🌡️ 온도 가이드: <span id="temp-guide">중불 (160-180°C)</span></span>
-                            <span class="guide-item">⏰ 적정 시간: <span id="time-guide">3-5분</span></span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Native Ad Space -->
-                <div class="ad-space ad-native" aria-label="광고">
-                    <div class="ad-placeholder">336x280 네이티브 광고</div>
-                </div>
-            </section>
+                </section>
+            </div>
         </div>
+
+        <!-- ============================================ -->
+        <!-- Screen 2: Step Configuration                 -->
+        <!-- ============================================ -->
+        <div id="step-configuration" class="step-configuration" style="display: none;">
+            <div class="cooking-container">
+                <div class="config-header">
+                    <button id="back-to-selection" class="btn btn-outline config-back-btn" aria-label="레시피 선택으로 돌아가기">
+                        ← 돌아가기
+                    </button>
+                    <div class="config-title-block">
+                        <h2 id="config-recipe-name" class="config-recipe-name">레시피 이름</h2>
+                        <span class="config-total-badge">총 시간: <strong id="config-total-time">0분</strong></span>
+                    </div>
+                </div>
+
+                <div id="steps-config-container" class="steps-config-container">
+                    <!-- Step config items populated by JS -->
+                </div>
+
+                <div class="config-actions">
+                    <button id="start-cooking" class="btn btn-primary btn-large start-cooking-btn">
+                        <span class="btn-icon">🔥</span>
+                        <span class="btn-text">요리 시작</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- Screen 3: Cooking Timer                      -->
+        <!-- ============================================ -->
+        <div id="cooking-timer-main" class="cooking-timer-main" style="display: none;">
+            <div class="timer-layout">
+                <!-- Main Timer Area -->
+                <div class="timer-main-panel">
+                    <div class="timer-display-card">
+                        <!-- Step Indicator -->
+                        <div id="step-indicator" class="timer-step-indicator">현재 단계: 준비 중</div>
+
+                        <!-- Main Countdown -->
+                        <div class="timer-countdown-wrapper">
+                            <div id="main-time" class="timer-countdown" role="timer" aria-live="polite">00:00</div>
+                            <div id="step-status" class="timer-step-name">대기 중</div>
+                        </div>
+
+                        <!-- Progress Bar -->
+                        <div class="timer-progress-wrapper">
+                            <div class="timer-progress-track">
+                                <div id="main-progress" class="timer-progress-fill"></div>
+                            </div>
+                        </div>
+
+                        <!-- Step Tip -->
+                        <div id="step-tip" class="timer-step-tip">요리를 시작하면 단계별 팁이 여기에 표시됩니다</div>
+
+                        <!-- Time Summary -->
+                        <div class="timer-time-summary">
+                            <div class="timer-time-block">
+                                <span class="timer-time-label">전체 시간</span>
+                                <span id="total-time-display" class="timer-time-value">00:00</span>
+                            </div>
+                            <div class="timer-time-divider"></div>
+                            <div class="timer-time-block">
+                                <span class="timer-time-label">남은 시간</span>
+                                <span id="remaining-time-display" class="timer-time-value timer-time-remaining">00:00</span>
+                            </div>
+                        </div>
+
+                        <!-- Controls -->
+                        <div class="timer-controls-row">
+                            <button id="pause-btn" class="btn btn-primary timer-ctrl-btn" aria-label="일시정지">
+                                ⏸️ 일시정지
+                            </button>
+                            <button id="next-step-btn" class="btn btn-secondary timer-ctrl-btn" aria-label="다음 단계">
+                                ⏭️ 다음 단계
+                            </button>
+                            <button id="notification-btn" class="btn btn-outline timer-ctrl-btn-sm" aria-label="알림 설정">
+                                🔔
+                            </button>
+                            <button id="settings-btn" class="btn btn-outline timer-ctrl-btn-sm" aria-label="설정">
+                                ⚙️
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Steps Sidebar -->
+                <aside class="timer-steps-sidebar" aria-label="조리 단계 목록">
+                    <h3 class="timer-sidebar-title">조리 단계</h3>
+                    <div id="steps-list" class="timer-steps-list">
+                        <!-- Step items populated by JS -->
+                    </div>
+                </aside>
+            </div>
+        </div>
+
     </main>
 
-    <!-- Notification Modal -->
-    <div class="modal" id="notification-modal" style="display: none;">
-        <div class="modal-content">
-            <h3>🔔 알림 설정</h3>
-            <div class="notification-options">
-                <label>
-                    <input type="checkbox" id="sound-notification" checked>
-                    소리 알림
-                </label>
-                <label>
-                    <input type="checkbox" id="vibration-notification" checked>
-                    진동 알림 (모바일)
-                </label>
-                <label>
-                    <input type="checkbox" id="visual-notification" checked>
-                    시각적 알림
-                </label>
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-links">
+                    <a href="../privacy.html">개인정보보호</a>
+                    <a href="../terms.html">이용약관</a>
+                    <a href="../contact.html">문의하기</a>
+                </div>
             </div>
-            <div class="modal-actions">
-                <button class="btn btn-primary" id="save-notifications">저장</button>
-                <button class="btn btn-secondary" id="close-notifications">닫기</button>
+            <div class="footer-copyright">
+                <p>&copy; 2026 TimerTools Pro. All rights reserved.</p>
             </div>
         </div>
-    </div>
+    </footer>
 
-    <!-- Multi-cooking Add Modal -->
-    <div class="modal" id="add-cooking-modal" style="display: none;">
-        <div class="modal-content">
-            <h3>+ 요리 추가</h3>
-            <form id="add-cooking-form">
-                <div class="form-group">
-                    <label for="new-cooking-name">요리명:</label>
-                    <input type="text" id="new-cooking-name" placeholder="예: 밥솥" required>
-                </div>
-                <div class="form-group">
-                    <label for="new-cooking-time">시간 (분):</label>
-                    <input type="number" id="new-cooking-time" min="1" max="180" value="15" required>
-                </div>
-                <div class="form-group">
-                    <label for="new-cooking-icon">아이콘:</label>
-                    <select id="new-cooking-icon">
-                        <option value="🍚">🍚 밥솥</option>
-                        <option value="🥬">🥬 나물</option>
-                        <option value="🥕">🥕 반찬</option>
-                        <option value="🍖">🍖 고기</option>
-                        <option value="🍲">🍲 국물</option>
-                        <option value="🥘">🥘 기타</option>
-                    </select>
-                </div>
-                <div class="modal-actions">
-                    <button type="submit" class="btn btn-primary">추가</button>
-                    <button type="button" class="btn btn-secondary" id="close-add-cooking">취소</button>
-                </div>
-            </form>
-        </div>
-    </div>
+    <!-- Live Region for Screen Reader Announcements -->
+    <div id="announcements" aria-live="polite" aria-atomic="true" class="sr-only"></div>
 
     <!-- Scripts -->
     <script src="../assets/js/utils.js"></script>
     <script src="../assets/js/timer-settings.js"></script>
     <script src="../assets/js/i18n.js"></script>
-    <script src="../assets/js/timer-i18n-integration.js"></script>
     <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/timer-i18n-integration.js"></script>
     <script src="../assets/js/cooking.js"></script>
 </body>
 </html>
