@@ -24,6 +24,40 @@
     <!-- Google AdSense Script -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7479840445702290"
          crossorigin="anonymous"></script>
+
+    <!-- FAQPage Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "타이머 소리가 들리지 않아요",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "브라우저 설정에서 사이트 알림을 허용해주세요. 또한 기기의 볼륨을 확인해주세요."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "오프라인에서도 사용할 수 있나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "네, PWA(Progressive Web App)로 제작되어 오프라인에서도 기본 기능을 사용할 수 있습니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "데이터가 저장되나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "모든 데이터는 브라우저 로컬에 저장되며, 서버로 전송되지 않습니다."
+          }
+        }
+      ]
+    }
+    </script>
 </head>
 <body>
     <header class="header">
