@@ -187,6 +187,7 @@
                         <li><a href="timer/workout.html" data-i18n="nav.workout-timer">운동 타이머</a></li>
                     </ul>
                 </li>
+                <li><a href="blog/" data-i18n="nav.blog">📝 블로그</a></li>
                 <li><a href="https://lotto.gon.ai.kr" target="_blank" data-i18n="nav.lotto" class="nav-lotto">🎲 로또AI</a></li>
                 <li class="nav-settings">
                     <button class="theme-toggle" aria-label="다크 모드 토글" title="테마 전환">
@@ -378,6 +379,47 @@
                 </div>
             </div>
         </section>
+        <!-- Blog Highlights Section -->
+        <section class="guide-section" aria-labelledby="blog-highlights-title">
+            <div class="container">
+                <h2 id="blog-highlights-title" class="section-title">인기 블로그 글</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; max-width: 960px; margin: 0 auto;">
+                    <a href="blog/pomodoro-25min-science.html" style="display:block;padding:20px;background:var(--bg-elevated,#1a1a1e);border-radius:12px;border:1px solid var(--border,#333);text-decoration:none;transition:transform 0.2s;">
+                        <span style="font-size:1.5rem;">🍅</span>
+                        <h3 style="color:var(--text-primary,#fff);font-size:1.1rem;margin:8px 0 6px;">뽀모도로 25분의 과학</h3>
+                        <p style="color:var(--text-secondary,#aaa);font-size:0.9rem;line-height:1.5;margin:0;">왜 25분이 최적의 집중 시간인지, 뇌과학으로 풀어봅니다.</p>
+                    </a>
+                    <a href="blog/egg-boiling-guide.html" style="display:block;padding:20px;background:var(--bg-elevated,#1a1a1e);border-radius:12px;border:1px solid var(--border,#333);text-decoration:none;transition:transform 0.2s;">
+                        <span style="font-size:1.5rem;">🥚</span>
+                        <h3 style="color:var(--text-primary,#fff);font-size:1.1rem;margin:8px 0 6px;">완벽한 계란 삶기 가이드</h3>
+                        <p style="color:var(--text-secondary,#aaa);font-size:0.9rem;line-height:1.5;margin:0;">반숙부터 완숙까지, 시간별 계란 삶기 완벽 정리.</p>
+                    </a>
+                    <a href="blog/power-nap-science.html" style="display:block;padding:20px;background:var(--bg-elevated,#1a1a1e);border-radius:12px;border:1px solid var(--border,#333);text-decoration:none;transition:transform 0.2s;">
+                        <span style="font-size:1.5rem;">😴</span>
+                        <h3 style="color:var(--text-primary,#fff);font-size:1.1rem;margin:8px 0 6px;">파워냅의 과학</h3>
+                        <p style="color:var(--text-secondary,#aaa);font-size:0.9rem;line-height:1.5;margin:0;">20분 낮잠이 생산성을 34% 높이는 과학적 이유.</p>
+                    </a>
+                    <a href="blog/plank-challenge-guide.html" style="display:block;padding:20px;background:var(--bg-elevated,#1a1a1e);border-radius:12px;border:1px solid var(--border,#333);text-decoration:none;transition:transform 0.2s;">
+                        <span style="font-size:1.5rem;">💪</span>
+                        <h3 style="color:var(--text-primary,#fff);font-size:1.1rem;margin:8px 0 6px;">플랭크 챌린지 가이드</h3>
+                        <p style="color:var(--text-secondary,#aaa);font-size:0.9rem;line-height:1.5;margin:0;">30일 플랭크 챌린지로 코어 근력을 키우는 방법.</p>
+                    </a>
+                    <a href="blog/meditation-beginner-guide.html" style="display:block;padding:20px;background:var(--bg-elevated,#1a1a1e);border-radius:12px;border:1px solid var(--border,#333);text-decoration:none;transition:transform 0.2s;">
+                        <span style="font-size:1.5rem;">🧘</span>
+                        <h3 style="color:var(--text-primary,#fff);font-size:1.1rem;margin:8px 0 6px;">명상 초보자 가이드</h3>
+                        <p style="color:var(--text-secondary,#aaa);font-size:0.9rem;line-height:1.5;margin:0;">하루 5분으로 시작하는 마음챙김 명상 입문.</p>
+                    </a>
+                    <a href="blog/productivity-5-methods.html" style="display:block;padding:20px;background:var(--bg-elevated,#1a1a1e);border-radius:12px;border:1px solid var(--border,#333);text-decoration:none;transition:transform 0.2s;">
+                        <span style="font-size:1.5rem;">🚀</span>
+                        <h3 style="color:var(--text-primary,#fff);font-size:1.1rem;margin:8px 0 6px;">생산성 200% 향상 비법</h3>
+                        <p style="color:var(--text-secondary,#aaa);font-size:0.9rem;line-height:1.5;margin:0;">과학적으로 검증된 5가지 생산성 향상 방법.</p>
+                    </a>
+                </div>
+                <div style="text-align:center;margin-top:24px;">
+                    <a href="blog/" style="display:inline-block;padding:10px 24px;background:var(--primary-blue,#667eea);color:white;border-radius:8px;text-decoration:none;font-weight:600;">블로그 전체 보기 →</a>
+                </div>
+            </div>
+        </section>
     </main>
 
     <!-- Footer -->
@@ -388,6 +430,7 @@
                     <a href="privacy.html" data-i18n="footer.privacy">개인정보보호</a>
                     <a href="terms.html" data-i18n="footer.terms">이용약관</a>
                     <a href="contact.html" data-i18n="footer.contact">문의하기</a>
+                    <a href="blog/" data-i18n="footer.blog">블로그</a>
                 </div>
             </div>
 
