@@ -308,6 +308,36 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://gon.ai.kr/en/timer/egg.html</loc>
+    <lastmod>2026-04-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://gon.ai.kr/en/timer/meditation.html</loc>
+    <lastmod>2026-04-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://gon.ai.kr/en/timer/plank.html</loc>
+    <lastmod>2026-04-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://gon.ai.kr/en/timer/nap.html</loc>
+    <lastmod>2026-04-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://gon.ai.kr/en/timer/study.html</loc>
+    <lastmod>2026-04-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://gon.ai.kr/terms.html</loc>
     <lastmod>2026-04-01</lastmod>
     <changefreq>yearly</changefreq>
