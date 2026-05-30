@@ -356,6 +356,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://gon.ai.kr/en/timer/multi.html</loc>
+    <lastmod>2026-05-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://gon.ai.kr/en/timer/plank.html</loc>
     <lastmod>2026-05-19</lastmod>
     <changefreq>monthly</changefreq>
