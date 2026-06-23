@@ -75,6 +75,63 @@
       ]
     }
     </script>
+    <!-- Schema.org - FAQPage -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "요리 타이머는 어떻게 사용하나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "원하는 레시피 카드(파스타·스테이크·김치찌개·케이크·샐러드)를 누르면 단계별 시간이 자동으로 설정됩니다. '요리 시작'을 누르면 첫 단계 카운트다운이 시작되고, 한 단계가 끝나면 알림이 울리며 다음 단계로 넘어갑니다. 나만의 레시피 칸에 이름·총 시간·단계 수를 입력하면 직접 만든 요리에도 단계별 타이머를 쓸 수 있습니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "파스타는 몇 분 삶아야 하나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "건면 스파게티 기준 알덴테(심이 살짝 남는 식감)는 끓는 소금물에서 8~9분, 부드러운 식감은 10~11분입니다. 포장지에 적힌 시간보다 1분 짧게 타이머를 맞춘 뒤 면을 하나 건져 맛보는 것이 가장 정확합니다. 소스에 넣고 더 볶을 예정이라면 1분 덜 삶아 알덴테로 건지세요."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "스테이크 굽기별 시간은 어떻게 되나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "두께 2~3cm 기준, 센 불에 달군 팬에서 한 면씩 굽습니다. 레어는 한 면 1분 30초~2분, 미디엄레어는 2분 30초~3분, 미디엄은 3분 30초~4분, 웰던은 5분 이상입니다. 구운 뒤 5분 정도 레스팅(휴지)하면 육즙이 고르게 퍼져 더 촉촉합니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "라면은 몇 분 끓여야 가장 맛있나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "봉지라면은 물 550ml를 끓인 뒤 면과 스프를 넣고 4분 30초가 표준입니다. 꼬들꼬들한 면을 좋아하면 3분 30초~4분, 푹 익은 면을 좋아하면 5분으로 맞추세요. 계란을 넣을 때는 끓이기 1분 전에 넣어야 노른자가 적당히 익습니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "여러 요리를 동시에 할 때 타이머를 어떻게 관리하나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "이 요리 타이머는 한 레시피의 여러 단계를 순서대로 자동 전환해 주므로, 가장 오래 걸리는 메인 요리를 기준으로 단계를 짜면 됩니다. 서로 다른 요리를 병렬로 진행할 때는 완성 시각을 역산해 가장 늦게 끝나는 요리부터 시작하세요. 동시에 여러 개의 독립 타이머가 필요하면 멀티 타이머를 함께 사용하면 편리합니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "요리 타이머가 휴대폰 기본 알람보다 좋은 점은 무엇인가요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "휴대폰 기본 알람은 한 번에 하나의 시간만 맞출 수 있지만, 요리 타이머는 한 요리의 여러 조리 단계를 미리 입력해 두면 단계가 끝날 때마다 자동으로 다음 단계로 넘어가며 알려 줍니다. 설치가 필요 없는 무료 웹 도구라 PC·태블릿·휴대폰 어디서든 브라우저만 열면 바로 쓸 수 있고, 손에 양념이 묻은 상태에서도 화면만 보면 남은 시간을 확인할 수 있습니다."
+          }
+        }
+      ]
+    }
+    </script>
 </head>
 <body>
     <!-- Skip Link -->
@@ -334,6 +391,68 @@
                     <h3 style="color:var(--text-primary,#fff);font-size:0.95rem;margin:4px 0;">15분 타이머</h3>
                     <p style="color:var(--text-secondary,#aaa);font-size:0.8rem;margin:0;">중간 조리 시간</p>
                 </a>
+            </div>
+        </section>
+
+        <!-- 음식별 조리 시간 가이드 (콘텐츠 심화) -->
+        <section class="guide-section" aria-labelledby="cooking-guide-title" style="padding:2.5rem 0;">
+            <div style="max-width:820px;margin:0 auto;padding:0 1rem;">
+                <h2 id="cooking-guide-title" style="font-size:1.4rem;color:var(--text-primary,#fff);margin-bottom:0.75rem;text-align:center;">음식별 조리 시간 가이드</h2>
+                <p style="color:var(--text-secondary,#aaa);line-height:1.8;margin-bottom:1.5rem;text-align:center;">자주 만드는 요리의 표준 조리 시간을 정리했습니다. 아래 표를 참고해 위 요리 타이머에 시간을 맞추면 태우거나 덜 익히는 실수 없이 매번 일정한 맛을 낼 수 있습니다.</p>
+                <div style="overflow-x:auto;">
+                    <table style="width:100%;border-collapse:collapse;background:var(--bg-elevated,#1a1a1e);border:1px solid var(--border,#333);border-radius:10px;overflow:hidden;">
+                        <thead>
+                            <tr style="background:rgba(255,255,255,0.04);">
+                                <th style="padding:0.75rem;text-align:left;color:var(--text-primary,#fff);">요리</th>
+                                <th style="padding:0.75rem;text-align:left;color:var(--text-primary,#fff);">표준 시간</th>
+                                <th style="padding:0.75rem;text-align:left;color:var(--text-primary,#fff);">메모</th>
+                            </tr>
+                        </thead>
+                        <tbody style="color:var(--text-secondary,#aaa);">
+                            <tr style="border-top:1px solid var(--border,#333);"><td style="padding:0.75rem;"><strong style="color:var(--text-primary,#fff);">파스타(알덴테)</strong></td><td style="padding:0.75rem;">8~9분</td><td style="padding:0.75rem;">소스에 볶을 땐 1분 덜</td></tr>
+                            <tr style="border-top:1px solid var(--border,#333);"><td style="padding:0.75rem;"><strong style="color:var(--text-primary,#fff);">봉지라면</strong></td><td style="padding:0.75rem;">4분 30초</td><td style="padding:0.75rem;">꼬들면은 3분 30초</td></tr>
+                            <tr style="border-top:1px solid var(--border,#333);"><td style="padding:0.75rem;"><strong style="color:var(--text-primary,#fff);">반숙 계란</strong></td><td style="padding:0.75rem;">7분</td><td style="padding:0.75rem;">끓는 물 기준</td></tr>
+                            <tr style="border-top:1px solid var(--border,#333);"><td style="padding:0.75rem;"><strong style="color:var(--text-primary,#fff);">완숙 계란</strong></td><td style="padding:0.75rem;">12분</td><td style="padding:0.75rem;">15분 넘기면 변색</td></tr>
+                            <tr style="border-top:1px solid var(--border,#333);"><td style="padding:0.75rem;"><strong style="color:var(--text-primary,#fff);">스테이크(미디엄)</strong></td><td style="padding:0.75rem;">한 면 3분 30초</td><td style="padding:0.75rem;">구운 뒤 5분 레스팅</td></tr>
+                            <tr style="border-top:1px solid var(--border,#333);"><td style="padding:0.75rem;"><strong style="color:var(--text-primary,#fff);">김치찌개</strong></td><td style="padding:0.75rem;">20~30분</td><td style="padding:0.75rem;">중불 끓이기</td></tr>
+                            <tr style="border-top:1px solid var(--border,#333);"><td style="padding:0.75rem;"><strong style="color:var(--text-primary,#fff);">냄비밥</strong></td><td style="padding:0.75rem;">15~20분</td><td style="padding:0.75rem;">뜸 10분 포함</td></tr>
+                            <tr style="border-top:1px solid var(--border,#333);"><td style="padding:0.75rem;"><strong style="color:var(--text-primary,#fff);">시금치 데치기</strong></td><td style="padding:0.75rem;">30초~1분</td><td style="padding:0.75rem;">찬물에 헹구기</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- 자주 묻는 질문 (가시 FAQ, 구조화 데이터와 일치) -->
+        <section class="guide-section faq-section" aria-labelledby="faq-title" style="padding:2.5rem 0;">
+            <div style="max-width:820px;margin:0 auto;padding:0 1rem;">
+                <h2 id="faq-title" style="font-size:1.4rem;color:var(--text-primary,#fff);margin-bottom:1.25rem;text-align:center;">❓ 요리 타이머 자주 묻는 질문</h2>
+                <div class="faq-list">
+                    <div class="faq-item" style="margin-bottom:1.25rem;">
+                        <h3 style="color:var(--text-primary,#fff);font-size:1rem;margin-bottom:0.4rem;">요리 타이머는 어떻게 사용하나요?</h3>
+                        <p style="color:var(--text-secondary,#aaa);line-height:1.8;margin:0;">원하는 레시피 카드(파스타·스테이크·김치찌개·케이크·샐러드)를 누르면 단계별 시간이 자동으로 설정됩니다. '요리 시작'을 누르면 첫 단계 카운트다운이 시작되고, 한 단계가 끝나면 알림이 울리며 다음 단계로 넘어갑니다. 나만의 레시피 칸에 이름·총 시간·단계 수를 입력하면 직접 만든 요리에도 단계별 타이머를 쓸 수 있습니다.</p>
+                    </div>
+                    <div class="faq-item" style="margin-bottom:1.25rem;">
+                        <h3 style="color:var(--text-primary,#fff);font-size:1rem;margin-bottom:0.4rem;">파스타는 몇 분 삶아야 하나요?</h3>
+                        <p style="color:var(--text-secondary,#aaa);line-height:1.8;margin:0;">건면 스파게티 기준 알덴테(심이 살짝 남는 식감)는 끓는 소금물에서 8~9분, 부드러운 식감은 10~11분입니다. 포장지에 적힌 시간보다 1분 짧게 타이머를 맞춘 뒤 면을 하나 건져 맛보는 것이 가장 정확합니다. 소스에 넣고 더 볶을 예정이라면 1분 덜 삶아 알덴테로 건지세요.</p>
+                    </div>
+                    <div class="faq-item" style="margin-bottom:1.25rem;">
+                        <h3 style="color:var(--text-primary,#fff);font-size:1rem;margin-bottom:0.4rem;">스테이크 굽기별 시간은 어떻게 되나요?</h3>
+                        <p style="color:var(--text-secondary,#aaa);line-height:1.8;margin:0;">두께 2~3cm 기준, 센 불에 달군 팬에서 한 면씩 굽습니다. 레어는 한 면 1분 30초~2분, 미디엄레어는 2분 30초~3분, 미디엄은 3분 30초~4분, 웰던은 5분 이상입니다. 구운 뒤 5분 정도 레스팅(휴지)하면 육즙이 고르게 퍼져 더 촉촉합니다.</p>
+                    </div>
+                    <div class="faq-item" style="margin-bottom:1.25rem;">
+                        <h3 style="color:var(--text-primary,#fff);font-size:1rem;margin-bottom:0.4rem;">라면은 몇 분 끓여야 가장 맛있나요?</h3>
+                        <p style="color:var(--text-secondary,#aaa);line-height:1.8;margin:0;">봉지라면은 물 550ml를 끓인 뒤 면과 스프를 넣고 4분 30초가 표준입니다. 꼬들꼬들한 면을 좋아하면 3분 30초~4분, 푹 익은 면을 좋아하면 5분으로 맞추세요. 계란을 넣을 때는 끓이기 1분 전에 넣어야 노른자가 적당히 익습니다.</p>
+                    </div>
+                    <div class="faq-item" style="margin-bottom:1.25rem;">
+                        <h3 style="color:var(--text-primary,#fff);font-size:1rem;margin-bottom:0.4rem;">여러 요리를 동시에 할 때 타이머를 어떻게 관리하나요?</h3>
+                        <p style="color:var(--text-secondary,#aaa);line-height:1.8;margin:0;">이 요리 타이머는 한 레시피의 여러 단계를 순서대로 자동 전환해 주므로, 가장 오래 걸리는 메인 요리를 기준으로 단계를 짜면 됩니다. 서로 다른 요리를 병렬로 진행할 때는 완성 시각을 역산해 가장 늦게 끝나는 요리부터 시작하세요. 동시에 여러 개의 독립 타이머가 필요하면 <a href="multi.html" style="color:var(--accent,#6c8cff);">멀티 타이머</a>를 함께 사용하면 편리합니다.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3 style="color:var(--text-primary,#fff);font-size:1rem;margin-bottom:0.4rem;">요리 타이머가 휴대폰 기본 알람보다 좋은 점은 무엇인가요?</h3>
+                        <p style="color:var(--text-secondary,#aaa);line-height:1.8;margin:0;">휴대폰 기본 알람은 한 번에 하나의 시간만 맞출 수 있지만, 요리 타이머는 한 요리의 여러 조리 단계를 미리 입력해 두면 단계가 끝날 때마다 자동으로 다음 단계로 넘어가며 알려 줍니다. 설치가 필요 없는 무료 웹 도구라 PC·태블릿·휴대폰 어디서든 브라우저만 열면 바로 쓸 수 있고, 손에 양념이 묻은 상태에서도 화면만 보면 남은 시간을 확인할 수 있습니다.</p>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
