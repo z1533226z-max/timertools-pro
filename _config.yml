@@ -1,0 +1,34 @@
+# GitHub Pages (Jekyll) build settings.
+# Pages here are plain HTML without front matter, so Jekyll copies them as-is;
+# this file only keeps development/internal files out of the published site.
+#
+# Jekyll 3.x (used by GitHub Pages) replaces its default exclude list with this
+# one, so the defaults are repeated first, including GitHub Pages' own CNAME
+# default (the custom domain is read from the repository, not the built site).
+# Entries are paths relative to the repository root; a directory entry excludes
+# everything inside it.
+exclude:
+  # Jekyll defaults
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+  - CNAME
+  # Internal notes / dev tooling (not part of the site)
+  - CLAUDE.md
+  - README.md
+  - WORK_STATUS.md
+  - current-status-analysis.md
+  - dev-instructions.md
+  - dev-commands.bat
+  - start-server.bat
+  - next-env.d.ts
+  - debug-script.js
+  - dashboard.html
+  - _backup_unused
+  - scripts
+  - timer/pomodoro_failed.html
+  - assets/icons/create_icons.py

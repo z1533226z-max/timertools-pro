@@ -1,5 +1,39 @@
 // ===== BASIC TIMER - CLEAN IMPLEMENTATION ===== //
 
+// Screen-reader announcements, errors and notifications per page language
+const BASIC_TIMER_STRINGS = {
+  ko: {
+    titleRunning: '타이머 실행 중',
+    startLabel: '시작', continueLabel: '계속',
+    started: '타이머가 시작되었습니다',
+    paused: '타이머가 일시정지되었습니다',
+    resumed: '타이머가 재시작되었습니다',
+    reset: '타이머가 초기화되었습니다',
+    completed: '타이머가 완료되었습니다!',
+    noTime: '시간을 설정해주세요',
+    timeSet: (m, s) => `${m}분 ${s}초로 설정되었습니다`,
+    leaveWarning: '타이머가 실행 중입니다. 정말 나가시겠습니까?',
+    notifyTitle: '타이머 완료!',
+    notifyBody: (time) => `${time} 타이머가 완료되었습니다.`,
+    pageError: '오류가 발생했습니다. 페이지를 새로고침해주세요.'
+  },
+  en: {
+    titleRunning: 'Timer running',
+    startLabel: 'Start', continueLabel: 'Continue',
+    started: 'Timer started',
+    paused: 'Timer paused',
+    resumed: 'Timer resumed',
+    reset: 'Timer reset',
+    completed: 'Timer finished!',
+    noTime: 'Please set a time',
+    timeSet: (m, s) => `Set to ${m} min ${s} sec`,
+    leaveWarning: 'The timer is still running. Leave this page?',
+    notifyTitle: 'Time is up!',
+    notifyBody: (time) => `Your ${time} timer has finished.`,
+    pageError: 'Something went wrong. Please reload the page.'
+  }
+};
+
 class BasicTimer {
   constructor() {
     // Timer state
@@ -8,6 +42,7 @@ class BasicTimer {
     this.totalSeconds = 0;
     this.remainingSeconds = 0;
     this.intervalId = null;
+    this.endTime = 0; // wall-clock end of the running countdown (ms)
     
     // Settings
     this.settings = {
@@ -18,8 +53,11 @@ class BasicTimer {
     // Audio context for sound
     this.audioContext = null;
     
-    // Language support
-    this.currentLanguage = 'ko';
+    // Static page title, restored after the countdown title is shown
+    this.originalTitle = document.title;
+
+    // Language support (default to the page's declared language)
+    this.currentLanguage = (document.documentElement.lang || 'ko').split('-')[0];
     this.setupLanguageSupport();
     
     // DOM elements (cached for performance)
@@ -29,6 +67,11 @@ class BasicTimer {
   }
   
   // ===== LANGUAGE SUPPORT ===== //
+  // Strings follow currentLanguage, which the language selector can change at runtime
+  get t() {
+    return BASIC_TIMER_STRINGS[this.currentLanguage] || BASIC_TIMER_STRINGS.ko;
+  }
+
   setupLanguageSupport() {
     // Wait for i18n to be ready
     document.addEventListener('i18n-ready', (event) => {
@@ -56,8 +99,6 @@ class BasicTimer {
     if (!window.i18n) return;
     
     const startBtn = document.querySelector('[data-i18n="timer.start"] .btn-text');
-    const pauseBtn = document.querySelector('[data-i18n="timer.pause"] .btn-text');
-    const resetBtn = document.querySelector('[data-i18n="timer.reset"] .btn-text');
     
     if (startBtn) {
       startBtn.textContent = this.isPaused ? 
@@ -84,6 +125,8 @@ class BasicTimer {
     
     const presetButtons = document.querySelectorAll('.preset-btn');
     presetButtons.forEach(btn => {
+      // Only relabel duration presets; link-style .preset-btn (e.g. "Tabata") have no data-minutes
+      if (btn.dataset.minutes === undefined) return;
       const minutes = btn.dataset.minutes || '0';
       const seconds = btn.dataset.seconds || '0';
       
@@ -106,8 +149,8 @@ class BasicTimer {
     this.cacheElements();
     this.loadSettings();
     this.bindEvents();
-    this.updateDisplay();
-    this.updateProgress();
+    // Show the time from the inputs (e.g. 05:00) instead of 00:00 on load
+    this.updateFromInputs();
     
     console.log('✅ Basic Timer initialized');
   }
@@ -185,7 +228,7 @@ class BasicTimer {
     window.addEventListener('beforeunload', (e) => {
       if (this.isRunning) {
         e.preventDefault();
-        e.returnValue = '타이머가 실행 중입니다. 정말 나가시겠습니까?';
+        e.returnValue = this.t.leaveWarning;
       }
     });
   }
@@ -200,7 +243,7 @@ class BasicTimer {
     this.updateFromInputs();
     
     if (this.totalSeconds <= 0) {
-      this.showError('시간을 설정해주세요');
+      this.showError(this.t.noTime);
       this.elements.minutesInput.focus();
       return;
     }
@@ -221,19 +264,9 @@ class BasicTimer {
     this.disableInputs();
     this.updateStatus('running');
     this.updateTimerClass('running');
+    this.startTicking();
     
-    this.intervalId = setInterval(() => {
-      this.remainingSeconds--;
-      this.updateDisplay();
-      this.updateProgress();
-      this.updatePageTitle();
-      
-      if (this.remainingSeconds <= 0) {
-        this.complete();
-      }
-    }, 1000);
-    
-    this.announce('타이머가 시작되었습니다');
+    this.announce(this.t.started);
   }
   
   pause() {
@@ -247,7 +280,7 @@ class BasicTimer {
     this.updateStatus('paused');
     this.updateTimerClass('paused');
     
-    this.announce('타이머가 일시정지되었습니다');
+    this.announce(this.t.paused);
   }
   
   resume() {
@@ -259,19 +292,31 @@ class BasicTimer {
     this.updateButtons();
     this.updateStatus('running');
     this.updateTimerClass('running');
+    this.startTicking();
     
-    this.intervalId = setInterval(() => {
-      this.remainingSeconds--;
-      this.updateDisplay();
-      this.updateProgress();
-      this.updatePageTitle();
-      
-      if (this.remainingSeconds <= 0) {
-        this.complete();
-      }
-    }, 1000);
+    this.announce(this.t.resumed);
+  }
+  
+  // Count down against the wall clock: browsers throttle timers in background tabs,
+  // so counting interval ticks would make the timer run slow (or never ring) there.
+  startTicking() {
+    this.endTime = Date.now() + this.remainingSeconds * 1000;
+    clearInterval(this.intervalId);
+    this.intervalId = setInterval(() => this.tick(), 250);
+  }
+  
+  tick() {
+    const remaining = Math.max(0, Math.ceil((this.endTime - Date.now()) / 1000));
+    if (remaining === this.remainingSeconds) return;
     
-    this.announce('타이머가 재시작되었습니다');
+    this.remainingSeconds = remaining;
+    this.updateDisplay();
+    this.updateProgress();
+    this.updatePageTitle();
+    
+    if (remaining <= 0) {
+      this.complete();
+    }
   }
   
   reset() {
@@ -292,7 +337,7 @@ class BasicTimer {
     this.updateDisplay();
     this.updateProgress();
     
-    this.announce('타이머가 초기화되었습니다');
+    this.announce(this.t.reset);
   }
   
   complete() {
@@ -323,7 +368,7 @@ class BasicTimer {
     
     this.playCompletionSound();
     this.showNotification();
-    this.announce('타이머가 완료되었습니다!');
+    this.announce(this.t.completed);
   }
   
   // ===== DISPLAY UPDATES ===== //
@@ -357,7 +402,7 @@ class BasicTimer {
       // Update start button text
       const btnText = this.elements.startBtn.querySelector('.btn-text');
       const textKey = this.isPaused ? 'timer.continue' : 'timer.start';
-      const translatedText = window.i18n ? window.i18n.get(textKey) : (this.isPaused ? '계속' : '시작');
+      const translatedText = window.i18n ? window.i18n.get(textKey) : (this.isPaused ? this.t.continueLabel : this.t.startLabel);
       btnText.textContent = translatedText;
       btnText.setAttribute('data-i18n', textKey);
     }
@@ -379,17 +424,19 @@ class BasicTimer {
   updatePageTitle() {
     if (this.isRunning && this.remainingSeconds > 0) {
       const timeStr = this.formatTime(this.remainingSeconds);
-      document.title = `${timeStr} - 타이머 실행 중`;
+      document.title = `${timeStr} - ${this.t.titleRunning}`;
     }
   }
   
   resetPageTitle() {
-    document.title = '기본 타이머 - TimerTools Pro';
+    document.title = this.originalTitle;
   }
   
   // ===== TIME MANAGEMENT ===== //
   updateFromInputs() {
-    const minutes = Math.max(0, Math.min(59, parseInt(this.elements.minutesInput.value) || 0));
+    // Each page sets its own limit on the minutes input (e.g. max="99" on the 60/90-minute pages)
+    const maxMinutes = parseInt(this.elements.minutesInput.max) || 59;
+    const minutes = Math.max(0, Math.min(maxMinutes, parseInt(this.elements.minutesInput.value) || 0));
     const seconds = Math.max(0, Math.min(59, parseInt(this.elements.secondsInput.value) || 0));
     
     // Update inputs with validated values
@@ -411,7 +458,7 @@ class BasicTimer {
     this.elements.secondsInput.value = seconds;
     this.updateFromInputs();
     
-    this.announce(`${minutes}분 ${seconds}초로 설정되었습니다`);
+    this.announce(this.t.timeSet(minutes, seconds));
   }
   
   formatTime(totalSeconds) {
@@ -488,40 +535,6 @@ class BasicTimer {
     localStorage.setItem('basic-timer-settings', JSON.stringify(this.settings));
   }
   
-  // ===== INTERNATIONALIZATION ===== //
-  setupI18n() {
-    // Listen for language change events
-    document.addEventListener('i18n-ready', () => {
-      this.updateI18nContent();
-    });
-    
-    // Listen for language changes
-    if (window.i18n) {
-      window.i18n.addLanguageChangeObserver(() => {
-        this.updateI18nContent();
-      });
-    }
-  }
-  
-  updateI18nContent() {
-    // Update status if it exists
-    if (this.elements.statusIndicator) {
-      const currentDataI18n = this.elements.statusIndicator.getAttribute('data-i18n');
-      if (currentDataI18n && window.i18n) {
-        this.elements.statusIndicator.textContent = window.i18n.get(currentDataI18n);
-      }
-    }
-    
-    // Update start button text
-    const startBtnText = this.elements.startBtn.querySelector('.btn-text');
-    if (startBtnText) {
-      const textKey = this.isPaused ? 'timer.continue' : 'timer.start';
-      if (window.i18n) {
-        startBtnText.textContent = window.i18n.get(textKey);
-      }
-    }
-  }
-
   // ===== AUDIO ===== //
   initAudio() {
     if (!this.audioContext && this.settings.soundEnabled) {
@@ -591,9 +604,9 @@ class BasicTimer {
     // Show notification if permitted
     if ('Notification' in window && Notification.permission === 'granted') {
       const timeStr = this.formatTime(this.totalSeconds);
-      const notification = new Notification('타이머 완료!', {
-        body: `${timeStr} 타이머가 완료되었습니다.`,
-        icon: '../assets/images/favicon.svg',
+      const notification = new Notification(this.t.notifyTitle, {
+        body: this.t.notifyBody(timeStr),
+        icon: '/assets/images/favicon.svg', // absolute: also used from /en/timer/ pages
         tag: 'timer-complete'
       });
       
@@ -672,21 +685,9 @@ class BasicTimer {
   
   // ===== UTILITY ===== //
   handleVisibilityChange() {
-    // Adjust for time spent in background (basic implementation)
-    if (!document.hidden && this.isRunning && this.hiddenTime) {
-      const elapsed = Math.floor((Date.now() - this.hiddenTime) / 1000);
-      this.remainingSeconds = Math.max(0, this.remainingSeconds - elapsed);
-      
-      if (this.remainingSeconds <= 0) {
-        this.complete();
-      } else {
-        this.updateDisplay();
-        this.updateProgress();
-      }
-      
-      this.hiddenTime = null;
-    } else if (document.hidden && this.isRunning) {
-      this.hiddenTime = Date.now();
+    // Refresh at once when the tab is shown again (background ticks can be a minute apart)
+    if (!document.hidden && this.isRunning) {
+      this.tick();
     }
   }
 }
@@ -710,6 +711,6 @@ document.addEventListener('DOMContentLoaded', () => {
 window.addEventListener('error', (e) => {
   console.error('기본 타이머 오류:', e.error);
   if (window.basicTimer && window.basicTimer.elements.announcements) {
-    window.basicTimer.announce('오류가 발생했습니다. 페이지를 새로고침해주세요.');
+    window.basicTimer.announce(window.basicTimer.t.pageError);
   }
 });

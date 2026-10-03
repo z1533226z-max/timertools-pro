@@ -1,6 +1,7 @@
-const CACHE_NAME = 'timertools-v1.0.0';
-const BASE_CACHE = 'base-cache-v1';
-const RUNTIME_CACHE = 'runtime-cache-v1';
+// Bump these when shipped JS/CSS changes so clients drop the old caches on activate
+const CACHE_NAME = 'timertools-v1.1.0';
+const BASE_CACHE = 'base-cache-v2';
+const RUNTIME_CACHE = 'runtime-cache-v2';
 
 // Production mode check for Service Worker
 const isProduction = !self.location.hostname.includes('localhost') && !self.location.hostname.includes('127.0.0.1');
@@ -16,23 +17,19 @@ const BASE_RESOURCES = [
     '/timer/multi.html',
     '/timer/cooking.html',
     '/timer/workout.html',
-    '/dashboard.html',
     '/offline.html',
     '/assets/css/styles.css',
-    '/assets/css/timer.css',
     '/assets/css/pomodoro.css',
     '/assets/css/multi.css',
     '/assets/css/cooking.css',
     '/assets/css/workout.css',
     '/assets/js/main.js',
-    '/assets/js/timer.js',
     '/assets/js/pomodoro.js',
     '/assets/js/multi.js',
     '/assets/js/cooking.js',
     '/assets/js/workout.js',
     '/assets/js/pwa-utils.js',
     '/assets/images/favicon.svg',
-    '/assets/icons/create_simple_icons.html',
     'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap'
 ];
 

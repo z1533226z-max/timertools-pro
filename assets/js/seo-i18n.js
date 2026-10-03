@@ -4,28 +4,14 @@ class SEOInternationalization {
   constructor() {
     this.currentLang = document.documentElement.lang || 'ko';
     this.supportedLangs = ['ko', 'en'];
-    this.translations = {
-      ko: {
-        siteName: 'TimerTools Pro',
-        tagline: '완벽한 시간 관리 도구',
-        metaDescription: '온라인 타이머, 뽀모도로, 멀티 타이머로 생산성을 높이고 집중력을 향상시키세요',
-        keywords: '타이머, 뽀모도로, 시간관리, 생산성, 집중, 온라인 타이머'
-      },
-      en: {
-        siteName: 'TimerTools Pro',
-        tagline: 'Perfect Time Management Tool',
-        metaDescription: 'Boost productivity and improve focus with online timer, pomodoro technique, and multi-timer tools',
-        keywords: 'timer, pomodoro, time management, productivity, focus, online timer'
-      }
-    };
-    
     this.init();
   }
   
   init() {
+    // canonical, hreflang, meta tags and JSON-LD are authored statically in each
+    // page's HTML. Rewriting them at runtime pointed canonical at the raw request
+    // URL (incl. query strings) and added hreflang pairs for pages that have none.
     this.setupLanguageSelector();
-    this.updateCanonicalLinks();
-    this.setupSEOMetadata();
     this.trackLanguagePreference();
   }
   
@@ -54,9 +40,6 @@ class SEOInternationalization {
     // Store language preference
     localStorage.setItem('preferredLanguage', targetLang);
     
-    // Update meta tags before navigation for better SEO
-    this.updateMetaTags(targetLang);
-    
     // Navigate to translated page
     window.location.href = newURL;
   }
@@ -76,133 +59,6 @@ class SEOInternationalization {
     } else {
       return `${baseURL}${cleanPath}`;
     }
-  }
-  
-  updateCanonicalLinks() {
-    const currentPath = window.location.pathname;
-    const currentURL = window.location.href;
-    
-    // Update canonical link
-    let canonical = document.querySelector('link[rel="canonical"]');
-    if (!canonical) {
-      canonical = document.createElement('link');
-      canonical.rel = 'canonical';
-      document.head.appendChild(canonical);
-    }
-    canonical.href = currentURL;
-    
-    // Ensure hreflang links exist and are correct
-    this.updateHreflangLinks(currentPath);
-  }
-  
-  updateHreflangLinks(currentPath) {
-    // Remove existing hreflang links
-    const existingHreflangs = document.querySelectorAll('link[hreflang]');
-    existingHreflangs.forEach(link => link.remove());
-    
-    const baseURL = window.location.origin;
-    let cleanPath = currentPath;
-    
-    // Remove language prefix to get clean path
-    if (currentPath.startsWith('/en/')) {
-      cleanPath = currentPath.substring(3);
-    }
-    
-    // Add hreflang links
-    const hreflangs = [
-      { lang: 'ko', url: `${baseURL}${cleanPath}` },
-      { lang: 'en', url: `${baseURL}/en${cleanPath}` },
-      { lang: 'x-default', url: `${baseURL}${cleanPath}` }
-    ];
-    
-    hreflangs.forEach(({ lang, url }) => {
-      const link = document.createElement('link');
-      link.rel = 'alternate';
-      link.hreflang = lang;
-      link.href = url;
-      document.head.appendChild(link);
-    });
-  }
-  
-  updateMetaTags(lang) {
-    const translations = this.translations[lang];
-    if (!translations) return;
-    
-    // Update meta description
-    const metaDesc = document.querySelector('meta[name="description"]');
-    if (metaDesc) {
-      metaDesc.content = translations.metaDescription;
-    }
-    
-    // Update meta keywords
-    const metaKeywords = document.querySelector('meta[name="keywords"]');
-    if (metaKeywords) {
-      metaKeywords.content = translations.keywords;
-    }
-    
-    // Update Open Graph meta tags
-    const ogTitle = document.querySelector('meta[property="og:title"]');
-    if (ogTitle) {
-      ogTitle.content = `${translations.siteName} - ${translations.tagline}`;
-    }
-    
-    const ogDesc = document.querySelector('meta[property="og:description"]');
-    if (ogDesc) {
-      ogDesc.content = translations.metaDescription;
-    }
-    
-    const ogLocale = document.querySelector('meta[property="og:locale"]');
-    if (ogLocale) {
-      ogLocale.content = lang === 'ko' ? 'ko_KR' : 'en_US';
-    }
-    
-    // Update Twitter Card
-    const twitterTitle = document.querySelector('meta[name="twitter:title"]');
-    if (twitterTitle) {
-      twitterTitle.content = `${translations.siteName} - ${translations.tagline}`;
-    }
-    
-    const twitterDesc = document.querySelector('meta[name="twitter:description"]');
-    if (twitterDesc) {
-      twitterDesc.content = translations.metaDescription;
-    }
-  }
-  
-  setupSEOMetadata() {
-    // Add structured data for search engines
-    const structuredData = {
-      "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": this.translations[this.currentLang].siteName,
-      "description": this.translations[this.currentLang].metaDescription,
-      "url": window.location.origin,
-      "applicationCategory": "Productivity",
-      "operatingSystem": "Web Browser",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD"
-      },
-      "inLanguage": this.supportedLangs,
-      "availableLanguage": [
-        {
-          "@type": "Language",
-          "name": "Korean",
-          "alternateName": "ko"
-        },
-        {
-          "@type": "Language", 
-          "name": "English",
-          "alternateName": "en"
-        }
-      ]
-    };
-    
-    // Add structured data to page
-    const script = document.createElement('script');
-    script.type = 'application/ld+json';
-    script.textContent = JSON.stringify(structuredData);
-    document.head.appendChild(script);
   }
   
   trackLanguagePreference() {

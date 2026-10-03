@@ -43,78 +43,18 @@ class TimerI18nIntegration {
   }
   
   updateTimerSpecificContent() {
-    this.updatePageTitle();
-    this.updateMetaDescription();
+    // <title> and meta description are intentionally NOT touched here: every page
+    // ships its own static, language-specific title/description, and KO/EN live on
+    // separate URLs. Overwriting them collapsed dozens of pages to one generic title.
     this.updatePresetButtons();
     this.updateDynamicContent();
-  }
-  
-  updatePageTitle() {
-    const titles = {
-      basic: {
-        ko: '기본 타이머 - TimerTools Pro',
-        en: 'Basic Timer - TimerTools Pro'
-      },
-      pomodoro: {
-        ko: '뽀모도로 타이머 - TimerTools Pro',
-        en: 'Pomodoro Timer - TimerTools Pro'
-      },
-      multi: {
-        ko: '멀티 타이머 - TimerTools Pro',
-        en: 'Multi Timer - TimerTools Pro'
-      },
-      cooking: {
-        ko: '요리 타이머 - TimerTools Pro',
-        en: 'Cooking Timer - TimerTools Pro'
-      },
-      workout: {
-        ko: '운동 타이머 - TimerTools Pro',
-        en: 'Workout Timer - TimerTools Pro'
-      }
-    };
-    
-    const title = titles[this.timerType]?.[this.currentLanguage];
-    if (title) {
-      document.title = title;
-    }
-  }
-  
-  updateMetaDescription() {
-    const descriptions = {
-      basic: {
-        ko: '간단한 카운트다운 타이머로 시간을 정확히 측정하세요',
-        en: 'Measure time accurately with a simple countdown timer'
-      },
-      pomodoro: {
-        ko: '뽀모도로 기법으로 생산성 향상 - 25분 집중 + 5분 휴식으로 최적의 작업 리듬을 만드세요',
-        en: 'Boost productivity with Pomodoro technique - 25min focus + 5min break for optimal work rhythm'
-      },
-      multi: {
-        ko: '최대 6개의 타이머를 동시에 실행하여 효율성을 높이세요',
-        en: 'Run up to 6 timers simultaneously to boost efficiency'
-      },
-      cooking: {
-        ko: '레시피별 최적화된 타이머로 완벽한 요리를 만드세요',
-        en: 'Create perfect dishes with recipe-optimized timers'
-      },
-      workout: {
-        ko: 'HIIT와 인터벌 트레이닝을 위한 전문 타이머입니다',
-        en: 'Professional timer designed for HIIT and interval training'
-      }
-    };
-    
-    const description = descriptions[this.timerType]?.[this.currentLanguage];
-    if (description) {
-      const metaDesc = document.querySelector('meta[name="description"]');
-      if (metaDesc) {
-        metaDesc.content = description;
-      }
-    }
   }
   
   updatePresetButtons() {
     const presetButtons = document.querySelectorAll('.preset-btn');
     presetButtons.forEach(btn => {
+      // Only relabel duration presets; link-style .preset-btn (e.g. "Tabata") have no data-minutes
+      if (btn.dataset.minutes === undefined) return;
       const minutes = btn.dataset.minutes || '0';
       const seconds = btn.dataset.seconds || '0';
       

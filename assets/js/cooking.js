@@ -1,7 +1,112 @@
 // ===== SIMPLIFIED COOKING TIMER IMPLEMENTATION ===== //
 
+// UI strings per page language (KO: /timer/cooking.html, EN: /en/timer/cooking.html)
+const COOKING_STRINGS = {
+  ko: {
+    minutes: (n) => `${n}분`,
+    step: (n) => `단계 ${n}`,
+    pause: '⏸️ 일시정지',
+    resume: '▶️ 재개',
+    tenSecondsLeft: '10초 남았습니다!',
+    stepDone: (name) => `${name} 완료!`,
+    next: (name) => `다음: ${name}`,
+    recipeDone: (name) => `🎉 ${name} 요리 완료!`,
+    recipeDoneConfirm: (name) => `${name} 요리가 완료되었습니다!\n\n새로운 요리를 시작하시겠습니까?`,
+    currentStep: (name, i, n) => `현재 단계: ${name} (${i}/${n})`,
+    titleSuffix: '요리 타이머',
+    customStepDesc: (name, i) => `${name}의 ${i}번째 단계입니다`,
+    notificationTitle: '🍳 요리 타이머',
+    notificationsOn: '알림이 활성화되었습니다!',
+    notificationsAlreadyOn: '알림이 이미 활성화되어 있습니다',
+    notificationsBlocked: '브라우저 설정에서 알림을 허용해주세요',
+    settingsSoon: '설정 기능은 준비 중입니다'
+  },
+  en: {
+    minutes: (n) => `${n} min`,
+    step: (n) => `Step ${n}`,
+    pause: '⏸️ Pause',
+    resume: '▶️ Resume',
+    tenSecondsLeft: '10 seconds left!',
+    stepDone: (name) => `${name} done!`,
+    next: (name) => `Next: ${name}`,
+    recipeDone: (name) => `🎉 ${name} is ready!`,
+    recipeDoneConfirm: (name) => `${name} is ready!\n\nStart another recipe?`,
+    currentStep: (name, i, n) => `Current step: ${name} (${i}/${n})`,
+    titleSuffix: 'Cooking Timer',
+    customStepDesc: (name, i) => `Step ${i} of ${name}`,
+    notificationTitle: '🍳 Cooking Timer',
+    notificationsOn: 'Notifications enabled!',
+    notificationsAlreadyOn: 'Notifications are already enabled',
+    notificationsBlocked: 'Please allow notifications in your browser settings',
+    settingsSoon: 'Settings are coming soon'
+  }
+};
+
+// English recipe presets (match the cards and guide text on /en/timer/cooking.html)
+const COOKING_RECIPES_EN = {
+  pasta: {
+    name: 'Pasta',
+    icon: '🍝',
+    totalTime: 20,
+    steps: [
+      { name: 'Boil water', duration: 480, description: 'Bring a large pot of salted water to a rolling boil' },
+      { name: 'Cook pasta', duration: 480, description: 'Add the pasta and stir occasionally until al dente' },
+      { name: 'Rest', duration: 120, description: 'Drain and toss the pasta with your sauce' },
+      { name: 'Plate', duration: 120, description: 'Plate and finish with cheese or herbs' }
+    ]
+  },
+  steak: {
+    name: 'Steak',
+    icon: '🍖',
+    totalTime: 15,
+    steps: [
+      { name: 'Heat the skillet', duration: 180, description: 'Preheat a heavy skillet over high heat' },
+      { name: 'Sear first side', duration: 120, description: 'Sear without moving the steak' },
+      { name: 'Sear second side', duration: 120, description: 'Flip once and sear the other side' },
+      { name: 'Rest', duration: 300, description: 'Rest the steak so the juices settle' },
+      { name: 'Slice and plate', duration: 180, description: 'Slice against the grain and serve' }
+    ]
+  },
+  'kimchi-stew': {
+    name: 'Kimchi Stew',
+    icon: '🍲',
+    totalTime: 30,
+    steps: [
+      { name: 'Prep', duration: 300, description: 'Cut the kimchi, pork and tofu' },
+      { name: 'Sauté kimchi', duration: 180, description: 'Stir-fry the kimchi (and pork) to build flavor' },
+      { name: 'Boil', duration: 420, description: 'Add water or stock and bring to a boil' },
+      { name: 'Simmer', duration: 600, description: 'Simmer over medium heat' },
+      { name: 'Season', duration: 300, description: 'Add tofu and green onion, then season to taste' }
+    ]
+  },
+  ramen: {
+    name: 'Ramen',
+    icon: '🍜',
+    totalTime: 5,
+    steps: [
+      { name: 'Boil water', duration: 120, description: 'Bring about 550 ml of water to a boil' },
+      { name: 'Cook noodles', duration: 180, description: 'Add the noodles and soup base, then cook' }
+    ]
+  },
+  salad: {
+    name: 'Salad',
+    icon: '🥗',
+    totalTime: 10,
+    steps: [
+      { name: 'Wash veggies', duration: 180, description: 'Rinse and dry the vegetables' },
+      { name: 'Chop', duration: 300, description: 'Cut into bite-sized pieces' },
+      { name: 'Dress', duration: 120, description: 'Make the dressing and toss' }
+    ]
+  }
+};
+
 class SimpleCookingTimer {
   constructor() {
+    // Page language decides UI strings and recipe presets
+    const lang = (document.documentElement.lang || 'ko').split('-')[0];
+    this.lang = COOKING_STRINGS[lang] ? lang : 'ko';
+    this.t = COOKING_STRINGS[this.lang];
+
     // Timer state
     this.currentRecipe = null;
     this.currentStep = 0;
@@ -71,6 +176,10 @@ class SimpleCookingTimer {
       }
     };
     
+    if (this.lang === 'en') {
+      this.recipes = COOKING_RECIPES_EN;
+    }
+
     // Custom recipe storage
     this.customRecipes = [];
     
@@ -224,7 +333,7 @@ class SimpleCookingTimer {
       // Update total time
       const totalTime = document.getElementById('config-total-time');
       if (totalTime) {
-        totalTime.textContent = `${this.currentRecipe.totalTime}분`;
+        totalTime.textContent = this.t.minutes(this.currentRecipe.totalTime);
       }
       
       // Display steps
@@ -243,7 +352,7 @@ class SimpleCookingTimer {
       stepEl.className = 'step-config-item';
       stepEl.innerHTML = `
         <div class="step-header">
-          <h4>단계 ${index + 1}: ${step.name}</h4>
+          <h4>${this.t.step(index + 1)}: ${step.name}</h4>
           <span class="step-time">${this.formatTime(step.duration)}</span>
         </div>
         <p class="step-description">${step.description}</p>
@@ -285,7 +394,7 @@ class SimpleCookingTimer {
     // Update button text
     const pauseBtn = document.getElementById('pause-btn');
     if (pauseBtn) {
-      pauseBtn.textContent = '⏸️ 일시정지';
+      pauseBtn.textContent = this.t.pause;
     }
     
     // Start interval
@@ -303,7 +412,7 @@ class SimpleCookingTimer {
     // Update button text
     const pauseBtn = document.getElementById('pause-btn');
     if (pauseBtn) {
-      pauseBtn.textContent = '▶️ 재개';
+      pauseBtn.textContent = this.t.resume;
     }
   }
   
@@ -341,7 +450,7 @@ class SimpleCookingTimer {
       const remaining = currentStepData.duration - this.currentSeconds;
       if (remaining === 10) {
         this.playSound('warning');
-        this.showNotification('10초 남았습니다!');
+        this.showNotification(this.t.tenSecondsLeft);
       }
     }
   }
@@ -353,7 +462,7 @@ class SimpleCookingTimer {
     this.playSound('complete');
     
     // Show notification
-    this.showNotification(`${currentStepData.name} 완료!`);
+    this.showNotification(this.t.stepDone(currentStepData.name));
     
     // Move to next step
     if (this.currentStep < this.currentRecipe.steps.length - 1) {
@@ -365,7 +474,7 @@ class SimpleCookingTimer {
       // Announce next step
       const nextStep = this.currentRecipe.steps[this.currentStep];
       setTimeout(() => {
-        this.showNotification(`다음: ${nextStep.name}`);
+        this.showNotification(this.t.next(nextStep.name));
       }, 1000);
     } else {
       this.completeRecipe();
@@ -392,11 +501,11 @@ class SimpleCookingTimer {
     this.playSound('recipe-complete');
     
     // Show completion notification
-    this.showNotification(`🎉 ${this.currentRecipe.name} 요리 완료!`);
+    this.showNotification(this.t.recipeDone(this.currentRecipe.name));
     
     // Show completion modal
     setTimeout(() => {
-      if (confirm(`${this.currentRecipe.name} 요리가 완료되었습니다!\n\n새로운 요리를 시작하시겠습니까?`)) {
+      if (confirm(this.t.recipeDoneConfirm(this.currentRecipe.name))) {
         this.showRecipeSelection();
       }
     }, 500);
@@ -420,7 +529,7 @@ class SimpleCookingTimer {
     // Update step indicator
     const stepIndicator = document.getElementById('step-indicator');
     if (stepIndicator) {
-      stepIndicator.textContent = `현재 단계: ${currentStepData.name} (${this.currentStep + 1}/${this.currentRecipe.steps.length})`;
+      stepIndicator.textContent = this.t.currentStep(currentStepData.name, this.currentStep + 1, this.currentRecipe.steps.length);
     }
     
     // Update step status
@@ -446,7 +555,7 @@ class SimpleCookingTimer {
     
     // Update page title
     if (this.isRunning) {
-      document.title = `${this.formatTime(remaining)} - ${currentStepData.name} - 요리 타이머`;
+      document.title = `${this.formatTime(remaining)} - ${currentStepData.name} - ${this.t.titleSuffix}`;
     }
   }
   
@@ -518,9 +627,9 @@ class SimpleCookingTimer {
     
     for (let i = 0; i < stepCount; i++) {
       steps.push({
-        name: `단계 ${i + 1}`,
+        name: this.t.step(i + 1),
         duration: stepDuration,
-        description: `${name}의 ${i + 1}번째 단계입니다`
+        description: this.t.customStepDesc(name, i + 1)
       });
     }
     
@@ -587,7 +696,7 @@ class SimpleCookingTimer {
   showNotification(message) {
     // Try browser notification
     if ('Notification' in window && Notification.permission === 'granted') {
-      new Notification('🍳 요리 타이머', {
+      new Notification(this.t.notificationTitle, {
         body: message,
         icon: '/assets/icons/icon-192x192.png',
         badge: '/assets/icons/icon-72x72.png',
@@ -621,18 +730,18 @@ class SimpleCookingTimer {
     if ('Notification' in window && Notification.permission === 'default') {
       Notification.requestPermission().then(permission => {
         if (permission === 'granted') {
-          this.showNotification('알림이 활성화되었습니다!');
+          this.showNotification(this.t.notificationsOn);
         }
       });
     } else if (Notification.permission === 'granted') {
-      this.showNotification('알림이 이미 활성화되어 있습니다');
+      this.showNotification(this.t.notificationsAlreadyOn);
     } else {
-      alert('브라우저 설정에서 알림을 허용해주세요');
+      alert(this.t.notificationsBlocked);
     }
   }
   
   showSettings() {
-    alert('설정 기능은 준비 중입니다');
+    alert(this.t.settingsSoon);
   }
 }
 

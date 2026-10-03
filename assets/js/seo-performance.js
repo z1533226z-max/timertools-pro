@@ -6,10 +6,11 @@ class SEOPerformanceOptimizer {
   }
   
   init() {
+    // No runtime JSON-LD injection (pages carry their own static structured data;
+    // the injected block also contained a made-up aggregateRating) and no loading of
+    // animations.css / print.css, which do not exist (404 on every load).
     this.setupLazyLoading();
-    this.setupCriticalCSS();
     this.setupPreconnections();
-    this.setupStructuredData();
     this.trackCoreWebVitals();
   }
   
@@ -37,26 +38,6 @@ class SEOPerformanceOptimizer {
     }
   }
   
-  // Optimize critical CSS loading
-  setupCriticalCSS() {
-    // Load non-critical CSS asynchronously
-    const nonCriticalCSS = [
-      '/assets/css/animations.css',
-      '/assets/css/print.css'
-    ];
-    
-    nonCriticalCSS.forEach(cssFile => {
-      const link = document.createElement('link');
-      link.rel = 'stylesheet';
-      link.href = cssFile;
-      link.media = 'print';
-      link.onload = () => {
-        link.media = 'all';
-      };
-      document.head.appendChild(link);
-    });
-  }
-  
   // Setup DNS preconnections for better performance
   setupPreconnections() {
     const domains = [
@@ -73,95 +54,6 @@ class SEOPerformanceOptimizer {
       link.crossOrigin = 'anonymous';
       document.head.appendChild(link);
     });
-  }
-  
-  // Enhanced structured data for search engines
-  setupStructuredData() {
-    const currentLang = document.documentElement.lang || 'ko';
-    
-    const structuredData = {
-      "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "TimerTools Pro",
-      "description": currentLang === 'ko' 
-        ? "온라인 타이머, 뽀모도로, 멀티 타이머로 생산성을 높이고 집중력을 향상시키는 무료 도구"
-        : "Free online timer, pomodoro, and multi-timer tools for enhanced productivity and focus",
-      "url": window.location.origin,
-      "applicationCategory": "ProductivityApplication",
-      "operatingSystem": "Web Browser",
-      "browserRequirements": "Requires JavaScript",
-      "softwareVersion": "1.0",
-      "datePublished": "2024-12-20",
-      "dateModified": "2024-12-20",
-      "inLanguage": ["ko", "en"],
-      "isAccessibleForFree": true,
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD",
-        "availability": "https://schema.org/InStock"
-      },
-      "author": {
-        "@type": "Organization",
-        "name": "TimerTools Pro",
-        "url": window.location.origin
-      },
-      "publisher": {
-        "@type": "Organization",
-        "name": "TimerTools Pro",
-        "url": window.location.origin
-      },
-      "featureList": [
-        currentLang === 'ko' ? "기본 타이머" : "Basic Timer",
-        currentLang === 'ko' ? "뽀모도로 타이머" : "Pomodoro Timer", 
-        currentLang === 'ko' ? "멀티 타이머" : "Multi Timer",
-        currentLang === 'ko' ? "요리 타이머" : "Cooking Timer",
-        currentLang === 'ko' ? "운동 타이머" : "Workout Timer"
-      ],
-      "screenshot": `${window.location.origin}/assets/images/app-screenshot.jpg`,
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.8",
-        "ratingCount": "1247",
-        "bestRating": "5",
-        "worstRating": "1"
-      }
-    };
-    
-    // Add breadcrumb structure for timer pages
-    if (window.location.pathname.includes('/timer/')) {
-      const breadcrumbData = {
-        "@context": "https://schema.org",
-        "@type": "BreadcrumbList",
-        "itemListElement": [{
-          "@type": "ListItem",
-          "position": 1,
-          "name": currentLang === 'ko' ? "홈" : "Home",
-          "item": window.location.origin
-        }, {
-          "@type": "ListItem", 
-          "position": 2,
-          "name": currentLang === 'ko' ? "타이머 도구" : "Timer Tools",
-          "item": `${window.location.origin}${currentLang === 'en' ? '/en' : ''}/`
-        }, {
-          "@type": "ListItem",
-          "position": 3,
-          "name": document.title.split(' - ')[0],
-          "item": window.location.href
-        }]
-      };
-      
-      this.addStructuredData(breadcrumbData);
-    }
-    
-    this.addStructuredData(structuredData);
-  }
-  
-  addStructuredData(data) {
-    const script = document.createElement('script');
-    script.type = 'application/ld+json';
-    script.textContent = JSON.stringify(data);
-    document.head.appendChild(script);
   }
   
   // Track Core Web Vitals for SEO

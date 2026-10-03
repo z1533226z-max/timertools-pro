@@ -131,15 +131,15 @@
                             <circle class="progress-ring-bg" cx="140" cy="140" r="120" fill="none" stroke-width="8"/>
                             <circle class="progress-ring-progress" cx="140" cy="140" r="120" fill="none" stroke-width="12" stroke-linecap="round" stroke-dasharray="754" stroke-dashoffset="754" transform="rotate(-90 140 140)"/>
                         </svg>
-                        <div class="time-display" id="time-display">59:59</div>
+                        <div class="time-display" id="time-display">60:00</div>
                         <div class="status-indicator" id="status-indicator">준비</div>
                     </div>
                 </div>
                 <div class="time-inputs" role="group">
                     <label class="sr-only">시간 설정</label>
-                    <div class="input-group"><label for="minutes">분</label><input type="number" id="minutes" min="0" max="59" value="59"></div>
+                    <div class="input-group"><label for="minutes">분</label><input type="number" id="minutes" min="0" max="99" value="60"></div>
                     <div class="input-separator">:</div>
-                    <div class="input-group"><label for="seconds">초</label><input type="number" id="seconds" min="0" max="59" value="59"></div>
+                    <div class="input-group"><label for="seconds">초</label><input type="number" id="seconds" min="0" max="59" value="0"></div>
                 </div>
                 <div class="timer-controls">
                     <button id="start-btn" class="btn btn-primary btn-large"><span class="btn-icon">▶</span><span class="btn-text">시작</span></button>

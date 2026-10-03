@@ -1,7 +1,41 @@
 // ===== POMODORO TIMER IMPLEMENTATION ===== //
 
+// UI strings per page language (KO: /timer/pomodoro.html, EN: /en/timer/pomodoro.html)
+const POMODORO_STRINGS = {
+  ko: {
+    ready: '준비', running: '실행 중', paused: '일시정지',
+    work: '작업 중', shortBreak: '짧은 휴식', longBreak: '긴 휴식',
+    completed: (n) => `완료: ${n}`,
+    goal: (n) => `목표: ${n} 뽀모도로`,
+    tomatoDone: '완료된 뽀모도로', tomatoPending: '미완료 뽀모도로',
+    titleSuffix: '뽀모도로 타이머',
+    workDoneTitle: '🍅 작업 완료!', breakDoneTitle: '☕ 휴식 완료!',
+    workDoneBody: (n) => `${n}개의 뽀모도로를 완료했습니다!`,
+    breakDoneBody: '다시 작업할 시간입니다!'
+  },
+  en: {
+    ready: 'Ready', running: 'Running', paused: 'Paused',
+    work: 'Focus', shortBreak: 'Short break', longBreak: 'Long break',
+    completed: (n) => `Completed: ${n}`,
+    goal: (n) => `Goal: ${n} pomodoro${n === 1 ? '' : 's'}`,
+    tomatoDone: 'Pomodoro completed', tomatoPending: 'Pomodoro not completed',
+    titleSuffix: 'Pomodoro Timer',
+    workDoneTitle: '🍅 Focus session complete!', breakDoneTitle: '☕ Break is over!',
+    workDoneBody: (n) => `You have completed ${n} pomodoro${n === 1 ? '' : 's'}!`,
+    breakDoneBody: 'Time to get back to work!'
+  }
+};
+
+// Daily goal input allows 1-16 pomodoros (one tomato icon each)
+const clampDailyGoal = (value) => Math.min(16, Math.max(1, parseInt(value) || 8));
+
 class PomodoroTimer {
   constructor() {
+    // Page language decides the UI strings; keep the static title to restore on reset
+    const lang = (document.documentElement.lang || 'ko').split('-')[0];
+    this.t = POMODORO_STRINGS[lang] || POMODORO_STRINGS.ko;
+    this.originalTitle = document.title;
+
     // Timer state
     this.isRunning = false;
     this.isPaused = false;
@@ -60,6 +94,7 @@ class PomodoroTimer {
       // Progress elements
       progressCircle: document.querySelector('.pomodoro-progress'),
       tomatoIcons: document.getElementById('tomato-icons'),
+      dailyGoalText: document.getElementById('daily-goal'),
       completedCount: document.getElementById('completed-count'),
       
       // Settings
@@ -83,8 +118,10 @@ class PomodoroTimer {
     // Setup event listeners
     this.setupEventListeners();
     
-    // Initialize display
+    // Initialize display (progress/stats replace the static placeholders in the HTML)
     this.reset();
+    this.updateTomatoIcons();
+    this.updateStatistics();
     
     // Request notification permission
     this.requestNotificationPermission();
@@ -119,7 +156,9 @@ class PomodoroTimer {
     });
     
     this.elements.dailyGoalInput?.addEventListener('change', (e) => {
-      this.dailyGoal = parseInt(e.target.value);
+      this.dailyGoal = clampDailyGoal(e.target.value);
+      e.target.value = this.dailyGoal;
+      this.updateTomatoIcons();
       this.updateStatistics();
       this.saveSettings();
     });
@@ -174,7 +213,7 @@ class PomodoroTimer {
     // Update UI
     this.elements.startBtn.style.display = 'none';
     this.elements.pauseBtn.style.display = 'inline-flex';
-    this.updateStatus('실행 중');
+    this.updateStatus(this.t.running);
     
     // Start timer
     this.intervalId = setInterval(() => this.tick(), 1000);
@@ -193,7 +232,7 @@ class PomodoroTimer {
     // Update UI
     this.elements.pauseBtn.style.display = 'none';
     this.elements.startBtn.style.display = 'inline-flex';
-    this.updateStatus('일시정지');
+    this.updateStatus(this.t.paused);
   }
   
   skip() {
@@ -214,7 +253,8 @@ class PomodoroTimer {
     // Update display
     this.updateDisplay();
     this.updateSessionInfo();
-    this.updateStatus('준비');
+    this.updateStatus(this.t.ready);
+    document.title = this.originalTitle;
     
     // Reset UI
     this.elements.pauseBtn.style.display = 'none';
@@ -285,7 +325,7 @@ class PomodoroTimer {
     } else {
       this.elements.pauseBtn.style.display = 'none';
       this.elements.startBtn.style.display = 'inline-flex';
-      this.updateStatus('준비');
+      this.updateStatus(this.t.ready);
     }
   }
   
@@ -328,7 +368,7 @@ class PomodoroTimer {
     
     // Update page title when running
     if (this.isRunning) {
-      document.title = `${minutes}:${seconds.toString().padStart(2, '0')} - 뽀모도로 타이머`;
+      document.title = `${minutes}:${seconds.toString().padStart(2, '0')} - ${this.t.titleSuffix}`;
     }
   }
   
@@ -346,9 +386,9 @@ class PomodoroTimer {
   updateSessionInfo() {
     if (this.elements.sessionType) {
       const typeText = {
-        'work': '작업 중',
-        'short-break': '짧은 휴식',
-        'long-break': '긴 휴식'
+        'work': this.t.work,
+        'short-break': this.t.shortBreak,
+        'long-break': this.t.longBreak
       };
       this.elements.sessionType.textContent = typeText[this.sessionType];
     }
@@ -367,21 +407,20 @@ class PomodoroTimer {
   updateTomatoIcons() {
     if (!this.elements.tomatoIcons) return;
     
-    const tomatoes = this.elements.tomatoIcons.querySelectorAll('.tomato');
-    tomatoes.forEach((tomato, index) => {
-      if (index < this.completedPomodoros) {
-        tomato.textContent = '🍅';
-        tomato.classList.add('completed');
-        tomato.classList.remove('pending');
-      } else {
-        tomato.textContent = '⚪';
-        tomato.classList.remove('completed');
-        tomato.classList.add('pending');
-      }
-    });
+    // One icon per pomodoro in the daily goal
+    let icons = '';
+    for (let i = 0; i < this.dailyGoal; i++) {
+      const done = i < this.completedPomodoros;
+      icons += `<span class="tomato ${done ? 'completed' : 'pending'}" aria-label="${done ? this.t.tomatoDone : this.t.tomatoPending}">${done ? '🍅' : '⚪'}</span>`;
+    }
+    this.elements.tomatoIcons.innerHTML = icons;
+
+    if (this.elements.dailyGoalText) {
+      this.elements.dailyGoalText.textContent = this.t.goal(this.dailyGoal);
+    }
     
     if (this.elements.completedCount) {
-      this.elements.completedCount.textContent = `완료: ${this.completedPomodoros}`;
+      this.elements.completedCount.textContent = this.t.completed(this.completedPomodoros);
     }
   }
   
@@ -445,12 +484,12 @@ class PomodoroTimer {
     
     if ('Notification' in window && Notification.permission === 'granted') {
       const title = this.sessionType === 'work' 
-        ? '🍅 작업 완료!' 
-        : '☕ 휴식 완료!';
+        ? this.t.workDoneTitle 
+        : this.t.breakDoneTitle;
       
       const body = this.sessionType === 'work'
-        ? `${this.completedPomodoros}개의 뽀모도로를 완료했습니다!`
-        : '다시 작업할 시간입니다!';
+        ? this.t.workDoneBody(this.completedPomodoros)
+        : this.t.breakDoneBody;
       
       new Notification(title, {
         body,
@@ -482,7 +521,7 @@ class PomodoroTimer {
           this.settings = { ...this.settings, ...data.settings };
         }
         if (data.dailyGoal) {
-          this.dailyGoal = data.dailyGoal;
+          this.dailyGoal = clampDailyGoal(data.dailyGoal);
         }
         
         // Update UI
@@ -518,8 +557,6 @@ class PomodoroTimer {
         if (data.date === today) {
           this.completedPomodoros = data.completedPomodoros || 0;
           this.stats = data.stats || this.stats;
-          this.updateTomatoIcons();
-          this.updateStatistics();
         }
       } catch (error) {
         // Silent fail
