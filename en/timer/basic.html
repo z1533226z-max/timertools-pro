@@ -27,7 +27,7 @@
     <link rel="icon" type="image/svg+xml" href="../../assets/images/favicon.svg">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../assets/css/styles.css">
-    <link rel="stylesheet" href="../../assets/css/timer.css">
+    <link rel="stylesheet" href="../../assets/css/basic-timer.css">
 
     <!-- Schema.org - SoftwareApplication -->
     <script type="application/ld+json">
@@ -55,7 +55,7 @@
           "name": "Is this online timer free to use?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes, this online timer is completely free. There is no signup required, no download needed, and no hidden costs. It runs directly in your web browser on any device including desktop, tablet, and mobile phone. You can set timers from one second up to 23 hours, 59 minutes, and 59 seconds."
+            "text": "Yes, this online timer is completely free. There is no signup required, no download needed, and no hidden costs. It runs directly in your web browser on any device including desktop, tablet, and mobile phone. You can set any countdown from one second up to 59 minutes and 59 seconds; dedicated 60- and 90-minute timers cover longer sessions."
           }
         },
         {
@@ -104,174 +104,123 @@
                 <button class="favorite-btn" aria-label="Add to favorites" title="Favorite">⭐</button>
             </div>
         </nav>
-        
-        <div class="ad-space ad-mobile-banner" aria-hidden="true">
-            <div class="ad-placeholder">320x50 Mobile Banner</div>
-        </div>
     </header>
 
-    <main id="main-content" class="timer-main" role="main">
-        <div class="container">
-            <div class="timer-layout">
-                <!-- Timer Section -->
-                <section class="timer-section" aria-labelledby="timer-title">
-                    <h2 id="timer-title" class="timer-title">Basic Timer</h2>
-                    
-                    <div class="timer-display" role="timer" aria-live="polite" aria-atomic="true">
-                        <div class="timer-circle">
-                            <svg class="timer-svg" viewBox="0 0 200 200" aria-hidden="true">
-                                <circle class="timer-bg" cx="100" cy="100" r="90" />
-                                <circle class="timer-progress" cx="100" cy="100" r="90" />
-                            </svg>
-                            <div class="timer-time" id="timer-display">05:00</div>
-                        </div>
+    <main id="main-content" class="main-container" role="main">
+        <div class="timer-container">
+            <section class="timer-display-section" aria-labelledby="timer-title">
+                <h2 id="timer-title" class="timer-title">Basic Timer</h2>
+
+                <div class="timer-display" role="timer" aria-live="polite">
+                    <div class="timer-circle">
+                        <svg class="progress-ring" width="280" height="280" viewBox="0 0 280 280">
+                            <circle class="progress-ring-bg" cx="140" cy="140" r="120" fill="none" stroke-width="8"/>
+                            <circle class="progress-ring-progress" cx="140" cy="140" r="120" fill="none" stroke-width="12" stroke-linecap="round" stroke-dasharray="754" stroke-dashoffset="754" transform="rotate(-90 140 140)"/>
+                        </svg>
+                        <div class="time-display" id="time-display">05:00</div>
+                        <div class="status-indicator" id="status-indicator">Ready</div>
                     </div>
-                    
-                    <div class="timer-controls">
-                        <div class="time-inputs" role="group" aria-labelledby="time-setting-label">
-                            <label id="time-setting-label" class="sr-only">Time Setting</label>
-                            <div class="input-group">
-                                <label for="hours">Hours</label>
-                                <input type="number" id="hours" min="0" max="23" value="0" aria-describedby="hours-desc">
-                                <small id="hours-desc" class="sr-only">Set hours from 0 to 23</small>
-                            </div>
-                            <div class="input-group">
-                                <label for="minutes">Minutes</label>
-                                <input type="number" id="minutes" min="0" max="59" value="5" aria-describedby="minutes-desc">
-                                <small id="minutes-desc" class="sr-only">Set minutes from 0 to 59</small>
-                            </div>
-                            <div class="input-group">
-                                <label for="seconds">Seconds</label>
-                                <input type="number" id="seconds" min="0" max="59" value="0" aria-describedby="seconds-desc">
-                                <small id="seconds-desc" class="sr-only">Set seconds from 0 to 59</small>
-                            </div>
-                        </div>
-                        
-                        <div class="control-buttons">
-                            <button id="start-btn" class="btn btn-primary timer-btn" aria-describedby="start-desc">
-                                <span class="btn-icon">▶️</span>
-                                <span class="btn-text">Start</span>
-                            </button>
-                            <button id="pause-btn" class="btn btn-secondary timer-btn" style="display: none;" aria-describedby="pause-desc">
-                                <span class="btn-icon">⏸️</span>
-                                <span class="btn-text">Pause</span>
-                            </button>
-                            <button id="reset-btn" class="btn btn-outline timer-btn" aria-describedby="reset-desc">
-                                <span class="btn-icon">🔄</span>
-                                <span class="btn-text">Reset</span>
-                            </button>
-                            <div id="start-desc" class="sr-only">Start the timer</div>
-                            <div id="pause-desc" class="sr-only">Pause the timer</div>
-                            <div id="reset-desc" class="sr-only">Reset the timer</div>
-                        </div>
+                </div>
+
+                <div class="time-inputs" role="group" aria-labelledby="input-label">
+                    <label id="input-label" class="sr-only">Time Setting</label>
+                    <div class="input-group">
+                        <label for="minutes">Min</label>
+                        <input type="number" id="minutes" min="0" max="59" value="5" aria-describedby="minutes-help">
+                        <span id="minutes-help" class="sr-only">Set minutes from 0 to 59</span>
                     </div>
-                </section>
-                
-                <!-- Sidebar -->
-                <aside class="timer-sidebar">
-                    <!-- Ad Space -->
-                    <div class="ad-space ad-rectangle" aria-hidden="true">
-                        <div class="ad-placeholder">300x250 Ad</div>
+                    <div class="input-separator">:</div>
+                    <div class="input-group">
+                        <label for="seconds">Sec</label>
+                        <input type="number" id="seconds" min="0" max="59" value="0" aria-describedby="seconds-help">
+                        <span id="seconds-help" class="sr-only">Set seconds from 0 to 59</span>
                     </div>
-                    
-                    <!-- Presets -->
-                    <div class="presets-section">
-                        <h3>Quick Settings</h3>
-                        <div class="preset-buttons" role="group" aria-label="Preset time buttons">
-                            <button class="preset-btn" data-time="60">1 min</button>
-                            <button class="preset-btn" data-time="180">3 min</button>
-                            <button class="preset-btn" data-time="300">5 min</button>
-                            <button class="preset-btn" data-time="600">10 min</button>
-                            <button class="preset-btn" data-time="900">15 min</button>
-                            <button class="preset-btn" data-time="1800">30 min</button>
-                            <button class="preset-btn" data-time="2700">45 min</button>
-                            <button class="preset-btn" data-time="3600">60 min</button>
-                        </div>
-                        <button class="btn btn-outline custom-preset-btn">Save Custom</button>
-                    </div>
-                </aside>
-            </div>
-        </div>
-        
-        <!-- Settings Panel -->
-        <section class="settings-panel" aria-labelledby="settings-title">
-            <div class="container">
-                <button class="settings-toggle" aria-expanded="false" aria-controls="settings-content">
-                    <span class="settings-icon">🔧</span>
+                </div>
+
+                <div class="timer-controls">
+                    <button id="start-btn" class="btn btn-primary btn-large" aria-describedby="start-help">
+                        <span class="btn-icon">&#9654;</span>
+                        <span class="btn-text">Start</span>
+                    </button>
+                    <button id="pause-btn" class="btn btn-secondary btn-large" style="display: none;" aria-describedby="pause-help">
+                        <span class="btn-icon">&#9208;</span>
+                        <span class="btn-text">Pause</span>
+                    </button>
+                    <button id="reset-btn" class="btn btn-outline btn-large" aria-describedby="reset-help">
+                        <span class="btn-icon">&#8635;</span>
+                        <span class="btn-text">Reset</span>
+                    </button>
+                    <div id="start-help" class="sr-only">Start the timer</div>
+                    <div id="pause-help" class="sr-only">Pause the timer</div>
+                    <div id="reset-help" class="sr-only">Reset the timer</div>
+                </div>
+            </section>
+
+            <section class="presets-section" aria-labelledby="presets-title">
+                <h2 id="presets-title" class="section-title">Quick Settings</h2>
+                <div class="preset-grid" role="group" aria-labelledby="presets-title">
+                    <button class="preset-btn" data-minutes="1" data-seconds="0">1 min</button>
+                    <button class="preset-btn" data-minutes="3" data-seconds="0">3 min</button>
+                    <button class="preset-btn" data-minutes="5" data-seconds="0">5 min</button>
+                    <button class="preset-btn" data-minutes="10" data-seconds="0">10 min</button>
+                    <button class="preset-btn" data-minutes="15" data-seconds="0">15 min</button>
+                    <button class="preset-btn" data-minutes="30" data-seconds="0">30 min</button>
+                </div>
+            </section>
+
+            <section class="presets-section" aria-labelledby="time-links-title" style="margin-top: var(--space-4);">
+                <h2 id="time-links-title" class="section-title">Timers by Duration</h2>
+                <div class="preset-grid" role="group">
+                    <a href="5min.html" class="preset-btn" style="text-decoration:none;text-align:center;">5 Minute Timer</a>
+                    <a href="10min.html" class="preset-btn" style="text-decoration:none;text-align:center;">10 Minute Timer</a>
+                    <a href="15min.html" class="preset-btn" style="text-decoration:none;text-align:center;">15 Minute Timer</a>
+                    <a href="20min.html" class="preset-btn" style="text-decoration:none;text-align:center;">20 Minute Timer</a>
+                    <a href="30min.html" class="preset-btn" style="text-decoration:none;text-align:center;">30 Minute Timer</a>
+                    <a href="60min.html" class="preset-btn" style="text-decoration:none;text-align:center;">60 Minute Timer</a>
+                </div>
+            </section>
+
+            <section class="settings-section" aria-labelledby="settings-title">
+                <button class="settings-toggle" aria-expanded="false" aria-controls="settings-panel">
+                    <span class="settings-icon">&#9881;</span>
                     <span id="settings-title">Settings</span>
-                    <span class="toggle-icon" aria-hidden="true">▼</span>
+                    <span class="toggle-arrow">&#9660;</span>
                 </button>
-                
-                <div id="settings-content" class="settings-content" hidden>
+                <div id="settings-panel" class="settings-panel" hidden>
+                    <div class="settings-header">
+                        <button class="settings-close" aria-label="Close settings">
+                            <span class="close-icon">&#10005;</span>
+                            <span class="close-text">Close</span>
+                        </button>
+                    </div>
                     <div class="settings-grid">
                         <div class="setting-group">
-                            <h4>Alarm Settings</h4>
+                            <h3>Notifications</h3>
                             <div class="setting-item">
-                                <label for="alarm-sound">Alarm Sound</label>
-                                <select id="alarm-sound">
-                                    <option value="classic">Classic</option>
-                                    <option value="digital">Digital</option>
-                                    <option value="bell">Bell</option>
-                                    <option value="chime">Chime</option>
-                                </select>
-                                <button class="btn btn-sm test-sound">Test</button>
+                                <label for="sound-enabled">
+                                    <input type="checkbox" id="sound-enabled" checked>
+                                    Sound alert
+                                </label>
                             </div>
                             <div class="setting-item">
                                 <label for="volume">Volume</label>
-                                <input type="range" id="volume" min="0" max="100" value="70" aria-describedby="volume-desc">
-                                <span id="volume-desc" class="volume-display">70%</span>
-                            </div>
-                            <div class="setting-item">
-                                <label>
-                                    <input type="checkbox" id="browser-notification" checked>
-                                    Enable browser notifications
-                                </label>
-                            </div>
-                            <div class="setting-item">
-                                <label>
-                                    <input type="checkbox" id="desktop-notification" checked>
-                                    Enable desktop notifications
-                                </label>
+                                <input type="range" id="volume" min="0" max="100" value="70">
+                                <span class="volume-value">70%</span>
                             </div>
                         </div>
-                        
                         <div class="setting-group">
-                            <h4>Visual Effects</h4>
+                            <h3>Display</h3>
                             <div class="setting-item">
-                                <label for="theme-select">Theme</label>
-                                <select id="theme-select">
-                                    <option value="default">Default</option>
-                                    <option value="minimal">Minimal</option>
-                                    <option value="colorful">Colorful</option>
-                                </select>
-                            </div>
-                            <div class="setting-item">
-                                <label for="brightness">Brightness</label>
-                                <input type="range" id="brightness" min="50" max="100" value="100">
-                                <span class="brightness-display">100%</span>
-                            </div>
-                            <div class="setting-item">
-                                <button class="btn btn-outline fullscreen-btn">Fullscreen Mode</button>
-                            </div>
-                            <div class="setting-item">
-                                <label>
-                                    <input type="checkbox" id="auto-repeat">
-                                    Auto repeat
+                                <label for="fullscreen-btn">
+                                    <button id="fullscreen-btn" class="btn btn-outline">Fullscreen</button>
                                 </label>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
-        
-        <!-- Native Ad -->
-        <section class="ad-space ad-native" aria-hidden="true">
-            <div class="container">
-                <div class="ad-placeholder">336x280 Native Ad</div>
-            </div>
-        </section>
-        
+            </section>
+        </div>
+
         <!-- Guide Section -->
         <section class="guide-section" aria-labelledby="guide-title">
             <div class="container">
@@ -279,7 +228,7 @@
                 
                 <ol class="usage-steps">
                     <li>
-                        <strong>Set Time:</strong> Set your desired time in hours/minutes/seconds or use preset buttons
+                        <strong>Set Time:</strong> Enter minutes and seconds, or tap a quick-setting button
                     </li>
                     <li>
                         <strong>Start Timer:</strong> Click the start button to begin countdown
@@ -292,7 +241,7 @@
                 <div class="tips-section">
                     <h3>💡 Useful Tips</h3>
                     <ul>
-                        <li>Save frequently used times as presets</li>
+                        <li>Use the quick-setting buttons for common durations</li>
                         <li>Keyboard shortcuts: Spacebar (start/stop), R (reset)</li>
                         <li>Use fullscreen mode for better focus</li>
                         <li>Allow browser notifications to get alerts from other tabs</li>
@@ -338,7 +287,7 @@
                 <div class="faq-list" style="max-width: 820px; margin: 0 auto;">
                     <div class="faq-item" style="margin-bottom: var(--space-5);">
                         <h3>Is this online timer free to use?</h3>
-                        <p>Yes, this online timer is completely free. There is no signup required, no download needed, and no hidden costs. It runs directly in your web browser on any device including desktop, tablet, and mobile phone. You can set timers from one second up to 23 hours, 59 minutes, and 59 seconds.</p>
+                        <p>Yes, this online timer is completely free. There is no signup required, no download needed, and no hidden costs. It runs directly in your web browser on any device including desktop, tablet, and mobile phone. You can set any countdown from one second up to 59 minutes and 59 seconds; dedicated 60- and 90-minute timers cover longer sessions.</p>
                     </div>
                     <div class="faq-item" style="margin-bottom: var(--space-5);">
                         <h3>Does the timer work in the background?</h3>
@@ -354,10 +303,6 @@
     </main>
     
     <footer class="footer" role="contentinfo">
-        <div class="ad-space ad-footer" aria-hidden="true">
-            <div class="ad-placeholder">728x90 Footer Ad</div>
-        </div>
-        
         <div class="container">
             <div class="footer-content">
                 <div class="footer-links">
@@ -372,13 +317,13 @@
         </div>
     </footer>
     
-    <!-- Audio elements for notifications -->
-    <audio id="alarm-audio">
-        <source src="../../assets/audio/classic.mp3" type="audio/mpeg">
-        <source src="../../assets/audio/classic.ogg" type="audio/ogg">
-    </audio>
-    
+    <div id="announcements" aria-live="polite" aria-atomic="true" class="sr-only"></div>
+
+    <script src="../../assets/js/utils.js"></script>
+    <script src="../../assets/js/timer-settings.js"></script>
+    <script src="../../assets/js/i18n.js"></script>
     <script src="../../assets/js/main.js"></script>
-    <script src="../../assets/js/timer.js"></script>
+    <script src="../../assets/js/timer-i18n-integration.js"></script>
+    <script src="../../assets/js/basic-timer.js"></script>
 </body>
 </html>
