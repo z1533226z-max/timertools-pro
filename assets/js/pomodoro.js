@@ -1,7 +1,34 @@
 // ===== POMODORO TIMER IMPLEMENTATION ===== //
 
+// UI strings per page language (KO: /timer/pomodoro.html, EN: /en/timer/pomodoro.html)
+const POMODORO_STRINGS = {
+  ko: {
+    ready: '준비', running: '실행 중', paused: '일시정지',
+    work: '작업 중', shortBreak: '짧은 휴식', longBreak: '긴 휴식',
+    completed: (n) => `완료: ${n}`,
+    titleSuffix: '뽀모도로 타이머',
+    workDoneTitle: '🍅 작업 완료!', breakDoneTitle: '☕ 휴식 완료!',
+    workDoneBody: (n) => `${n}개의 뽀모도로를 완료했습니다!`,
+    breakDoneBody: '다시 작업할 시간입니다!'
+  },
+  en: {
+    ready: 'Ready', running: 'Running', paused: 'Paused',
+    work: 'Focus', shortBreak: 'Short break', longBreak: 'Long break',
+    completed: (n) => `Completed: ${n}`,
+    titleSuffix: 'Pomodoro Timer',
+    workDoneTitle: '🍅 Focus session complete!', breakDoneTitle: '☕ Break is over!',
+    workDoneBody: (n) => `You have completed ${n} pomodoro${n === 1 ? '' : 's'}!`,
+    breakDoneBody: 'Time to get back to work!'
+  }
+};
+
 class PomodoroTimer {
   constructor() {
+    // Page language decides the UI strings; keep the static title to restore on reset
+    const lang = (document.documentElement.lang || 'ko').split('-')[0];
+    this.t = POMODORO_STRINGS[lang] || POMODORO_STRINGS.ko;
+    this.originalTitle = document.title;
+
     // Timer state
     this.isRunning = false;
     this.isPaused = false;
@@ -174,7 +201,7 @@ class PomodoroTimer {
     // Update UI
     this.elements.startBtn.style.display = 'none';
     this.elements.pauseBtn.style.display = 'inline-flex';
-    this.updateStatus('실행 중');
+    this.updateStatus(this.t.running);
     
     // Start timer
     this.intervalId = setInterval(() => this.tick(), 1000);
@@ -193,7 +220,7 @@ class PomodoroTimer {
     // Update UI
     this.elements.pauseBtn.style.display = 'none';
     this.elements.startBtn.style.display = 'inline-flex';
-    this.updateStatus('일시정지');
+    this.updateStatus(this.t.paused);
   }
   
   skip() {
@@ -214,7 +241,8 @@ class PomodoroTimer {
     // Update display
     this.updateDisplay();
     this.updateSessionInfo();
-    this.updateStatus('준비');
+    this.updateStatus(this.t.ready);
+    document.title = this.originalTitle;
     
     // Reset UI
     this.elements.pauseBtn.style.display = 'none';
@@ -285,7 +313,7 @@ class PomodoroTimer {
     } else {
       this.elements.pauseBtn.style.display = 'none';
       this.elements.startBtn.style.display = 'inline-flex';
-      this.updateStatus('준비');
+      this.updateStatus(this.t.ready);
     }
   }
   
@@ -328,7 +356,7 @@ class PomodoroTimer {
     
     // Update page title when running
     if (this.isRunning) {
-      document.title = `${minutes}:${seconds.toString().padStart(2, '0')} - 뽀모도로 타이머`;
+      document.title = `${minutes}:${seconds.toString().padStart(2, '0')} - ${this.t.titleSuffix}`;
     }
   }
   
@@ -346,9 +374,9 @@ class PomodoroTimer {
   updateSessionInfo() {
     if (this.elements.sessionType) {
       const typeText = {
-        'work': '작업 중',
-        'short-break': '짧은 휴식',
-        'long-break': '긴 휴식'
+        'work': this.t.work,
+        'short-break': this.t.shortBreak,
+        'long-break': this.t.longBreak
       };
       this.elements.sessionType.textContent = typeText[this.sessionType];
     }
@@ -381,7 +409,7 @@ class PomodoroTimer {
     });
     
     if (this.elements.completedCount) {
-      this.elements.completedCount.textContent = `완료: ${this.completedPomodoros}`;
+      this.elements.completedCount.textContent = this.t.completed(this.completedPomodoros);
     }
   }
   
@@ -445,12 +473,12 @@ class PomodoroTimer {
     
     if ('Notification' in window && Notification.permission === 'granted') {
       const title = this.sessionType === 'work' 
-        ? '🍅 작업 완료!' 
-        : '☕ 휴식 완료!';
+        ? this.t.workDoneTitle 
+        : this.t.breakDoneTitle;
       
       const body = this.sessionType === 'work'
-        ? `${this.completedPomodoros}개의 뽀모도로를 완료했습니다!`
-        : '다시 작업할 시간입니다!';
+        ? this.t.workDoneBody(this.completedPomodoros)
+        : this.t.breakDoneBody;
       
       new Notification(title, {
         body,

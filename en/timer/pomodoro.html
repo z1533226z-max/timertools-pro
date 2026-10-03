@@ -27,7 +27,7 @@
     <link rel="icon" type="image/svg+xml" href="../../assets/images/favicon.svg">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../assets/css/styles.css">
-    <link rel="stylesheet" href="../../assets/css/timer.css">
+    <link rel="stylesheet" href="../../assets/css/pomodoro.css">
 
     <!-- Schema.org - SoftwareApplication -->
     <script type="application/ld+json">
@@ -87,7 +87,7 @@
           "name": "Can I change the work and break durations?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. While the classic Pomodoro cycle is 25 minutes of work and a 5-minute break, this timer lets you customize the work time, short break, long break, and the number of sessions before a long break. Many people prefer a 50/10 or 45/15 cycle for deep work, so you can adapt the timer to your own focus rhythm."
+            "text": "Yes. While the classic Pomodoro cycle is 25 minutes of work and a 5-minute break, this timer lets you customize the work time, short break, long break, and your daily pomodoro goal. Many people prefer a 50/10 or 45/15 cycle for deep work, so you can adapt the timer to your own focus rhythm."
           }
         },
         {
@@ -95,7 +95,7 @@
           "name": "Does the Pomodoro timer play a sound when time is up?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. The timer plays an audible alarm when each work or break session ends, and you can adjust the volume in the settings. You can also enable browser notifications so you are alerted even when the timer tab is in the background, making it easy to stay on track without watching the clock."
+            "text": "Yes. The timer plays an audible alarm when each work or break session ends. You can also enable browser notifications so you are alerted even when the timer tab is in the background, making it easy to stay on track without watching the clock."
           }
         }
       ]
@@ -129,120 +129,165 @@
                 <button class="favorite-btn" aria-label="Add to favorites" title="Favorite">⭐</button>
             </div>
         </nav>
-        
-        <div class="ad-space ad-mobile-banner" aria-hidden="true">
-            <div class="ad-placeholder">320x50 Mobile Banner</div>
-        </div>
     </header>
 
-    <main id="main-content" class="timer-main" role="main">
+    <main id="main-content" class="pomodoro-main" role="main">
         <div class="container">
-            <div class="timer-layout">
+            <div class="pomodoro-layout">
                 <!-- Timer Section -->
-                <section class="timer-section pomodoro-section" aria-labelledby="timer-title">
-                    <h1 id="timer-title" class="timer-title">25-Minute Pomodoro Timer</h1>
-                    
-                    <!-- Session Status -->
-                    <div class="session-status">
-                        <div class="session-type" id="session-type">Work Time</div>
-                        <div class="session-counter">
-                            Session <span id="session-count">1</span> / <span id="total-sessions">4</span>
+                <section class="pomodoro-section" aria-labelledby="timer-title">
+                    <div class="session-header">
+                        <h1 id="timer-title" class="pomodoro-title">25-Minute Pomodoro Timer</h1>
+                        <div class="session-info" aria-live="polite">
+                            <span class="session-type" id="session-type">Focus</span>
+                            <span class="session-count" id="session-count">(1/4)</span>
                         </div>
                     </div>
-                    
-                    <div class="timer-display" role="timer" aria-live="polite" aria-atomic="true">
-                        <div class="timer-circle">
-                            <svg class="timer-svg" viewBox="0 0 200 200" aria-hidden="true">
-                                <circle class="timer-bg" cx="100" cy="100" r="90" />
-                                <circle class="timer-progress" cx="100" cy="100" r="90" />
+
+                    <div class="pomodoro-display" role="timer" aria-live="polite" aria-atomic="true">
+                        <div class="pomodoro-circle">
+                            <svg class="pomodoro-svg" viewBox="0 0 200 200" aria-hidden="true">
+                                <circle class="pomodoro-bg" cx="100" cy="100" r="90" />
+                                <circle class="pomodoro-progress" cx="100" cy="100" r="90" />
                             </svg>
-                            <div class="timer-time" id="timer-display">25:00</div>
+                            <div class="pomodoro-time" id="pomodoro-display">25:00</div>
+                            <div class="pomodoro-status" id="pomodoro-status">Ready</div>
                         </div>
                     </div>
-                    
-                    <div class="timer-controls">
-                        <div class="control-buttons">
-                            <button id="start-btn" class="btn btn-primary timer-btn">
-                                <span class="btn-icon">▶️</span>
-                                <span class="btn-text">Start</span>
-                            </button>
-                            <button id="pause-btn" class="btn btn-secondary timer-btn" style="display: none;">
-                                <span class="btn-icon">⏸️</span>
-                                <span class="btn-text">Pause</span>
-                            </button>
-                            <button id="skip-btn" class="btn btn-outline timer-btn">
-                                <span class="btn-icon">⏭️</span>
-                                <span class="btn-text">Skip</span>
-                            </button>
-                            <button id="reset-btn" class="btn btn-outline timer-btn">
-                                <span class="btn-icon">🔄</span>
-                                <span class="btn-text">Reset</span>
-                            </button>
+
+                    <div class="tomato-progress" aria-label="Today's pomodoro progress">
+                        <div class="tomato-icons" id="tomato-icons">
+                            <span class="tomato pending" aria-label="Pomodoro not completed">⚪</span>
+                            <span class="tomato pending" aria-label="Pomodoro not completed">⚪</span>
+                            <span class="tomato pending" aria-label="Pomodoro not completed">⚪</span>
+                            <span class="tomato pending" aria-label="Pomodoro not completed">⚪</span>
+                            <span class="tomato pending" aria-label="Pomodoro not completed">⚪</span>
+                            <span class="tomato pending" aria-label="Pomodoro not completed">⚪</span>
+                            <span class="tomato pending" aria-label="Pomodoro not completed">⚪</span>
+                            <span class="tomato pending" aria-label="Pomodoro not completed">⚪</span>
+                        </div>
+                        <div class="progress-text">
+                            <span id="daily-goal">Goal: 8 pomodoros</span>
+                            <span id="completed-count">Completed: 0</span>
+                        </div>
+                    </div>
+
+                    <div class="pomodoro-controls">
+                        <button id="pomodoro-start" class="btn btn-primary pomodoro-btn" aria-describedby="start-help">
+                            <span class="btn-icon">▶️</span>
+                            <span class="btn-text">Start</span>
+                        </button>
+                        <button id="pomodoro-pause" class="btn btn-secondary pomodoro-btn" style="display: none;" aria-describedby="pause-help">
+                            <span class="btn-icon">⏸️</span>
+                            <span class="btn-text">Pause</span>
+                        </button>
+                        <button id="pomodoro-skip" class="btn btn-outline pomodoro-btn" aria-describedby="skip-help">
+                            <span class="btn-icon">⏭️</span>
+                            <span class="btn-text">Skip</span>
+                        </button>
+                        <button id="pomodoro-reset" class="btn btn-outline pomodoro-btn" aria-describedby="reset-help">
+                            <span class="btn-icon">🔄</span>
+                            <span class="btn-text">Reset</span>
+                        </button>
+
+                        <div class="control-help" role="region" aria-label="Button help">
+                            <div id="start-help" class="sr-only">Start the current session</div>
+                            <div id="pause-help" class="sr-only">Pause the timer</div>
+                            <div id="skip-help" class="sr-only">Skip the current session and move to the next one</div>
+                            <div id="reset-help" class="sr-only">Reset the timer and return to the first session</div>
                         </div>
                     </div>
                 </section>
-                
+
                 <!-- Sidebar -->
-                <aside class="timer-sidebar">
-                    <!-- Ad Space -->
-                    <div class="ad-space ad-rectangle" aria-hidden="true">
-                        <div class="ad-placeholder">300x250 Ad</div>
-                    </div>
-                    
-                    <!-- Settings -->
-                    <div class="settings-section">
-                        <h3>Time Settings</h3>
-                        <div class="time-settings">
-                            <div class="setting-item">
-                                <label for="work-time">Work Time (minutes)</label>
-                                <input type="number" id="work-time" min="1" max="60" value="25">
+                <aside class="pomodoro-sidebar">
+                    <!-- Today's Statistics -->
+                    <div class="stats-widget">
+                        <h3>Today</h3>
+                        <div class="stat-grid">
+                            <div class="stat-item">
+                                <span class="stat-icon">🍅</span>
+                                <div class="stat-info">
+                                    <span class="stat-value" id="daily-pomodoros">0</span>
+                                    <span class="stat-label">Done</span>
+                                </div>
                             </div>
-                            <div class="setting-item">
-                                <label for="break-time">Break Time (minutes)</label>
-                                <input type="number" id="break-time" min="1" max="30" value="5">
+                            <div class="stat-item">
+                                <span class="stat-icon">🎯</span>
+                                <div class="stat-info">
+                                    <span class="stat-value" id="daily-target">8</span>
+                                    <span class="stat-label">Goal</span>
+                                </div>
                             </div>
-                            <div class="setting-item">
-                                <label for="long-break-time">Long Break Time (minutes)</label>
-                                <input type="number" id="long-break-time" min="5" max="60" value="15">
+                            <div class="stat-item">
+                                <span class="stat-icon">⏱️</span>
+                                <div class="stat-info">
+                                    <span class="stat-value" id="focus-time">0m</span>
+                                    <span class="stat-label">Focus</span>
+                                </div>
                             </div>
-                            <div class="setting-item">
-                                <label for="sessions-before-long-break">Sessions Before Long Break</label>
-                                <input type="number" id="sessions-before-long-break" min="2" max="8" value="4">
+                            <div class="stat-item">
+                                <span class="stat-icon">☕</span>
+                                <div class="stat-info">
+                                    <span class="stat-value" id="break-time">0m</span>
+                                    <span class="stat-label">Breaks</span>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    
-                    <!-- Audio Settings -->
-                    <div class="settings-section">
-                        <h3>Notification Settings</h3>
-                        <div class="audio-settings">
-                            <div class="setting-item">
-                                <label for="volume">Volume</label>
-                                <input type="range" id="volume" min="0" max="100" value="70">
-                                <span class="volume-display">70%</span>
-                            </div>
-                            <div class="setting-item">
-                                <label>
-                                    <input type="checkbox" id="notifications" checked>
-                                    Enable browser notifications
-                                </label>
-                            </div>
-                            <div class="setting-item">
-                                <button class="btn btn-outline fullscreen-btn">Fullscreen Mode</button>
-                            </div>
+
+                    <!-- Quick Settings -->
+                    <div class="quick-settings">
+                        <h3>Quick Settings</h3>
+                        <div class="setting-row">
+                            <label for="work-duration">Focus time</label>
+                            <select id="work-duration">
+                                <option value="1500">25 min (classic)</option>
+                                <option value="900">15 min</option>
+                                <option value="2700">45 min</option>
+                                <option value="3000">50 min</option>
+                                <option value="3600">60 min</option>
+                            </select>
+                        </div>
+                        <div class="setting-row">
+                            <label for="short-break">Short break</label>
+                            <select id="short-break">
+                                <option value="300">5 min (classic)</option>
+                                <option value="180">3 min</option>
+                                <option value="600">10 min</option>
+                                <option value="900">15 min</option>
+                            </select>
+                        </div>
+                        <div class="setting-row">
+                            <label for="long-break">Long break</label>
+                            <select id="long-break">
+                                <option value="900">15 min (classic)</option>
+                                <option value="1200">20 min</option>
+                                <option value="1800">30 min</option>
+                            </select>
+                        </div>
+                        <div class="setting-row">
+                            <label for="daily-goal-input">Daily goal</label>
+                            <input type="number" id="daily-goal-input" min="1" max="16" value="8" aria-describedby="goal-desc">
+                            <small id="goal-desc" class="sr-only">Number of pomodoros you want to finish today</small>
+                        </div>
+                        <div class="setting-row">
+                            <label>
+                                <input type="checkbox" id="auto-start-breaks" checked>
+                                Auto-start breaks
+                            </label>
+                        </div>
+                        <div class="setting-row">
+                            <label>
+                                <input type="checkbox" id="auto-start-work">
+                                Auto-start next focus session
+                            </label>
                         </div>
                     </div>
                 </aside>
             </div>
         </div>
-        
-        <!-- Native Ad -->
-        <section class="ad-space ad-native" aria-hidden="true">
-            <div class="container">
-                <div class="ad-placeholder">336x280 Native Ad</div>
-            </div>
-        </section>
-        
+
         <!-- Guide Section -->
         <section class="guide-section" aria-labelledby="guide-title">
             <div class="container">
@@ -323,11 +368,11 @@
                     </div>
                     <div class="faq-item" style="margin-bottom: var(--space-5);">
                         <h3>Can I change the work and break durations?</h3>
-                        <p>Yes. While the classic cycle is 25 minutes of work and a 5-minute break, this timer lets you customize the work time, short break, long break, and the number of sessions before a long break. Many people prefer a 50/10 or 45/15 cycle for deep work, so you can adapt the timer to your own focus rhythm.</p>
+                        <p>Yes. While the classic cycle is 25 minutes of work and a 5-minute break, this timer lets you customize the work time, short break, long break, and your daily pomodoro goal. Many people prefer a 50/10 or 45/15 cycle for deep work, so you can adapt the timer to your own focus rhythm.</p>
                     </div>
                     <div class="faq-item">
                         <h3>Does the timer play a sound when time is up?</h3>
-                        <p>Yes. The timer plays an audible alarm when each work or break session ends, and you can adjust the volume in the settings. You can also enable browser notifications so you are alerted even when the tab is in the background — staying on track without watching the clock.</p>
+                        <p>Yes. The timer plays an audible alarm when each work or break session ends. You can also enable browser notifications so you are alerted even when the tab is in the background — staying on track without watching the clock.</p>
                     </div>
                 </div>
             </div>
@@ -365,10 +410,6 @@
     </main>
     
     <footer class="footer" role="contentinfo">
-        <div class="ad-space ad-footer" aria-hidden="true">
-            <div class="ad-placeholder">728x90 Footer Ad</div>
-        </div>
-        
         <div class="container">
             <div class="footer-content">
                 <div class="footer-links">
@@ -383,15 +424,11 @@
         </div>
     </footer>
     
-    <!-- Audio elements for notifications -->
-    <audio id="alarm-audio">
-        <source src="../../assets/audio/classic.mp3" type="audio/mpeg">
-        <source src="../../assets/audio/classic.ogg" type="audio/ogg">
-    </audio>
-    
-    <script src="../../assets/js/seo-performance.js"></script>
-    <script src="../../assets/js/seo-i18n.js"></script>
+    <script src="../../assets/js/utils.js"></script>
+    <script src="../../assets/js/timer-settings.js"></script>
+    <script src="../../assets/js/i18n.js"></script>
     <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/timer-i18n-integration.js"></script>
     <script src="../../assets/js/pomodoro.js"></script>
 </body>
 </html>
