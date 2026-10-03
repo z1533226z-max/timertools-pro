@@ -1,5 +1,39 @@
 // ===== BASIC TIMER - CLEAN IMPLEMENTATION ===== //
 
+// Screen-reader announcements, errors and notifications per page language
+const BASIC_TIMER_STRINGS = {
+  ko: {
+    titleRunning: '타이머 실행 중',
+    startLabel: '시작', continueLabel: '계속',
+    started: '타이머가 시작되었습니다',
+    paused: '타이머가 일시정지되었습니다',
+    resumed: '타이머가 재시작되었습니다',
+    reset: '타이머가 초기화되었습니다',
+    completed: '타이머가 완료되었습니다!',
+    noTime: '시간을 설정해주세요',
+    timeSet: (m, s) => `${m}분 ${s}초로 설정되었습니다`,
+    leaveWarning: '타이머가 실행 중입니다. 정말 나가시겠습니까?',
+    notifyTitle: '타이머 완료!',
+    notifyBody: (time) => `${time} 타이머가 완료되었습니다.`,
+    pageError: '오류가 발생했습니다. 페이지를 새로고침해주세요.'
+  },
+  en: {
+    titleRunning: 'Timer running',
+    startLabel: 'Start', continueLabel: 'Continue',
+    started: 'Timer started',
+    paused: 'Timer paused',
+    resumed: 'Timer resumed',
+    reset: 'Timer reset',
+    completed: 'Timer finished!',
+    noTime: 'Please set a time',
+    timeSet: (m, s) => `Set to ${m} min ${s} sec`,
+    leaveWarning: 'The timer is still running. Leave this page?',
+    notifyTitle: 'Time is up!',
+    notifyBody: (time) => `Your ${time} timer has finished.`,
+    pageError: 'Something went wrong. Please reload the page.'
+  }
+};
+
 class BasicTimer {
   constructor() {
     // Timer state
@@ -32,6 +66,11 @@ class BasicTimer {
   }
   
   // ===== LANGUAGE SUPPORT ===== //
+  // Strings follow currentLanguage, which the language selector can change at runtime
+  get t() {
+    return BASIC_TIMER_STRINGS[this.currentLanguage] || BASIC_TIMER_STRINGS.ko;
+  }
+
   setupLanguageSupport() {
     // Wait for i18n to be ready
     document.addEventListener('i18n-ready', (event) => {
@@ -59,8 +98,6 @@ class BasicTimer {
     if (!window.i18n) return;
     
     const startBtn = document.querySelector('[data-i18n="timer.start"] .btn-text');
-    const pauseBtn = document.querySelector('[data-i18n="timer.pause"] .btn-text');
-    const resetBtn = document.querySelector('[data-i18n="timer.reset"] .btn-text');
     
     if (startBtn) {
       startBtn.textContent = this.isPaused ? 
@@ -190,7 +227,7 @@ class BasicTimer {
     window.addEventListener('beforeunload', (e) => {
       if (this.isRunning) {
         e.preventDefault();
-        e.returnValue = '타이머가 실행 중입니다. 정말 나가시겠습니까?';
+        e.returnValue = this.t.leaveWarning;
       }
     });
   }
@@ -205,7 +242,7 @@ class BasicTimer {
     this.updateFromInputs();
     
     if (this.totalSeconds <= 0) {
-      this.showError('시간을 설정해주세요');
+      this.showError(this.t.noTime);
       this.elements.minutesInput.focus();
       return;
     }
@@ -238,7 +275,7 @@ class BasicTimer {
       }
     }, 1000);
     
-    this.announce('타이머가 시작되었습니다');
+    this.announce(this.t.started);
   }
   
   pause() {
@@ -252,7 +289,7 @@ class BasicTimer {
     this.updateStatus('paused');
     this.updateTimerClass('paused');
     
-    this.announce('타이머가 일시정지되었습니다');
+    this.announce(this.t.paused);
   }
   
   resume() {
@@ -276,7 +313,7 @@ class BasicTimer {
       }
     }, 1000);
     
-    this.announce('타이머가 재시작되었습니다');
+    this.announce(this.t.resumed);
   }
   
   reset() {
@@ -297,7 +334,7 @@ class BasicTimer {
     this.updateDisplay();
     this.updateProgress();
     
-    this.announce('타이머가 초기화되었습니다');
+    this.announce(this.t.reset);
   }
   
   complete() {
@@ -328,7 +365,7 @@ class BasicTimer {
     
     this.playCompletionSound();
     this.showNotification();
-    this.announce('타이머가 완료되었습니다!');
+    this.announce(this.t.completed);
   }
   
   // ===== DISPLAY UPDATES ===== //
@@ -362,7 +399,7 @@ class BasicTimer {
       // Update start button text
       const btnText = this.elements.startBtn.querySelector('.btn-text');
       const textKey = this.isPaused ? 'timer.continue' : 'timer.start';
-      const translatedText = window.i18n ? window.i18n.get(textKey) : (this.isPaused ? '계속' : '시작');
+      const translatedText = window.i18n ? window.i18n.get(textKey) : (this.isPaused ? this.t.continueLabel : this.t.startLabel);
       btnText.textContent = translatedText;
       btnText.setAttribute('data-i18n', textKey);
     }
@@ -384,7 +421,7 @@ class BasicTimer {
   updatePageTitle() {
     if (this.isRunning && this.remainingSeconds > 0) {
       const timeStr = this.formatTime(this.remainingSeconds);
-      document.title = `${timeStr} - ${this.currentLanguage === 'en' ? 'Timer running' : '타이머 실행 중'}`;
+      document.title = `${timeStr} - ${this.t.titleRunning}`;
     }
   }
   
@@ -418,7 +455,7 @@ class BasicTimer {
     this.elements.secondsInput.value = seconds;
     this.updateFromInputs();
     
-    this.announce(`${minutes}분 ${seconds}초로 설정되었습니다`);
+    this.announce(this.t.timeSet(minutes, seconds));
   }
   
   formatTime(totalSeconds) {
@@ -495,40 +532,6 @@ class BasicTimer {
     localStorage.setItem('basic-timer-settings', JSON.stringify(this.settings));
   }
   
-  // ===== INTERNATIONALIZATION ===== //
-  setupI18n() {
-    // Listen for language change events
-    document.addEventListener('i18n-ready', () => {
-      this.updateI18nContent();
-    });
-    
-    // Listen for language changes
-    if (window.i18n) {
-      window.i18n.addLanguageChangeObserver(() => {
-        this.updateI18nContent();
-      });
-    }
-  }
-  
-  updateI18nContent() {
-    // Update status if it exists
-    if (this.elements.statusIndicator) {
-      const currentDataI18n = this.elements.statusIndicator.getAttribute('data-i18n');
-      if (currentDataI18n && window.i18n) {
-        this.elements.statusIndicator.textContent = window.i18n.get(currentDataI18n);
-      }
-    }
-    
-    // Update start button text
-    const startBtnText = this.elements.startBtn.querySelector('.btn-text');
-    if (startBtnText) {
-      const textKey = this.isPaused ? 'timer.continue' : 'timer.start';
-      if (window.i18n) {
-        startBtnText.textContent = window.i18n.get(textKey);
-      }
-    }
-  }
-
   // ===== AUDIO ===== //
   initAudio() {
     if (!this.audioContext && this.settings.soundEnabled) {
@@ -598,9 +601,9 @@ class BasicTimer {
     // Show notification if permitted
     if ('Notification' in window && Notification.permission === 'granted') {
       const timeStr = this.formatTime(this.totalSeconds);
-      const notification = new Notification('타이머 완료!', {
-        body: `${timeStr} 타이머가 완료되었습니다.`,
-        icon: '../assets/images/favicon.svg',
+      const notification = new Notification(this.t.notifyTitle, {
+        body: this.t.notifyBody(timeStr),
+        icon: '/assets/images/favicon.svg', // absolute: also used from /en/timer/ pages
         tag: 'timer-complete'
       });
       
@@ -717,6 +720,6 @@ document.addEventListener('DOMContentLoaded', () => {
 window.addEventListener('error', (e) => {
   console.error('기본 타이머 오류:', e.error);
   if (window.basicTimer && window.basicTimer.elements.announcements) {
-    window.basicTimer.announce('오류가 발생했습니다. 페이지를 새로고침해주세요.');
+    window.basicTimer.announce(window.basicTimer.t.pageError);
   }
 });

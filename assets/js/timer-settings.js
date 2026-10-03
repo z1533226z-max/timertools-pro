@@ -1,5 +1,19 @@
 // ===== TIMER SETTINGS MANAGER ===== //
 
+// English achievement text for notifications on /en/ pages (stored names stay Korean)
+const ACHIEVEMENTS_EN = {
+  first_timer: ['First timer', 'Completed your first timer'],
+  rookie: ['Rookie', '10 sessions completed'],
+  regular: ['Regular', '50 sessions completed'],
+  dedicated: ['Dedicated', '100 sessions completed'],
+  expert: ['Expert', '500 sessions completed'],
+  master: ['Master', '1000 sessions completed'],
+  streak_3: ['3-day streak', 'Used 3 days in a row'],
+  streak_7: ['7-day streak', 'Used 7 days in a row'],
+  streak_30: ['30-day streak', 'Used 30 days in a row'],
+  streak_100: ['100-day streak', 'Used 100 days in a row']
+};
+
 class TimerSettings {
   constructor(timerType = 'basic') {
     this.timerType = timerType;
@@ -297,8 +311,10 @@ class TimerSettings {
   notifyAchievement(achievement) {
     // Show notification if enabled
     if (this.settings.notificationsEnabled && 'Notification' in window && Notification.permission === 'granted') {
-      new Notification('🏆 업적 달성!', {
-        body: `${achievement.name}: ${achievement.description}`,
+      const en = document.documentElement.lang.startsWith('en') && ACHIEVEMENTS_EN[achievement.id];
+      const [name, description] = en || [achievement.name, achievement.description];
+      new Notification(en ? '🏆 Achievement unlocked!' : '🏆 업적 달성!', {
+        body: `${name}: ${description}`,
         icon: '/assets/icons/icon-192x192.png',
         badge: '/assets/icons/icon-72x72.png',
         vibrate: [200, 100, 200]
