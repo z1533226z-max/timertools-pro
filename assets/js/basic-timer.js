@@ -111,8 +111,8 @@ class BasicTimer {
     this.cacheElements();
     this.loadSettings();
     this.bindEvents();
-    this.updateDisplay();
-    this.updateProgress();
+    // Show the time from the inputs (e.g. 05:00) instead of 00:00 on load
+    this.updateFromInputs();
     
     console.log('✅ Basic Timer initialized');
   }
