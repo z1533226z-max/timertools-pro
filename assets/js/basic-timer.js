@@ -394,7 +394,9 @@ class BasicTimer {
   
   // ===== TIME MANAGEMENT ===== //
   updateFromInputs() {
-    const minutes = Math.max(0, Math.min(59, parseInt(this.elements.minutesInput.value) || 0));
+    // Each page sets its own limit on the minutes input (e.g. max="99" on the 60/90-minute pages)
+    const maxMinutes = parseInt(this.elements.minutesInput.max) || 59;
+    const minutes = Math.max(0, Math.min(maxMinutes, parseInt(this.elements.minutesInput.value) || 0));
     const seconds = Math.max(0, Math.min(59, parseInt(this.elements.secondsInput.value) || 0));
     
     // Update inputs with validated values
