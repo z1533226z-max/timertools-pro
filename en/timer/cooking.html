@@ -143,7 +143,9 @@
     </header>
 
     <main id="main-content" class="main-container cooking-page" role="main">
-        <div class="cooking-container">
+        <!-- Screen 1: Recipe Selection -->
+        <div id="recipe-selection" class="recipe-selection">
+            <div class="cooking-container">
             <div class="cooking-hero">
                 <h2 class="cooking-title">Cooking Timer</h2>
                 <p class="cooking-subtitle">Pick a recipe and cook perfectly with step-by-step alerts</p>
@@ -168,7 +170,7 @@
                 <div class="recipe-card" data-recipe="ramen">
                     <div class="recipe-card-icon">🍜</div>
                     <h3 class="recipe-card-name">Ramen</h3>
-                    <div class="recipe-card-meta"><span>5 min</span> · <span>3 steps</span></div>
+                    <div class="recipe-card-meta"><span>5 min</span> · <span>2 steps</span></div>
                 </div>
                 <div class="recipe-card" data-recipe="salad">
                     <div class="recipe-card-icon">🥗</div>
@@ -176,6 +178,112 @@
                     <div class="recipe-card-meta"><span>10 min</span> · <span>3 steps</span></div>
                 </div>
             </section>
+
+                <!-- Custom Recipe Form -->
+                <section class="custom-recipe-section" aria-labelledby="custom-recipe-title">
+                    <h3 id="custom-recipe-title" class="custom-section-title">Your Own Recipe</h3>
+                    <form id="custom-recipe-form" class="custom-recipe-form">
+                        <div class="custom-form-row">
+                            <div class="custom-form-group">
+                                <label for="recipe-name">Recipe name</label>
+                                <input type="text" id="recipe-name" placeholder="e.g. Fried rice" required>
+                            </div>
+                            <div class="custom-form-group">
+                                <label for="total-time">Total time (min)</label>
+                                <input type="number" id="total-time" min="1" max="180" placeholder="15" required>
+                            </div>
+                            <div class="custom-form-group">
+                                <label for="step-count">Number of steps</label>
+                                <input type="number" id="step-count" min="1" max="10" placeholder="3" required>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary custom-submit-btn">
+                            Create recipe
+                        </button>
+                    </form>
+                </section>
+            </div>
+        </div>
+
+        <!-- Screen 2: Step Configuration -->
+        <div id="step-configuration" class="step-configuration" style="display: none;">
+            <div class="cooking-container">
+                <div class="config-header">
+                    <button id="back-to-selection" class="btn btn-outline config-back-btn" aria-label="Back to recipe list">
+                        ← Back
+                    </button>
+                    <div class="config-title-block">
+                        <h2 id="config-recipe-name" class="config-recipe-name">Recipe</h2>
+                        <span class="config-total-badge">Total time: <strong id="config-total-time">0 min</strong></span>
+                    </div>
+                </div>
+
+                <div id="steps-config-container" class="steps-config-container">
+                    <!-- Step items populated by JS -->
+                </div>
+
+                <div class="config-actions">
+                    <button id="start-cooking" class="btn btn-primary btn-large start-cooking-btn">
+                        <span class="btn-icon">🔥</span>
+                        <span class="btn-text">Start cooking</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Screen 3: Cooking Timer -->
+        <div id="cooking-timer-main" class="cooking-timer-main" style="display: none;">
+            <div class="timer-layout">
+                <div class="timer-main-panel">
+                    <div class="timer-display-card">
+                        <div id="step-indicator" class="timer-step-indicator">Current step: getting ready</div>
+
+                        <div class="timer-countdown-wrapper">
+                            <div id="main-time" class="timer-countdown" role="timer" aria-live="polite">00:00</div>
+                            <div id="step-status" class="timer-step-name">Waiting</div>
+                        </div>
+
+                        <div class="timer-progress-wrapper">
+                            <div class="timer-progress-track">
+                                <div id="main-progress" class="timer-progress-fill"></div>
+                            </div>
+                        </div>
+
+                        <div id="step-tip" class="timer-step-tip">Tips for each step appear here once you start cooking</div>
+
+                        <div class="timer-time-summary">
+                            <div class="timer-time-block">
+                                <span class="timer-time-label">Total time</span>
+                                <span id="total-time-display" class="timer-time-value">00:00</span>
+                            </div>
+                            <div class="timer-time-divider"></div>
+                            <div class="timer-time-block">
+                                <span class="timer-time-label">Time left</span>
+                                <span id="remaining-time-display" class="timer-time-value timer-time-remaining">00:00</span>
+                            </div>
+                        </div>
+
+                        <div class="timer-controls-row">
+                            <button id="pause-btn" class="btn btn-primary timer-ctrl-btn" aria-label="Pause">
+                                ⏸️ Pause
+                            </button>
+                            <button id="next-step-btn" class="btn btn-secondary timer-ctrl-btn" aria-label="Next step">
+                                ⏭️ Next step
+                            </button>
+                            <button id="notification-btn" class="btn btn-outline timer-ctrl-btn-sm" aria-label="Enable notifications">
+                                🔔
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <aside class="timer-steps-sidebar" aria-label="Cooking steps">
+                    <h3 class="timer-sidebar-title">Cooking steps</h3>
+                    <div id="steps-list" class="timer-steps-list">
+                        <!-- Step items populated by JS -->
+                    </div>
+                </aside>
+            </div>
         </div>
 
         <section class="guide-section">
@@ -187,15 +295,15 @@
                 <ul>
                     <li><strong>Pasta (20 min):</strong> boil water 8 min → cook pasta 8 min → rest 2 min → plate 2 min</li>
                     <li><strong>Steak (15 min):</strong> warm skillet 3 min → sear 2 min each side → rest 5 min → plate 3 min</li>
-                    <li><strong>Kimchi Stew (30 min):</strong> prep 5 min → boil 10 min → simmer 10 min → season 5 min</li>
-                    <li><strong>Ramen (5 min):</strong> boil water 2 min → cook noodles 3 min → serve</li>
+                    <li><strong>Kimchi Stew (30 min):</strong> prep 5 min → sauté kimchi 3 min → boil 7 min → simmer 10 min → season 5 min</li>
+                    <li><strong>Ramen (5 min):</strong> boil water 2 min → cook noodles 3 min</li>
                     <li><strong>Salad (10 min):</strong> wash veggies 3 min → chop 5 min → dress 2 min</li>
                 </ul>
 
                 <h3>How it works</h3>
                 <ol>
                     <li>Pick a recipe from the presets (or create a custom one).</li>
-                    <li>Review each step's duration and customize if needed.</li>
+                    <li>Review each step and its duration, then press Start cooking.</li>
                     <li>Press start—the timer plays an alert at each step transition.</li>
                     <li>Cook along without watching the clock.</li>
                 </ol>
@@ -303,6 +411,11 @@
         </div>
     </footer>
 
-    <script src="../../assets/js/cooking-timer.js" defer></script>
+    <script src="../../assets/js/utils.js"></script>
+    <script src="../../assets/js/timer-settings.js"></script>
+    <script src="../../assets/js/i18n.js"></script>
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/timer-i18n-integration.js"></script>
+    <script src="../../assets/js/cooking.js"></script>
 </body>
 </html>
