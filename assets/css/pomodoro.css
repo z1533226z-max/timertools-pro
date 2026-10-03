@@ -626,8 +626,8 @@
     gap: var(--space-6);
   }
 
+  /* Timer stays first (DOM order); stats/settings follow below it */
   .pomodoro-sidebar {
-    order: -1;
     flex-direction: row;
     justify-content: center;
     overflow-x: auto;
