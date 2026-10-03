@@ -3,8 +3,10 @@
 # this file only keeps development/internal files out of the published site.
 #
 # Jekyll 3.x (used by GitHub Pages) replaces its default exclude list with this
-# one, so the defaults are repeated first. Entries are paths relative to the
-# repository root; a directory entry excludes everything inside it.
+# one, so the defaults are repeated first, including GitHub Pages' own CNAME
+# default (the custom domain is read from the repository, not the built site).
+# Entries are paths relative to the repository root; a directory entry excludes
+# everything inside it.
 exclude:
   # Jekyll defaults
   - Gemfile
@@ -14,6 +16,7 @@ exclude:
   - vendor/cache/
   - vendor/gems/
   - vendor/ruby/
+  - CNAME
   # Internal notes / dev tooling (not part of the site)
   - CLAUDE.md
   - README.md
