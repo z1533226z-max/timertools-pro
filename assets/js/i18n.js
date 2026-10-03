@@ -353,16 +353,12 @@ class I18nManager {
       return;
     }
     
-    // Check browser language
-    const browserLang = navigator.language.split('-')[0];
-    if (this.translations[browserLang]) {
-      this.currentLanguage = browserLang;
-    } else {
-      this.currentLanguage = 'ko'; // Default to Korean
-    }
-    
-    // Update HTML lang attribute
-    document.documentElement.lang = this.currentLanguage;
+    // Default to the page's own declared language. Korean and English pages live
+    // on separate URLs (/timer/... and /en/timer/...), so a page must not be
+    // re-translated (and its <html lang> rewritten) based on the browser language;
+    // crawlers render with an en-US browser and saw Korean pages as English.
+    const pageLang = (document.documentElement.lang || 'ko').split('-')[0];
+    this.currentLanguage = this.translations[pageLang] ? pageLang : 'ko';
   }
   
   // ===== LANGUAGE SELECTOR SETUP ===== //

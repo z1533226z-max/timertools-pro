@@ -18,8 +18,11 @@ class BasicTimer {
     // Audio context for sound
     this.audioContext = null;
     
-    // Language support
-    this.currentLanguage = 'ko';
+    // Static page title, restored after the countdown title is shown
+    this.originalTitle = document.title;
+
+    // Language support (default to the page's declared language)
+    this.currentLanguage = (document.documentElement.lang || 'ko').split('-')[0];
     this.setupLanguageSupport();
     
     // DOM elements (cached for performance)
@@ -84,6 +87,8 @@ class BasicTimer {
     
     const presetButtons = document.querySelectorAll('.preset-btn');
     presetButtons.forEach(btn => {
+      // Only relabel duration presets; link-style .preset-btn (e.g. "Tabata") have no data-minutes
+      if (btn.dataset.minutes === undefined) return;
       const minutes = btn.dataset.minutes || '0';
       const seconds = btn.dataset.seconds || '0';
       
@@ -379,12 +384,12 @@ class BasicTimer {
   updatePageTitle() {
     if (this.isRunning && this.remainingSeconds > 0) {
       const timeStr = this.formatTime(this.remainingSeconds);
-      document.title = `${timeStr} - 타이머 실행 중`;
+      document.title = `${timeStr} - ${this.currentLanguage === 'en' ? 'Timer running' : '타이머 실행 중'}`;
     }
   }
   
   resetPageTitle() {
-    document.title = '기본 타이머 - TimerTools Pro';
+    document.title = this.originalTitle;
   }
   
   // ===== TIME MANAGEMENT ===== //
