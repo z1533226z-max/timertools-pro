@@ -42,6 +42,7 @@ class BasicTimer {
     this.totalSeconds = 0;
     this.remainingSeconds = 0;
     this.intervalId = null;
+    this.endTime = 0; // wall-clock end of the running countdown (ms)
     
     // Settings
     this.settings = {
@@ -263,17 +264,7 @@ class BasicTimer {
     this.disableInputs();
     this.updateStatus('running');
     this.updateTimerClass('running');
-    
-    this.intervalId = setInterval(() => {
-      this.remainingSeconds--;
-      this.updateDisplay();
-      this.updateProgress();
-      this.updatePageTitle();
-      
-      if (this.remainingSeconds <= 0) {
-        this.complete();
-      }
-    }, 1000);
+    this.startTicking();
     
     this.announce(this.t.started);
   }
@@ -301,19 +292,31 @@ class BasicTimer {
     this.updateButtons();
     this.updateStatus('running');
     this.updateTimerClass('running');
-    
-    this.intervalId = setInterval(() => {
-      this.remainingSeconds--;
-      this.updateDisplay();
-      this.updateProgress();
-      this.updatePageTitle();
-      
-      if (this.remainingSeconds <= 0) {
-        this.complete();
-      }
-    }, 1000);
+    this.startTicking();
     
     this.announce(this.t.resumed);
+  }
+  
+  // Count down against the wall clock: browsers throttle timers in background tabs,
+  // so counting interval ticks would make the timer run slow (or never ring) there.
+  startTicking() {
+    this.endTime = Date.now() + this.remainingSeconds * 1000;
+    clearInterval(this.intervalId);
+    this.intervalId = setInterval(() => this.tick(), 250);
+  }
+  
+  tick() {
+    const remaining = Math.max(0, Math.ceil((this.endTime - Date.now()) / 1000));
+    if (remaining === this.remainingSeconds) return;
+    
+    this.remainingSeconds = remaining;
+    this.updateDisplay();
+    this.updateProgress();
+    this.updatePageTitle();
+    
+    if (remaining <= 0) {
+      this.complete();
+    }
   }
   
   reset() {
@@ -682,21 +685,9 @@ class BasicTimer {
   
   // ===== UTILITY ===== //
   handleVisibilityChange() {
-    // Adjust for time spent in background (basic implementation)
-    if (!document.hidden && this.isRunning && this.hiddenTime) {
-      const elapsed = Math.floor((Date.now() - this.hiddenTime) / 1000);
-      this.remainingSeconds = Math.max(0, this.remainingSeconds - elapsed);
-      
-      if (this.remainingSeconds <= 0) {
-        this.complete();
-      } else {
-        this.updateDisplay();
-        this.updateProgress();
-      }
-      
-      this.hiddenTime = null;
-    } else if (document.hidden && this.isRunning) {
-      this.hiddenTime = Date.now();
+    // Refresh at once when the tab is shown again (background ticks can be a minute apart)
+    if (!document.hidden && this.isRunning) {
+      this.tick();
     }
   }
 }
