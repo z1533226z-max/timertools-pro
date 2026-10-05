@@ -258,49 +258,6 @@
             </div>
         </div>
 
-        <!-- Settings Panel -->
-        <section class="pomodoro-settings-panel" aria-labelledby="pomodoro-settings-title">
-            <div class="container">
-                <button class="settings-toggle" aria-expanded="false" aria-controls="pomodoro-settings-content">
-                    <span class="settings-icon">⚙️</span>
-                    <span id="pomodoro-settings-title">설정</span>
-                    <span class="toggle-icon" aria-hidden="true">▼</span>
-                </button>
-
-                <div id="pomodoro-settings-content" class="settings-content" hidden>
-                    <div class="settings-header">
-                        <button class="settings-close" aria-label="설정 닫기" title="설정 닫기">
-                            <span class="close-icon">✕</span>
-                            <span class="close-text">닫기</span>
-                        </button>
-                    </div>
-                    <div class="settings-grid">
-                        <div class="setting-group">
-                            <h4>알림 설정</h4>
-                            <div class="setting-item">
-                                <label>
-                                    <input type="checkbox" id="sound-enabled" checked>
-                                    알림음 사용
-                                </label>
-                            </div>
-                            <div class="setting-item">
-                                <label for="volume">볼륨</label>
-                                <input type="range" id="volume" min="0" max="100" value="70">
-                                <span class="volume-value">70%</span>
-                            </div>
-                        </div>
-
-                        <div class="setting-group">
-                            <h4>화면 설정</h4>
-                            <div class="setting-item">
-                                <button class="btn btn-outline" id="pomodoro-fullscreen">전체화면 모드</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <!-- Guide Section -->
         <section class="guide-section" aria-labelledby="pomodoro-guide-title">
             <div class="container">
