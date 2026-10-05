@@ -118,33 +118,44 @@ self.addEventListener('fetch', (event) => {
     }
 });
 
-// HTML requests - Network first, then cache
+// HTML requests - Network first, then cache.
+// The offline page is only used when the network itself fails; a real HTTP
+// answer such as the site's custom 404 page (404.html) is shown as sent.
 async function handleHTMLRequest(request) {
+    let networkResponse;
     try {
-        const networkResponse = await fetch(request);
-        
-        if (networkResponse.ok) {
-            const cache = await caches.open(RUNTIME_CACHE);
-            cache.put(request, networkResponse.clone());
-            return networkResponse;
-        }
-        
-        throw new Error('Network response not ok');
+        networkResponse = await fetch(request);
     } catch (error) {
         console.log('[SW] Network failed for HTML, trying cache:', request.url);
-        
+
         const cachedResponse = await caches.match(request);
         if (cachedResponse) {
             return cachedResponse;
         }
-        
+
         // Return offline page for navigation requests
         if (request.mode === 'navigate') {
             return caches.match('/offline.html');
         }
-        
+
         throw error;
     }
+
+    if (networkResponse.ok) {
+        const cache = await caches.open(RUNTIME_CACHE);
+        cache.put(request, networkResponse.clone());
+        return networkResponse;
+    }
+
+    // Server errors (5xx): prefer a previously cached copy of the page
+    if (networkResponse.status >= 500) {
+        const cachedResponse = await caches.match(request);
+        if (cachedResponse) {
+            return cachedResponse;
+        }
+    }
+
+    return networkResponse;
 }
 
 // Static assets - Cache first, then network

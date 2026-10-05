@@ -40,7 +40,6 @@ class I18nManager {
         'hero.title': '완벽한 시간 관리를 위한<br>올인원 타이머 도구',
         'hero.subtitle': '생산성을 높이고 목표를 달성하세요. 간단하고 강력한 타이머로 집중력을 향상시키세요.',
         'hero.start-button': '지금 시작하기',
-        'hero.demo-button': '데모 보기',
         
         // Timer Tools
         'tools.title': '주요 타이머 도구',
@@ -80,13 +79,6 @@ class I18nManager {
         'guide.step3.title': '집중 시작',
         'guide.step3.description': '타이머가 완료될 때까지 집중하세요',
         'guide.detailed-button': '상세 가이드 보기',
-        'guide.video-button': '동영상 튜토리얼',
-        
-        // Testimonials
-        'testimonials.title': '사용자 후기',
-        'testimonials.1': '"이 타이머로 생산성이 200% 향상됐어요!"',
-        'testimonials.2': '"요리할 때 꼭 필요한 도구예요"',
-        'testimonials.3': '"운동 루틴 관리가 이렇게 쉬울 줄 몰랐어요"',
         
         // Footer
         'footer.privacy': '개인정보보호',
@@ -199,7 +191,6 @@ class I18nManager {
         'hero.title': 'All-in-One Timer Tools<br>for Perfect Time Management',
         'hero.subtitle': 'Boost your productivity and achieve your goals. Improve focus with simple yet powerful timers.',
         'hero.start-button': 'Get Started',
-        'hero.demo-button': 'View Demo',
         
         // Timer Tools
         'tools.title': 'Essential Timer Tools',
@@ -239,13 +230,6 @@ class I18nManager {
         'guide.step3.title': 'Start Focusing',
         'guide.step3.description': 'Focus until the timer completes',
         'guide.detailed-button': 'View Detailed Guide',
-        'guide.video-button': 'Video Tutorial',
-        
-        // Testimonials
-        'testimonials.title': 'User Reviews',
-        'testimonials.1': '"This timer boosted my productivity by 200%!"',
-        'testimonials.2': '"Essential tool for cooking"',
-        'testimonials.3': '"Never knew workout routine management could be this easy"',
         
         // Footer
         'footer.privacy': 'Privacy Policy',

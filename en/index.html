@@ -1,8 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BNRL6FRMMM"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-BNRL6FRMMM');
+    </script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Google AdSense -->
+    <meta name="google-adsense-account" content="ca-pub-7479840445702290">
     <meta name="description" content="Complete time management solution with online timer, pomodoro technique, and multi-timer tools for enhanced productivity and focus">
     <meta name="keywords" content="timer, pomodoro, time management, productivity, focus, online timer, productivity tools, time tracking, concentration, work efficiency">
     <title>TimerTools Pro - Perfect Time Management Tool | Online Timer Pomodoro Productivity</title>
@@ -18,7 +30,7 @@
     <meta property="og:description" content="Boost productivity and improve focus with online timer, pomodoro technique, and multi-timer tools. Free time management solution">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://gon.ai.kr/en/">
-    <meta property="og:image" content="https://gon.ai.kr/assets/images/og-image-en.jpg">
+    <meta property="og:image" content="https://gon.ai.kr/assets/og/default-en.png">
     <meta property="og:locale" content="en_US">
     <meta property="og:locale:alternate" content="ko_KR">
     <meta property="og:site_name" content="TimerTools Pro">
@@ -27,7 +39,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="TimerTools Pro - Perfect Time Management Tool">
     <meta name="twitter:description" content="Online timer, pomodoro technique, multi-timer for enhanced productivity">
-    <meta name="twitter:image" content="https://gon.ai.kr/assets/images/twitter-card-en.jpg">
+    <meta name="twitter:image" content="https://gon.ai.kr/assets/og/default-en.png">
     
     <!-- Additional SEO -->
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
@@ -55,6 +67,10 @@
     
     <!-- Stylesheets -->
     <link rel="stylesheet" href="../assets/css/styles.css">
+
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7479840445702290"
+         crossorigin="anonymous"></script>
 </head>
 <body>
     <!-- Skip Navigation Link for Accessibility -->
@@ -95,8 +111,8 @@
                         <li><a href="timer/ramen.html">Ramen Timer</a></li>
                     </ul>
                 </li>
-                <li><a href="guide/">Guide</a></li>
-                <li><a href="blog/">Blog</a></li>
+                <li><a href="../guide/">Guide</a></li>
+                <li><a href="../blog/">Blog</a></li>
                 <li class="nav-settings">
                     <button class="theme-toggle" aria-label="Toggle dark mode" title="Switch theme">
                         <span class="theme-icon">🌙</span>
@@ -112,11 +128,6 @@
                 <span class="hamburger"></span>
             </button>
         </nav>
-        
-        <!-- Top Ad Space -->
-        <div class="ad-space ad-leaderboard" aria-hidden="true">
-            <div class="ad-placeholder">728x90 Advertisement</div>
-        </div>
     </header>
 
     <!-- Main Content -->
@@ -124,34 +135,15 @@
         <!-- Hero Section -->
         <section class="hero" aria-labelledby="hero-title">
             <div class="container">
-                <div class="hero-content">
-                    <div class="hero-text">
+                <div class="hero-content" style="grid-template-columns: 1fr; text-align: center; max-width: 720px; margin: 0 auto;">
+                    <div class="hero-text" style="text-align: center;">
                         <h1 id="hero-title" class="hero-title">Online Timer and Pomodoro<br>Perfect Productivity Tools</h1>
-                        <p class="hero-subtitle">Boost your productivity and achieve your goals. Improve focus with simple yet powerful timer tools.</p>
-                        <div class="hero-actions">
+                        <p class="hero-subtitle" style="margin-left: auto; margin-right: auto;">Boost your productivity and achieve your goals. Improve focus with simple yet powerful timer tools.</p>
+                        <div class="hero-actions" style="justify-content: center;">
                             <a href="timer/basic.html" class="btn btn-primary">Get Started Now</a>
-                            <button class="btn btn-secondary" onclick="showDemo()">View Demo</button>
+                            <a href="timer/pomodoro.html" class="btn btn-secondary">Start Pomodoro</a>
                         </div>
                     </div>
-                    
-                    <!-- Sidebar Ad Space -->
-                    <aside class="hero-sidebar" aria-hidden="true">
-                        <div class="ad-space ad-rectangle">
-                            <div class="ad-placeholder">300x250 Ad</div>
-                        </div>
-                        
-                        <div class="stats-widget">
-                            <h3>Usage Statistics</h3>
-                            <div class="stat-item">
-                                <span class="stat-number">12,547</span>
-                                <span class="stat-label">Active users today</span>
-                            </div>
-                            <div class="stat-item">
-                                <span class="stat-number">8,923</span>
-                                <span class="stat-label">Sessions completed</span>
-                            </div>
-                        </div>
-                    </aside>
                 </div>
             </div>
         </section>
@@ -340,13 +332,6 @@
             </div>
         </section>
 
-        <!-- Native Ad Space -->
-        <section class="ad-space ad-native" aria-hidden="true">
-            <div class="container">
-                <div class="ad-placeholder">336x280 Native Ad</div>
-            </div>
-        </section>
-
         <!-- Guide Section -->
         <section class="guide-section" aria-labelledby="guide-title">
             <div class="container">
@@ -371,32 +356,7 @@
                 </ol>
                 
                 <div class="guide-actions">
-                    <a href="guide/" class="btn btn-outline">View Detailed Guide</a>
-                    <button class="btn btn-outline" onclick="playVideo()">Video Tutorial</button>
-                </div>
-            </div>
-        </section>
-
-        <!-- Testimonials Section -->
-        <section class="testimonials" aria-labelledby="testimonials-title">
-            <div class="container">
-                <h2 id="testimonials-title" class="section-title">User Reviews</h2>
-                
-                <div class="testimonial-cards">
-                    <blockquote class="testimonial">
-                        <p>"This timer boosted my productivity by 200%!"</p>
-                        <cite>- John D.</cite>
-                    </blockquote>
-                    
-                    <blockquote class="testimonial">
-                        <p>"Essential tool for cooking - perfect timing every time"</p>
-                        <cite>- Sarah M.</cite>
-                    </blockquote>
-                    
-                    <blockquote class="testimonial">
-                        <p>"Never knew workout routine management could be this easy"</p>
-                        <cite>- Mike R.</cite>
-                    </blockquote>
+                    <a href="../guide/" class="btn btn-outline">View Detailed Guide</a>
                 </div>
             </div>
         </section>
@@ -437,23 +397,12 @@
 
     <!-- Footer -->
     <footer class="footer" role="contentinfo">
-        <!-- Footer Ad Space -->
-        <div class="ad-space ad-footer" aria-hidden="true">
-            <div class="ad-placeholder">728x90 Footer Ad</div>
-        </div>
-        
         <div class="container">
             <div class="footer-content">
                 <div class="footer-links">
                     <a href="../privacy.html">Privacy Policy</a>
                     <a href="../terms.html">Terms of Service</a>
                     <a href="../contact.html">Contact</a>
-                </div>
-                
-                <div class="footer-social">
-                    <a href="#" aria-label="Facebook">📘</a>
-                    <a href="#" aria-label="Twitter">🐦</a>
-                    <a href="#" aria-label="Instagram">📷</a>
                 </div>
             </div>
             
