@@ -405,7 +405,7 @@ a:hover { color: var(--accent-hover); }
 }
 
 .nav-menu a[aria-current="page"] {
-  color: var(--accent);
+  color: var(--accent-hover);
   background: var(--accent-glow);
 }
 
@@ -789,8 +789,8 @@ a:hover { color: var(--accent-hover); }
 }
 
 .external-link {
-  background: var(--amber-500) !important;
-  color: #fff !important;
+  background: var(--accent) !important;
+  color: var(--accent-foreground) !important;
   border: none !important;
   font-weight: 700 !important;
   padding: var(--space-2) var(--space-4) !important;
@@ -802,7 +802,7 @@ a:hover { color: var(--accent-hover); }
 }
 
 .external-link:hover {
-  background: var(--amber-400) !important;
+  background: var(--accent-hover) !important;
   transform: translateY(-2px) !important;
   box-shadow: 0 4px 20px rgba(255, 107, 44, 0.3) !important;
 }
