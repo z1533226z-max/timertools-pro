@@ -39,7 +39,7 @@ class I18nManager {
         // Hero Section
         'hero.title': '완벽한 시간 관리를 위한<br>올인원 타이머 도구',
         'hero.subtitle': '생산성을 높이고 목표를 달성하세요. 간단하고 강력한 타이머로 집중력을 향상시키세요.',
-        'hero.start-button': '지금 시작하기',
+        'hero.start-button': '기본 타이머 시작',
         
         // Timer Tools
         'tools.title': '주요 타이머 도구',
@@ -190,7 +190,7 @@ class I18nManager {
         // Hero Section
         'hero.title': 'All-in-One Timer Tools<br>for Perfect Time Management',
         'hero.subtitle': 'Boost your productivity and achieve your goals. Improve focus with simple yet powerful timers.',
-        'hero.start-button': 'Get Started',
+        'hero.start-button': 'Start Basic Timer',
         
         // Timer Tools
         'tools.title': 'Essential Timer Tools',

@@ -473,14 +473,35 @@
 }
 
 @media (max-width: 480px) {
+  .timer-container { gap: var(--space-4); }
+  .timer-display-section { padding: var(--space-4); }
+  .timer-title { margin-bottom: var(--space-4); }
+  .timer-display { margin-bottom: var(--space-4); }
+
+  .progress-ring {
+    width: 200px;
+    height: 200px;
+  }
+
   .time-inputs {
-    flex-direction: column;
+    flex-direction: row;
+    gap: var(--space-2);
+    margin-bottom: var(--space-4);
+  }
+
+  .input-group input { width: 96px; }
+
+  .timer-controls {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: var(--space-3);
   }
 
-  .input-separator { display: none; }
-
-  .input-group input { width: 120px; }
+  .btn-large {
+    min-width: 0;
+    max-width: none;
+    padding: var(--space-3);
+  }
 
   .preset-grid {
     grid-template-columns: repeat(2, 1fr);
